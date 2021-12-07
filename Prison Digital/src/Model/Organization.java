@@ -9,10 +9,7 @@ package Model;
  *
  * @author vikasshastry
  */
-public class ConfigureEcosystem {
-    
-    public static PrisonEcosystem configure(){
-        return new PrisonEcosystem();
-    }
+public class Organization {
+    String name;
     
 }

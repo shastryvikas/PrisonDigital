@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.FoodCateringService;
+
+import Model.Organization;
 
 /**
  *
  * @author vikasshastry
  */
-public class ConfigureEcosystem {
-    
-    public static PrisonEcosystem configure(){
-        return new PrisonEcosystem();
-    }
+public class Transport extends Organization{
     
 }
