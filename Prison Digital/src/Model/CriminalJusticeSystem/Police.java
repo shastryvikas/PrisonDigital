@@ -5,8 +5,6 @@
  */
 package Model.CriminalJusticeSystem;
 
-import Model.Hospital.*;
-import Model.Prison.*;
 import Model.Organization;
 
 /**
