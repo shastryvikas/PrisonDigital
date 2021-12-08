@@ -5,6 +5,7 @@
  */
 package Model.Employee;
 
+import Model.Person;
 import Model.UserAccountManagement.UserAccount;
 import javax.management.relation.Role;
 
@@ -14,7 +15,7 @@ import javax.management.relation.Role;
  */
 public class Employee {
     
-    private String name;
+    private Person person;
     private int id;
     private UserAccount userAccount;
     private Role role;
@@ -46,16 +47,16 @@ public class Employee {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.person.setName(name);
     }
 
     public String getName() {
-        return name;
+        return this.person.getName();
     }
 
     @Override
     public String toString() {
-        return name;
+        return this.person.getName();
     }
     
 }

@@ -5,12 +5,40 @@
  */
 package Model.CriminalJusticeSystem;
 
+import Model.Employee.Employee;
 import Model.Organization;
+import java.util.ArrayList;
 
 /**
  *
  * @author vikasshastry
  */
 public class Police extends Organization{
-    
+    Employee policeAdmin;
+    ArrayList<Employee> listOfPoliceOfficers;
+    CaseDirectory caseDirectory;
+
+    public CaseDirectory getCaseDirectory() {
+        return caseDirectory;
+    }
+
+    public void setCaseDirectory(CaseDirectory caseDirectory) {
+        this.caseDirectory = caseDirectory;
+    }
+
+    public Employee getPoliceAdmin() {
+        return policeAdmin;
+    }
+
+    public void setPoliceAdmin(Employee policeAdmin) {
+        this.policeAdmin = policeAdmin;
+    }
+
+    public ArrayList<Employee> getListOfPoliceOfficers() {
+        return listOfPoliceOfficers;
+    }
+
+    public void setListOfPoliceOfficers(ArrayList<Employee> listOfPoliceOfficers) {
+        this.listOfPoliceOfficers = listOfPoliceOfficers;
+    }
 }

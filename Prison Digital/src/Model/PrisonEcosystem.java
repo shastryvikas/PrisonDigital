@@ -20,7 +20,37 @@ public class PrisonEcosystem {
     FoodCateringService[] cateringServices;
     Hospital[] hospitals;
     CriminalJusticeSystem[] criminalJusticeSystems;
-    
-    
-    
+
+    public Prison[] getPrisons() {
+        return prisons;
+    }
+
+    public void setPrisons(Prison[] prisons) {
+        this.prisons = prisons;
+    }
+
+    public FoodCateringService[] getCateringServices() {
+        return cateringServices;
+    }
+
+    public void setCateringServices(FoodCateringService[] cateringServices) {
+        this.cateringServices = cateringServices;
+    }
+
+    public Hospital[] getHospitals() {
+        return hospitals;
+    }
+
+    public void setHospitals(Hospital[] hospitals) {
+        this.hospitals = hospitals;
+    }
+
+    public CriminalJusticeSystem[] getCriminalJusticeSystems() {
+        return criminalJusticeSystems;
+    }
+
+    public void setCriminalJusticeSystems(CriminalJusticeSystem[] criminalJusticeSystems) {
+        this.criminalJusticeSystems = criminalJusticeSystems;
+    }
+       
 }

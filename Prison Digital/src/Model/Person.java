@@ -5,12 +5,16 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author vikasshastry
  */
-public class Organization {
+public class Person {
     String name;
+    Date dob;
+    Location address;
 
     public String getName() {
         return name;
@@ -18,6 +22,22 @@ public class Organization {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public Location getAddress() {
+        return address;
+    }
+
+    public void setAddress(Location address) {
+        this.address = address;
     }
     
 }
