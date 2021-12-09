@@ -12,5 +12,22 @@ import Model.Enterprise;
  * @author vikasshastry
  */
 public class Prison extends Enterprise{
-    
+    Management management;
+    Infrastructure infrastructure;
+
+    public Management getManagement() {
+        return management;
+    }
+
+    public void setManagement(Management management) {
+        this.management = management;
+    }
+
+    public Infrastructure getInfrastructure() {
+        return infrastructure;
+    }
+
+    public void setInfrastructure(Infrastructure infrastructure) {
+        this.infrastructure = infrastructure;
+    }
 }

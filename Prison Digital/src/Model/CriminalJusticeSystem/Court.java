@@ -5,6 +5,7 @@
  */
 package Model.CriminalJusticeSystem;
 
+import Model.Employee.Employee;
 import Model.Organization;
 
 /**
@@ -12,5 +13,22 @@ import Model.Organization;
  * @author vikasshastry
  */
 public class Court extends Organization{
-    
+    Employee judge;
+    CaseDirectory caseDirectory;
+
+    public Employee getJudge() {
+        return judge;
+    }
+
+    public void setJudge(Employee judge) {
+        this.judge = judge;
+    }
+
+    public CaseDirectory getCaseDirectory() {
+        return caseDirectory;
+    }
+
+    public void setCaseDirectory(CaseDirectory caseDirectory) {
+        this.caseDirectory = caseDirectory;
+    }
 }

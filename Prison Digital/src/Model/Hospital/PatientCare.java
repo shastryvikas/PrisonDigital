@@ -5,6 +5,7 @@
  */
 package Model.Hospital;
 
+import Model.Employee.EmployeeDirectory;
 import Model.Organization;
 
 /**
@@ -12,5 +13,31 @@ import Model.Organization;
  * @author vikasshastry
  */
 public class PatientCare extends Organization{
-    
+    EmployeeDirectory psychologyStaff;
+    EmployeeDirectory generalStaff;
+    EmployeeDirectory physiotherapyStaff;
+
+    public EmployeeDirectory getPsychologyStaff() {
+        return psychologyStaff;
+    }
+
+    public void setPsychologyStaff(EmployeeDirectory psychologyStaff) {
+        this.psychologyStaff = psychologyStaff;
+    }
+
+    public EmployeeDirectory getGeneralStaff() {
+        return generalStaff;
+    }
+
+    public void setGeneralStaff(EmployeeDirectory generalStaff) {
+        this.generalStaff = generalStaff;
+    }
+
+    public EmployeeDirectory getPhysiotherapyStaff() {
+        return physiotherapyStaff;
+    }
+
+    public void setPhysiotherapyStaff(EmployeeDirectory physiotherapyStaff) {
+        this.physiotherapyStaff = physiotherapyStaff;
+    }
 }

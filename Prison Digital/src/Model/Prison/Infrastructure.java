@@ -6,11 +6,21 @@
 package Model.Prison;
 
 import Model.Organization;
+import java.util.ArrayList;
 
 /**
  *
  * @author vikasshastry
  */
 public class Infrastructure extends Organization{
+    ArrayList<Unit> units;
+
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(ArrayList<Unit> units) {
+        this.units = units;
+    }
     
 }

@@ -20,9 +20,20 @@ public abstract class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private final int ID;
+    private static int count = 1;
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        WorkRequest.count = count;
+    }
     
     public WorkRequest(){
         requestDate = new Date();
+        ID = count++;
     }
 
     public String getMessage() {

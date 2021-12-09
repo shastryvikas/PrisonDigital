@@ -12,5 +12,22 @@ import Model.Enterprise;
  * @author vikasshastry
  */
 public class Hospital extends Enterprise{
-    
+    Management management;
+    PatientCare patientCare;
+
+    public Management getManagement() {
+        return management;
+    }
+
+    public void setManagement(Management management) {
+        this.management = management;
+    }
+
+    public PatientCare getPatientCare() {
+        return patientCare;
+    }
+
+    public void setPatientCare(PatientCare patientCare) {
+        this.patientCare = patientCare;
+    }
 }
