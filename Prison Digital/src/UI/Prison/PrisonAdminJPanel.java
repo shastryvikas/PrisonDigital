@@ -186,7 +186,7 @@ public class PrisonAdminJPanel extends javax.swing.JPanel {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
         MainJFrame mainframe = new MainJFrame();
-        container.add("sysadminLandingPage", mainframe);
+        container.previous();
         cardLayoutPointer.next(container);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
