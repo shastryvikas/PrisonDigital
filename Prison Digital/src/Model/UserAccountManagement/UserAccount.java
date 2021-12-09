@@ -6,6 +6,7 @@
 package Model.UserAccountManagement;
 
 import Model.Enterprise;
+import Model.WorkQueue.WorkQueue;
 
 /**
  *
@@ -16,6 +17,7 @@ public class UserAccount {
     private String username;
     private String password;
     private Enterprise enterprise;
+    WorkQueue workQueue;
 
     public Enterprise getEnterprise() {
         return enterprise;

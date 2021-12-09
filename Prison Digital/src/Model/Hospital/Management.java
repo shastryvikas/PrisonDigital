@@ -5,6 +5,7 @@
  */
 package Model.Hospital;
 
+import Model.Employee.Employee;
 import Model.Prison.*;
 import Model.Organization;
 
@@ -13,5 +14,13 @@ import Model.Organization;
  * @author vikasshastry
  */
 public class Management extends Organization{
-    
+    Employee hospitalAdmin;
+
+    public Employee getHospitalAdmin() {
+        return hospitalAdmin;
+    }
+
+    public void setHospitalAdmin(Employee hospitalAdmin) {
+        this.hospitalAdmin = hospitalAdmin;
+    }
 }

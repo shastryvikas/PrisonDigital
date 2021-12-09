@@ -5,6 +5,7 @@
  */
 package Model.CriminalJusticeSystem;
 
+import Model.Employee.Employee;
 import Model.Enterprise;
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class CriminalJusticeSystem extends Enterprise{
     
     ArrayList<Court> listOfCourts;
     ArrayList<Police> listOfPolice;
+    Employee admin;
 
     public ArrayList<Court> getListOfCourts() {
         return listOfCourts;

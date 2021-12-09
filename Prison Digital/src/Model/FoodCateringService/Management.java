@@ -5,6 +5,7 @@
  */
 package Model.FoodCateringService;
 
+import Model.Employee.Employee;
 import Model.Hospital.*;
 import Model.Prison.*;
 import Model.Organization;
@@ -14,5 +15,5 @@ import Model.Organization;
  * @author vikasshastry
  */
 public class Management extends Organization{
-    
+    Employee admin;
 }
