@@ -5,8 +5,8 @@
  */
 package UI.Prison;
 
-import UI.MainJFrame;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,14 +15,14 @@ import java.awt.CardLayout;
 public class PrisonAdminJPanel extends javax.swing.JPanel {
 
     CardLayout cardLayoutPointer;
-    
+    JPanel container;
     /**
      * Creates new form PrisonAdminJPanel
      */
-    public PrisonAdminJPanel() {
+    public PrisonAdminJPanel(JPanel container) {
         initComponents();
-        
-        
+        this.container = container;
+        cardLayoutPointer = (CardLayout) container.getLayout();
     }
 
     /**
@@ -165,7 +165,7 @@ public class PrisonAdminJPanel extends javax.swing.JPanel {
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEperience, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
@@ -185,9 +185,8 @@ public class PrisonAdminJPanel extends javax.swing.JPanel {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
-        MainJFrame mainframe = new MainJFrame();
-        container.previous();
-        cardLayoutPointer.next(container);
+        container.remove(this);
+        cardLayoutPointer.previous(container);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
 

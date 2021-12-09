@@ -5,6 +5,7 @@
  */
 package UI.CriminalJusticeSystem;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
 public class JudgementPage extends javax.swing.JPanel {
 
     JPanel container;
-
+    CardLayout layout;
     /**
      * Creates new form JudgementPage
      * @param container
@@ -22,6 +23,7 @@ public class JudgementPage extends javax.swing.JPanel {
     public JudgementPage(JPanel container) {
         initComponents();
         this.container = container;
+        layout = (CardLayout) container.getLayout();
     }
 
     /**
@@ -42,6 +44,7 @@ public class JudgementPage extends javax.swing.JPanel {
         drpdwnPolicePersonel = new javax.swing.JComboBox<>();
         lblAssignToPrison = new javax.swing.JLabel();
         drpdwnAssignToPrison = new javax.swing.JComboBox<>();
+        btnBack = new javax.swing.JButton();
 
         lblCaseJudgement.setText("Case Judgement: ");
 
@@ -61,6 +64,13 @@ public class JudgementPage extends javax.swing.JPanel {
 
         drpdwnAssignToPrison.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,6 +89,10 @@ public class JudgementPage extends javax.swing.JPanel {
                     .addComponent(drpdwnImprisonmentType, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(drpdwnAssignToPrison, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(78, 78, 78))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,12 +113,22 @@ public class JudgementPage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(drpdwnAssignToPrison, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAssignToPrison))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        container.remove(this);
+        layout.previous(container);
+        
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> drpdwnAssignToPrison;
     private javax.swing.JComboBox<String> drpdwnImprisonmentType;
     private javax.swing.JComboBox<String> drpdwnPolicePersonel;

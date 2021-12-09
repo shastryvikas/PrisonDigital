@@ -5,6 +5,8 @@
  */
 package UI;
 
+import UI.Prison.DiningSupervisorJPanel;
+import UI.Prison.InfirmarySupervisorJPanel;
 import UI.Prison.PrisonAdminJPanel;
 import java.awt.CardLayout;
 
@@ -17,14 +19,13 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    
     CardLayout cardLayoutPointer;
-    
+
     public MainJFrame() {
         initComponents();
-        
+
         cardLayoutPointer = (CardLayout) container.getLayout();
-        
+
     }
 
     /**
@@ -42,7 +43,7 @@ public class MainJFrame extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,10 +59,10 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -72,7 +73,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(btnLogin)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblUserName)
@@ -91,11 +92,11 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(lblUserName)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(jButton1)
+                .addComponent(btnLogin)
                 .addContainerGap(414, Short.MAX_VALUE))
         );
 
@@ -119,12 +120,20 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        PrisonAdminJPanel prisonAdminJPanel = new PrisonAdminJPanel();
-        container.add("prisonAdminJPanel", prisonAdminJPanel);
+//        PrisonAdminJPanel prisonAdminJPanel = new PrisonAdminJPanel(container);
+//        container.add("prisonAdminJPanel", prisonAdminJPanel);
+
+//        DiningSupervisorJPanel diningSupervisorPage = new DiningSupervisorJPanel(container);
+//        container.add("diningSupervisor", diningSupervisorPage);
+
+//        InfirmarySupervisorJPanel infirmarySupervisorPage  = new InfirmarySupervisorJPanel(container);
+//        container.add("infirmarySupervisor", infirmarySupervisorPage);
+
+
         cardLayoutPointer.next(container);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,8 +171,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JPanel container;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUserName;

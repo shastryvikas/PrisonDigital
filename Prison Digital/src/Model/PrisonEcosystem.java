@@ -15,7 +15,7 @@ import Model.Prison.Prison;
  *
  * @author vikasshastry
  */
-public class PrisonEcosystem {
+public class PrisonEcosystem{
     
     Prison[] prisons;
     FoodCateringService[] cateringServices;

@@ -6,6 +6,7 @@
 package UI.Prison;
 
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,11 +17,12 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form InfirmarySupervisorJPanel
      */
-    
     CardLayout cardLayoutPointer;
-    
-    public InfirmarySupervisorJPanel() {
+    JPanel container;
+
+    public InfirmarySupervisorJPanel(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
