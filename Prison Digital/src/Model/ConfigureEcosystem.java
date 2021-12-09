@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Model.UserAccountManagement.UserAccount;
+
 /**
  *
  * @author vikasshastry
@@ -12,7 +14,13 @@ package Model;
 public class ConfigureEcosystem {
     
     public static PrisonEcosystem configure(){
-        return new PrisonEcosystem();
+        
+        PrisonEcosystem system = new PrisonEcosystem();
+        UserAccount ua = new UserAccount();
+        ua.setUsername("sysadmin");
+        ua.setPassword("sysadmin");
+        return system;
+        
     }
     
 }

@@ -6,6 +6,7 @@
 package Model;
 
 import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.Employee.Employee;
 import Model.FoodCateringService.FoodCateringService;
 import Model.Hospital.Hospital;
 import Model.Prison.Prison;
@@ -20,6 +21,7 @@ public class PrisonEcosystem {
     FoodCateringService[] cateringServices;
     Hospital[] hospitals;
     CriminalJusticeSystem[] criminalJusticeSystems;
+    Employee admin;
 
     public Prison[] getPrisons() {
         return prisons;
