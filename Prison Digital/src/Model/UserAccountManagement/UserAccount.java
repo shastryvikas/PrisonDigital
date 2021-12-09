@@ -6,6 +6,7 @@
 package Model.UserAccountManagement;
 
 import Model.Enterprise;
+import Model.Role.Role;
 import Model.WorkQueue.WorkQueue;
 
 /**
@@ -17,7 +18,33 @@ public class UserAccount {
     private String username;
     private String password;
     private Enterprise enterprise;
-    WorkQueue workQueue;
+    private WorkQueue workQueue;
+    private WorkQueue oldWorkQueue;
+    private Role role;
+
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+
+    public void setWorkQueue(WorkQueue workQueue) {
+        this.workQueue = workQueue;
+    }
+
+    public WorkQueue getOldWorkQueue() {
+        return oldWorkQueue;
+    }
+
+    public void setOldWorkQueue(WorkQueue oldWorkQueue) {
+        this.oldWorkQueue = oldWorkQueue;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Enterprise getEnterprise() {
         return enterprise;

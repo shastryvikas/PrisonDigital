@@ -5,6 +5,7 @@
  */
 package UI.SysAdmin;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -18,10 +19,12 @@ public class SysAdminLandingPage extends javax.swing.JPanel {
      * Creates new form SysAdminLandingPage
      */
     JPanel container;
+    PrisonEcosystem system;
 
-    public SysAdminLandingPage(JPanel container) {
+    public SysAdminLandingPage(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        this.system = system;
     }
 
     /**

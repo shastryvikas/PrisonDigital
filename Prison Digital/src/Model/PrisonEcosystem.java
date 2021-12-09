@@ -10,6 +10,8 @@ import Model.Employee.Employee;
 import Model.FoodCateringService.FoodCateringService;
 import Model.Hospital.Hospital;
 import Model.Prison.Prison;
+import Model.UserAccountManagement.UserAccountDirectory;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,42 +19,61 @@ import Model.Prison.Prison;
  */
 public class PrisonEcosystem{
     
-    Prison[] prisons;
-    FoodCateringService[] cateringServices;
-    Hospital[] hospitals;
-    CriminalJusticeSystem[] criminalJusticeSystems;
-    Employee admin;
+    private ArrayList<Prison> prisons;
+    private ArrayList<FoodCateringService> cateringServices;
+    private ArrayList<Hospital> hospitals;
+    private ArrayList<CriminalJusticeSystem> criminalJusticeSystems;
+    private Employee admin;
+    private UserAccountDirectory userAccountDirectory;
 
-    public Prison[] getPrisons() {
+    public UserAccountDirectory getUserAccountDirectory() {
+        if(userAccountDirectory == null){
+            userAccountDirectory = new UserAccountDirectory();
+        }
+        return userAccountDirectory;
+    }
+
+    public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
+        this.userAccountDirectory = userAccountDirectory;
+    }
+
+    public ArrayList<Prison> getPrisons() {
         return prisons;
     }
 
-    public void setPrisons(Prison[] prisons) {
+    public void setPrisons(ArrayList<Prison> prisons) {
         this.prisons = prisons;
     }
 
-    public FoodCateringService[] getCateringServices() {
+    public ArrayList<FoodCateringService> getCateringServices() {
         return cateringServices;
     }
 
-    public void setCateringServices(FoodCateringService[] cateringServices) {
+    public void setCateringServices(ArrayList<FoodCateringService> cateringServices) {
         this.cateringServices = cateringServices;
     }
 
-    public Hospital[] getHospitals() {
+    public ArrayList<Hospital> getHospitals() {
         return hospitals;
     }
 
-    public void setHospitals(Hospital[] hospitals) {
+    public void setHospitals(ArrayList<Hospital> hospitals) {
         this.hospitals = hospitals;
     }
 
-    public CriminalJusticeSystem[] getCriminalJusticeSystems() {
+    public ArrayList<CriminalJusticeSystem> getCriminalJusticeSystems() {
         return criminalJusticeSystems;
     }
 
-    public void setCriminalJusticeSystems(CriminalJusticeSystem[] criminalJusticeSystems) {
+    public void setCriminalJusticeSystems(ArrayList<CriminalJusticeSystem> criminalJusticeSystems) {
         this.criminalJusticeSystems = criminalJusticeSystems;
     }
-       
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Employee admin) {
+        this.admin = admin;
+    }
 }

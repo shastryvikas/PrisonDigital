@@ -33,7 +33,6 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblGuardWorkArea = new javax.swing.JLabel();
-        PrisonGuardjCalendar = new com.toedter.calendar.JCalendar();
         btnSubmitAttendance = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -53,7 +52,6 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PrisonGuardjCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblGuardWorkArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSubmitAttendance)
@@ -68,9 +66,7 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblGuardWorkArea)
-                .addGap(18, 18, 18)
-                .addComponent(PrisonGuardjCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(308, 308, 308)
                 .addComponent(btnSubmitAttendance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addComponent(btnLogout)
@@ -80,7 +76,6 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JCalendar PrisonGuardjCalendar;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSubmitAttendance;
     private javax.swing.JLabel lblGuardWorkArea;

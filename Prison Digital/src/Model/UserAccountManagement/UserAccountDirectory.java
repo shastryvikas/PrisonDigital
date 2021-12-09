@@ -6,6 +6,7 @@
 package Model.UserAccountManagement;
 
 import Model.Enterprise;
+import Model.Role.Role;
 import java.util.ArrayList;
 
 /**
@@ -41,11 +42,11 @@ public class UserAccountDirectory {
         user.setPassword(password);
     }
     
-    public UserAccount createUserAccount(String username, String password, Enterprise enterprise){
+    public UserAccount createUserAccount(String username, String password, Role role){
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(username);
         userAccount.setPassword(password);
-        userAccount.setEnterprise(enterprise);
+        userAccount.setRole(role);
         userAccountList.add(userAccount);
         return userAccount;
     }

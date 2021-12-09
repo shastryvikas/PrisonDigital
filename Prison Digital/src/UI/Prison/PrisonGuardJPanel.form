@@ -19,7 +19,6 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="PrisonGuardjCalendar" alignment="1" max="32767" attributes="0"/>
                   <Component id="lblGuardWorkArea" alignment="1" pref="788" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnSubmitAttendance" min="-2" max="-2" attributes="0"/>
@@ -39,9 +38,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblGuardWorkArea" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="PrisonGuardjCalendar" min="-2" pref="272" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
               <Component id="btnSubmitAttendance" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="193" max="32767" attributes="0"/>
               <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
@@ -60,8 +57,6 @@
         <Property name="text" type="java.lang.String" value="Prison Guard Work Area"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
-    </Component>
-    <Component class="com.toedter.calendar.JCalendar" name="PrisonGuardjCalendar">
     </Component>
     <Component class="javax.swing.JButton" name="btnSubmitAttendance">
       <Properties>
