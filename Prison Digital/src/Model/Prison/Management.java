@@ -5,6 +5,7 @@
  */
 package Model.Prison;
 
+import Model.CriminalJusticeSystem.CaseDirectory;
 import Model.Employee.Employee;
 import Model.Employee.EmployeeDirectory;
 import Model.Organization;
@@ -20,6 +21,23 @@ public class Management extends Organization{
     Employee InfirmaryAdmin;
     EmployeeDirectory staff;
     ArrayList<Prisoner> prisoners;
+    CaseDirectory caseDirectory;
+
+    public CaseDirectory getCaseDirectory() {
+        return caseDirectory;
+    }
+
+    public void setCaseDirectory(CaseDirectory caseDirectory) {
+        this.caseDirectory = caseDirectory;
+    }
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Employee admin) {
+        this.admin = admin;
+    }
 
     public Employee getDiningAdmin() {
         return DiningAdmin;
@@ -38,6 +56,8 @@ public class Management extends Organization{
     }
 
     public EmployeeDirectory getStaff() {
+        if(staff == null)
+            staff = new EmployeeDirectory();
         return staff;
     }
 

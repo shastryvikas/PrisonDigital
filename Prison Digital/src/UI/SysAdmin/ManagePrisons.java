@@ -5,22 +5,72 @@
  */
 package UI.SysAdmin;
 
+import Model.Employee.Employee;
+import Model.Location;
+import Model.Prison.Prison;
+import Model.PrisonEcosystem;
+import Model.Role.PrisonAdmin;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Thejas
  */
 public class ManagePrisons extends javax.swing.JPanel {
-JPanel container;
+    
+    JPanel container;
+    PrisonEcosystem system;
+    Prison selectedPrison;
+
     /**
      * Creates new form ManagePrisons
+     *
      * @param container
+     * @param system
      */
-    public ManagePrisons(JPanel container) {
+    public ManagePrisons(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        this.system = system;
+        initializeTable();
+        tblPrisons.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+            private void initializeFields() {
+                selectedPrison = (Prison) tblPrisons.getModel().getValueAt(tblPrisons.getSelectedRow(), 0);
+                txtPrisonName.setText(selectedPrison.getName());
+                txtPrisonAdminName.setText(selectedPrison.getManagement().getAdmin().getName());
+                txtPrisonLocation.setText(String.valueOf(selectedPrison.getLocation()));
+                txtPrisonAdminPassword.setText(selectedPrison.getManagement().getAdmin().getUserAccount().getPassword());
+                txtPrisonAdminUsername.setText(selectedPrison.getManagement().getAdmin().getUserAccount().getUsername());
+                drpdwnStatus.setSelectedIndex(selectedPrison.getStatus() == true ? 0 : 1);
+            }
+        });
     }
 
     /**
@@ -43,20 +93,23 @@ JPanel container;
         lblPrisonAdminPassword = new javax.swing.JLabel();
         txtPrisonAdminPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        lblPrisonAdminName = new javax.swing.JLabel();
+        txtPrisonAdminName = new javax.swing.JTextField();
+        lblPrisonStatus = new javax.swing.JLabel();
+        drpdwnStatus = new javax.swing.JComboBox<>();
 
         tblPrisons.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Username", "Password", "Location"
+                "Prison Name", "Admin Name", "Username", "Password", "Location", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -88,17 +141,6 @@ JPanel container;
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(244, 208, 129));
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
-        btnDelete.setText("Delete");
-        btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
         btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
@@ -121,53 +163,60 @@ JPanel container;
             }
         });
 
+        lblPrisonAdminName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPrisonAdminName.setText("Admin Name");
+
+        lblPrisonStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPrisonStatus.setText("Status");
+
+        drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Service", "Out of Service" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 732, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblPrisonLocation)
+                            .addComponent(lblPrisonName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrisonStatus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblPrisonLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPrisonName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPrisonName)
-                                    .addComponent(txtPrisonLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(158, 158, 158)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblPrisonAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPrisonAdminPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPrisonAdminUsername)
-                                    .addComponent(txtPrisonAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(150, 150, 150)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(125, 125, 125))))
+                            .addComponent(txtPrisonName, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(txtPrisonLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(drpdwnStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblPrisonAdminUsername)
+                                .addComponent(lblPrisonAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblPrisonAdminName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrisonAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrisonAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrisonAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(82, 82, 82))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -185,12 +234,19 @@ JPanel container;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPrisonAdminPassword)
                             .addComponent(txtPrisonAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(69, 69, 69)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPrisonAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPrisonAdminName))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPrisonStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(183, 183, 183)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -198,17 +254,52 @@ JPanel container;
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnAddActionPerformed
+        if (checkInputFields(txtPrisonName) && checkInputFields(txtPrisonAdminName) && checkInputFields(txtPrisonAdminUsername) && checkInputFields(txtPrisonAdminPassword) && checkInputFields(txtPrisonLocation)) {
+//            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnDeleteActionPerformed
+            if (checkIfPrisonNameIsUnique()) {
+                //String[] locationData =  txtPrisonLocation.getText().split(", ");
+//Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+                Prison newPrison = new Prison(txtPrisonName.getText(), new Location(42.338767, -71.087863), true);
+                Employee prisonAdmin = new Employee(system,txtPrisonAdminName.getText(), txtPrisonAdminUsername.getText(), txtPrisonAdminPassword.getText(), newPrison, new PrisonAdmin());
+                newPrison.getManagement().setAdmin(prisonAdmin);
+                system.getPrisons().add(newPrison);
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "New Prison has been added");
+            } else {
+                JOptionPane.showMessageDialog(this, "Prison name already exists, try a different name");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Prison");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        
+        if (checkInputFields(txtPrisonName) && checkInputFields(txtPrisonAdminName) && checkInputFields(txtPrisonAdminUsername) && checkInputFields(txtPrisonAdminPassword) && checkInputFields(txtPrisonLocation)) {
+            if (selectedPrison != null) {
+                for (Prison prison : system.getPrisons()) {
+                    if (selectedPrison.getName().equals(prison.getName())) {
+                        //String[] locationData =  txtPrisonLocation.getText().split(", ");
+                        prison.setName(txtPrisonName.getText());
+                        // prison.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+                        prison.setLocation(new Location(42.338767, -71.087863));
+                        prison.getManagement().getAdmin().getUserAccount().setUsername(txtPrisonAdminUsername.getText());
+                        prison.getManagement().getAdmin().getUserAccount().setPassword(txtPrisonAdminPassword.getText());
+                        prison.getManagement().getAdmin().setName(txtPrisonAdminName.getText());
+                        prison.setStatus(drpdwnStatus.getSelectedIndex() == 0);
+                        initializeTable();
+                        resetFields();
+                        JOptionPane.showMessageDialog(this, "Prison details updated successfully");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a prison to update from the table");
+            }
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -217,22 +308,71 @@ JPanel container;
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
-
-
+    
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+    
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> drpdwnStatus;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPrisonAdminName;
     private javax.swing.JLabel lblPrisonAdminPassword;
     private javax.swing.JLabel lblPrisonAdminUsername;
     private javax.swing.JLabel lblPrisonLocation;
     private javax.swing.JLabel lblPrisonName;
+    private javax.swing.JLabel lblPrisonStatus;
     private javax.swing.JTable tblPrisons;
+    private javax.swing.JTextField txtPrisonAdminName;
     private javax.swing.JTextField txtPrisonAdminPassword;
     private javax.swing.JTextField txtPrisonAdminUsername;
     private javax.swing.JTextField txtPrisonLocation;
     private javax.swing.JTextField txtPrisonName;
     // End of variables declaration//GEN-END:variables
+
+    private void initializeTable() {
+        ArrayList<Prison> prisonDetails = system.getPrisons();
+        DefaultTableModel tablemodel = (DefaultTableModel) tblPrisons.getModel();
+        tablemodel.setRowCount(0);
+        if (prisonDetails != null) {
+            for (Prison prison : prisonDetails) {
+                if (prison != null) {
+                    Object[] row = new Object[6];
+                    row[0] = prison;
+                    row[1] = prison.getManagement().getAdmin().getName();
+                    row[2] = prison.getManagement().getAdmin().getUserAccount().getUsername();
+                    row[3] = prison.getManagement().getAdmin().getUserAccount().getUsername();
+                    row[4] = String.valueOf(prison.getLocation());
+                    row[5] = prison.getStatus() == true ? "In service" : "Out of service";
+                    tablemodel.addRow(row);
+                }
+            }
+        }
+    }
+    
+    private void resetFields() {
+        txtPrisonLocation.setText("");
+        txtPrisonAdminUsername.setText("");
+        txtPrisonAdminPassword.setText("");
+        txtPrisonName.setText("");
+        txtPrisonAdminName.setText("");
+        drpdwnStatus.setSelectedIndex(0);
+    }
+    
+    private boolean checkIfPrisonNameIsUnique() {
+        if (checkInputFields(txtPrisonName)) {
+            for (Prison prison : system.getPrisons()) {
+                if (prison.getName().equals(txtPrisonName.getText())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

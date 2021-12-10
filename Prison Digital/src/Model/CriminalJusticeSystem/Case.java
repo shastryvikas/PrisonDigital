@@ -106,4 +106,9 @@ public class Case {
         this.prison = prison;
     }
     
+    @Override
+    public String toString() {
+        return this.caseNumber + "";
+    }
+    
 }

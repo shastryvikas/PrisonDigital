@@ -5,6 +5,7 @@
  */
 package Model.Prison;
 
+import Model.Location;
 import Model.Enterprise;
 
 /**
@@ -16,6 +17,31 @@ public class Prison extends Enterprise{
     Infrastructure infrastructure;
     String name;
 
+    public Prison(String name, Location location, Boolean status) {
+        this.name = name;
+        this.setLocation(location);
+        this.setStatus(status);
+        this.management = new Management();
+        this.infrastructure = new Infrastructure();
+    }
+    
+    public Prison() {
+        
+    }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Management getManagement() {
         return management;
     }
