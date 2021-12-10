@@ -22,11 +22,11 @@ public class ConfigureEcosystem {
         
         PrisonEcosystem system = new PrisonEcosystem();
         
-//        Prison p = new Prison();
-//        Management m = new Management();
-//        m.setAdmin(new Employee(system, "PrisonAdmin", "prisonadmin", "prisonadmin", p, new PrisonAdmin()));
-//        p.setManagement(m);
-//        system.getPrisons().add(p);
+        Prison p = new Prison();
+        Management m = new Management();
+        m.setAdmin(new Employee(system, "PrisonAdmin", "prisonadmin", "prisonadmin", p, new PrisonAdmin()));
+        p.setManagement(m);
+        system.getPrisons().add(p);
         
         system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", new SysAdmin());
         return system;

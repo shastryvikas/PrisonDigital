@@ -6,6 +6,7 @@
 package Model.UserAccountManagement;
 
 import Model.Enterprise;
+import Model.PrisonEcosystem;
 import Model.Role.Role;
 import Model.WorkQueue.WorkQueue;
 

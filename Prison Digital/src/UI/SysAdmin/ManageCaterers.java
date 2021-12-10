@@ -275,31 +275,28 @@ public class ManageCaterers extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-//        if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
-//            if (selectedCateringService != null) {
-//                for (FoodCateringService cateringService : system.getCateringServices()) {
-//                    if (selectedCateringService.getName().equals(cateringService.getName())) {
-//                        cateringService.setName(txtCatererName.getText());
-////                       String[] locationData =  txtCatererLocation.getText().split(", ");
-////                       cateringService.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-//                        cateringService.setLocation(new Location(42.338767, -71.087863));
-//                        cateringService.getManagement().getAdmin().getUserAccount().setUsername(txtCatererAdminUsername.getText());
-//                        cateringService.getManagement().getAdmin().getUserAccount().setPassword(txtCatererAdminPassword.getText());
-//                        cateringService.getManagement().getAdmin().setName(txtCatererAdminName.getText());
-//                        cateringService.setStatus(drpdwnStatus.getSelectedIndex()==0);
-//                        initializeTable();
-//                        resetFields();
-//                        JOptionPane.showMessageDialog(this, "Caterer details updated successfully");
-//                        break;
-//                    }
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Please select a caterer to update from the table");
-//            }
-//        }else{
-//             JOptionPane.showMessageDialog(this, "Fields cannot be empty for updating caterer's details");
-//        }
-
+        if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
+            if (selectedCateringService != null) {
+                for (FoodCateringService cateringService : system.getCateringServices()) {
+                    if (selectedCateringService.getName().equals(cateringService.getName())) {
+                        cateringService.setName(txtCatererName.getText());
+//                       String[] locationData =  txtCatererLocation.getText().split(", ");
+//                       cateringService.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+                        cateringService.setLocation(new Location(42.338767, -71.087863));
+                        cateringService.getManagement().getAdmin().getUserAccount().setUsername(txtCatererAdminUsername.getText());
+                        cateringService.getManagement().getAdmin().getUserAccount().setPassword(txtCatererAdminPassword.getText());
+                        cateringService.getManagement().getAdmin().setName(txtCatererAdminName.getText());
+                        cateringService.setStatus(drpdwnStatus.getSelectedIndex()==0);
+                        initializeTable();
+                        resetFields();
+                        JOptionPane.showMessageDialog(this, "Caterer details updated successfully");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a caterer to update from the table");
+            }
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
