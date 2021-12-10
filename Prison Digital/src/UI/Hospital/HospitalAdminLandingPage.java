@@ -3,25 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.Infirmary;
+package UI.Hospital;
 
+import Model.PrisonEcosystem;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Thejas
  */
-public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
+public class HospitalAdminLandingPage extends javax.swing.JPanel {
 
     JPanel container;
+    PrisonEcosystem system;
 
     /**
      * Creates new form InfirmaryAdminLandingPage
      * @param container
      */
-    public InfirmaryAdminLandingPage(JPanel container) {
+    public HospitalAdminLandingPage(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        this.system = system;
     }
 
     /**
@@ -97,7 +100,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnAdd.setBackground(new java.awt.Color(244, 208, 129));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
         btnAdd.setText("Add");
         btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +110,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnDelete.setBackground(new java.awt.Color(244, 208, 129));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
         btnDelete.setText("Delete");
         btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +120,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
         btnUpdate.setText("Update");
         btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnChangeStatus.setBackground(new java.awt.Color(244, 208, 129));
         btnChangeStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnChangeStatus.setForeground(new java.awt.Color(0, 0, 0));
         btnChangeStatus.setText("Change Status");
         btnChangeStatus.setPreferredSize(new java.awt.Dimension(85, 30));
         btnChangeStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +253,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnAssignHeadPsychologist.setBackground(new java.awt.Color(244, 208, 129));
         btnAssignHeadPsychologist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAssignHeadPsychologist.setForeground(new java.awt.Color(0, 0, 0));
         btnAssignHeadPsychologist.setText("Assign head Psychologist");
         btnAssignHeadPsychologist.setPreferredSize(new java.awt.Dimension(85, 30));
         btnAssignHeadPsychologist.addActionListener(new java.awt.event.ActionListener() {
@@ -265,7 +263,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnAssignHeadGeneralPhysician.setBackground(new java.awt.Color(244, 208, 129));
         btnAssignHeadGeneralPhysician.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAssignHeadGeneralPhysician.setForeground(new java.awt.Color(0, 0, 0));
         btnAssignHeadGeneralPhysician.setText("Assign head General Physician");
         btnAssignHeadGeneralPhysician.setPreferredSize(new java.awt.Dimension(85, 30));
         btnAssignHeadGeneralPhysician.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +273,6 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
 
         btnAssignHeadPatientCareTechnician.setBackground(new java.awt.Color(244, 208, 129));
         btnAssignHeadPatientCareTechnician.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAssignHeadPatientCareTechnician.setForeground(new java.awt.Color(0, 0, 0));
         btnAssignHeadPatientCareTechnician.setText("Assign head Patient care technician");
         btnAssignHeadPatientCareTechnician.setPreferredSize(new java.awt.Dimension(85, 30));
         btnAssignHeadPatientCareTechnician.addActionListener(new java.awt.event.ActionListener() {
@@ -347,7 +343,7 @@ public class InfirmaryAdminLandingPage extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(manageOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 797, Short.MAX_VALUE))
+                    .addComponent(manageStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE))
                 .addGap(0, 171, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

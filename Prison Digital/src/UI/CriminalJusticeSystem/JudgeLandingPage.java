@@ -5,6 +5,7 @@
  */
 package UI.CriminalJusticeSystem;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -16,16 +17,18 @@ public class JudgeLandingPage extends javax.swing.JPanel {
 
     JPanel container;
     CardLayout layout;
+    PrisonEcosystem system;
 
     /**
      * Creates new form JudgeLandingPage
      *
      * @param container
      */
-    public JudgeLandingPage(JPanel container) {
+    public JudgeLandingPage(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
+        this.system = system;
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package UI.Prison;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -16,13 +17,15 @@ public class PrisonAdminJPanel extends javax.swing.JPanel {
 
     CardLayout cardLayoutPointer;
     JPanel container;
+    PrisonEcosystem system;
     /**
      * Creates new form PrisonAdminJPanel
      */
-    public PrisonAdminJPanel(JPanel container) {
+    public PrisonAdminJPanel(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         cardLayoutPointer = (CardLayout) container.getLayout();
+        this.system = system;
     }
 
     /**

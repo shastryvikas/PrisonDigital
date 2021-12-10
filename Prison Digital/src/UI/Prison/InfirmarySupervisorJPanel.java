@@ -5,6 +5,7 @@
  */
 package UI.Prison;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,12 +18,15 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form InfirmarySupervisorJPanel
      */
-    CardLayout cardLayoutPointer;
     JPanel container;
+    CardLayout layout;
+    PrisonEcosystem system;
 
-    public InfirmarySupervisorJPanel(JPanel container) {
+    public InfirmarySupervisorJPanel(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        layout = layout = (CardLayout) container.getLayout();
+        this.system = system;
     }
 
     /**

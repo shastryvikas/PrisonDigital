@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.Role.PrisonAdmin;
 import Model.Role.SysAdmin;
 import Model.UserAccountManagement.UserAccount;
 
@@ -18,6 +19,7 @@ public class ConfigureEcosystem {
         
         PrisonEcosystem system = new PrisonEcosystem();
         system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", new SysAdmin());
+        system.getUserAccountDirectory().createUserAccount("prisonadmin", "prisonadmin", new PrisonAdmin());
         return system;
         
     }

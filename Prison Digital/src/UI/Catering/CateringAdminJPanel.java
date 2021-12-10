@@ -5,7 +5,9 @@
  */
 package UI.Catering;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,10 +19,15 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
      * Creates new form CateringAdminJPanel
      */
     
-    CardLayout cardLayoutPointer;
+    JPanel container;
+    CardLayout layout;
+    PrisonEcosystem system;
     
-    public CateringAdminJPanel() {
+    public CateringAdminJPanel(JPanel container, PrisonEcosystem system) {
         initComponents();
+        this.container = container;
+        layout = (CardLayout) container.getLayout();
+        this.system = system;
     }
 
     /**
@@ -223,9 +230,8 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblPassword)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnUpdate)
                         .addComponent(btnDelete)

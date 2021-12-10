@@ -18,6 +18,7 @@ public class CriminalJusticeSystem extends Enterprise{
     ArrayList<Court> listOfCourts;
     ArrayList<Police> listOfPolice;
     Employee admin;
+    String name;
 
     public ArrayList<Court> getListOfCourts() {
         return listOfCourts;

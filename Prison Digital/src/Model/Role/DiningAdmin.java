@@ -7,6 +7,9 @@ package Model.Role;
 
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
+import UI.Catering.CateringAdminJPanel;
+import UI.Catering.DeliveryJPanel;
+import UI.Prison.DiningSupervisorJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -17,7 +20,7 @@ public class DiningAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DiningSupervisorJPanel(userProcessContainer, business);
     }
     
 }

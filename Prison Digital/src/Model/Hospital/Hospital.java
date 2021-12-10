@@ -14,6 +14,7 @@ import Model.Enterprise;
 public class Hospital extends Enterprise{
     Management management;
     PatientCare patientCare;
+    String name;
 
     public Management getManagement() {
         return management;

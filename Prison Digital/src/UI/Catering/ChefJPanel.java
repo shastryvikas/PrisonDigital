@@ -5,7 +5,9 @@
  */
 package UI.Catering;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,10 +19,15 @@ public class ChefJPanel extends javax.swing.JPanel {
      * Creates new form ChefJPanel
      */
     
-    CardLayout cardLayoutPointer;
+    JPanel container;
+    CardLayout layout;
+    PrisonEcosystem system;
     
-    public ChefJPanel() {
+    public ChefJPanel(JPanel container, PrisonEcosystem system) {
         initComponents();
+        this.container = container;
+        layout = (CardLayout) container.getLayout();
+        this.system = system;
     }
 
     /**

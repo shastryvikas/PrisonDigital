@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.Infirmary;
+package UI.Hospital;
 
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -12,19 +13,21 @@ import javax.swing.JPanel;
  *
  * @author Thejas
  */
-public class InfirmaryStaffLogin extends javax.swing.JPanel {
+public class HospitalStaffLogin extends javax.swing.JPanel {
 
     JPanel container;
     CardLayout layout;
+    PrisonEcosystem system;
 
     /**
      * Creates new form InfirmaryStaffLogin
      * @param container
      */
-    public InfirmaryStaffLogin(JPanel container) {
+    public HospitalStaffLogin(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = layout = (CardLayout) container.getLayout();
+        this.system = system;
     }
 
     /**

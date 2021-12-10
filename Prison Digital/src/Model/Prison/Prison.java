@@ -14,6 +14,7 @@ import Model.Enterprise;
 public class Prison extends Enterprise{
     Management management;
     Infrastructure infrastructure;
+    String name;
 
     public Management getManagement() {
         return management;

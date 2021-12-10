@@ -15,6 +15,7 @@ public class FoodCateringService extends Enterprise{
     Kitchen kitchen;
     Management management;
     Transport transport;
+    String name;
 
     public Kitchen getKitchen() {
         return kitchen;
