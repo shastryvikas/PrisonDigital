@@ -5,9 +5,11 @@
  */
 package Model.Employee;
 
+import Model.Enterprise;
 import Model.Person;
+import Model.PrisonEcosystem;
+import Model.Role.Role;
 import Model.UserAccountManagement.UserAccount;
-import javax.management.relation.Role;
 
 /**
  *
@@ -21,6 +23,15 @@ public class Employee {
     private Role role;
     private static int count = 10904;
 
+    public Employee(PrisonEcosystem system, String name, String username, String password, Enterprise enterprise, Role roleType) {
+        Person newPerson = new Person(name);
+        this.person = newPerson;
+        this.userAccount = system.getNewUserAccount(username, password, enterprise, roleType);
+        this.role = roleType;
+        id = count;
+        count++;
+    }
+    
     public UserAccount getUserAccount() {
         return userAccount;
     }

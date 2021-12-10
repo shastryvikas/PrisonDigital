@@ -15,7 +15,6 @@ public abstract class Enterprise {
     
     String name;
     Location location;
-    EmployeeDirectory employeeDirectory;
     Boolean status;
 
     public Boolean getStatus() {
@@ -24,14 +23,6 @@ public abstract class Enterprise {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public EmployeeDirectory getEmployeeDirectory() {
-        return employeeDirectory;
-    }
-
-    public void setEmployeeDirectory(EmployeeDirectory employeeDirectory) {
-        this.employeeDirectory = employeeDirectory;
     }
 
     public String getName() {

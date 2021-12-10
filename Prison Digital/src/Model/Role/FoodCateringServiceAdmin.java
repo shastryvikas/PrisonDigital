@@ -19,7 +19,7 @@ public class FoodCateringServiceAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new CateringAdminJPanel(userProcessContainer, business);
+        return new CateringAdminJPanel(userProcessContainer, account, business);
     }
     
 }
