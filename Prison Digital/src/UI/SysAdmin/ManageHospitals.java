@@ -5,12 +5,16 @@
  */
 package UI.SysAdmin;
 
+import Model.Employee.Employee;
 import Model.Hospital.Hospital;
 import Model.Hospital.Management;
+import Model.Location;
 import Model.PrisonEcosystem;
+import Model.Role.HospitalAdmin;
 import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -20,15 +24,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Thejas
  */
 public class ManageHospitals extends javax.swing.JPanel {
+
     JPanel container;
     PrisonEcosystem system;
     Hospital selectedHospital;
 
     /**
      * Creates new form ManageHospitals
+     *
      * @param container
      */
-
     public ManageHospitals(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
@@ -57,17 +62,13 @@ public class ManageHospitals extends javax.swing.JPanel {
             }
 
             private void initializeFields() {
-                String username = (String) tblHospitals.getModel().getValueAt(tblHospitals.getSelectedRow(), 1);
-                for (UserAccount user : system.getUserAccountDirectory().getUserAccountList()) {
-                    if (username.equals(user.getUsername())) {
-                        txtHospitalName.setText(user.getName());
-                        txtHospitalLocation.setText();
-                        txtHospitalAdminPassword.setText(user.getPassword());
-                        txtHospitalAdminUsername.setText(username);
-                        selectedHospital = system.getUserAccountDirectory().authenticateUser(user.getUsername(), user.getPassword());
-                        break;
-                    }
-                }
+                selectedHospital = (Hospital) tblHospitals.getModel().getValueAt(tblHospitals.getSelectedRow(), 0);
+                txtHospitalName.setText(selectedHospital.getName());
+                txtHospitalAdminName.setText(selectedHospital.getManagement().getHospitalAdmin().getName());
+                txtHospitalLocation.setText(String.valueOf(selectedHospital.getLocation()));
+                txtHospitalAdminPassword.setText(selectedHospital.getManagement().getHospitalAdmin().getUserAccount().getPassword());
+                txtHospitalAdminUsername.setText(selectedHospital.getManagement().getHospitalAdmin().getUserAccount().getUsername());
+                drpdwnStatus.setSelectedIndex(selectedHospital.getStatus() == true ? 0 : 1);
             }
         });
     }
@@ -92,20 +93,23 @@ public class ManageHospitals extends javax.swing.JPanel {
         lblHospitalAdminPassword = new javax.swing.JLabel();
         txtHospitalAdminPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        lblHospitalStatus = new javax.swing.JLabel();
+        drpdwnStatus = new javax.swing.JComboBox<>();
+        lblHospitalAdminName = new javax.swing.JLabel();
+        txtHospitalAdminName = new javax.swing.JTextField();
 
         tblHospitals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Username", "Password", "Location"
+                "Hospital Name", "Admin Name", "Username", "Password", "Location", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -137,17 +141,6 @@ public class ManageHospitals extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(244, 208, 129));
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
-        btnDelete.setText("Delete");
-        btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
         btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
@@ -170,6 +163,14 @@ public class ManageHospitals extends javax.swing.JPanel {
             }
         });
 
+        lblHospitalStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblHospitalStatus.setText("Status");
+
+        drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Service", "Out of Service" }));
+
+        lblHospitalAdminName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblHospitalAdminName.setText("Admin Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,29 +187,30 @@ public class ManageHospitals extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblHospitalLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHospitalStatus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblHospitalLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtHospitalName)
-                                    .addComponent(txtHospitalLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(158, 158, 158)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblHospitalAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblHospitalAdminPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtHospitalAdminUsername)
-                                    .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(150, 150, 150)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(drpdwnStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtHospitalName)
+                                .addComponent(txtHospitalLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+                        .addGap(152, 152, 152)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblHospitalAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblHospitalAdminPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtHospitalAdminUsername)
+                                .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(125, 125, 125))))
         );
         layout.setVerticalGroup(
@@ -234,11 +236,17 @@ public class ManageHospitals extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblHospitalAdminPassword)
                             .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(69, 69, 69)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblHospitalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblHospitalAdminName))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(97, 97, 97)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -247,10 +255,14 @@ public class ManageHospitals extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
-            if (system.getPrisons().checkIfUsernameIsUnique(txtHospitalAdminUsername.getText())) {
-                Hospital newHospital = new Hospital(new Management().setAdmin(txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText()));
-                system.getHospitals().addHospital(newHospital);
+        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
+            if (checkIfHospitalNameIsUnique()) {
+//                String[] locationData = txtHospitalLocation.getText().split(", ");
+//Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), (drpdwnStatus.getSelectedIndex()==0));
+                Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(42.338767, -71.087863), true);
+                Employee hospitalAdmin = new Employee(txtHospitalAdminName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), newHospital, new HospitalAdmin());
+                newHospital.getManagement().setHospitalAdmin(hospitalAdmin);
+                system.getHospitals().add(newHospital);
                 initializeTable();
                 resetFields();
                 JOptionPane.showMessageDialog(this, "New Hospital has been added");
@@ -262,18 +274,22 @@ public class ManageHospitals extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnAddActionPerformed
-private void initializeTable() {
-        Hospital[] HospitalDetails = system.getHospitals();
+    private void initializeTable() {
+        ArrayList<Hospital> hospitalDetails = system.getHospitals();
         DefaultTableModel tablemodel = (DefaultTableModel) tblHospitals.getModel();
         tablemodel.setRowCount(0);
-        for (Hospital hospital : HospitalDetails) {
-            if (hospital != null) {
-                Object[] row = new Object[4];
-                row[0] = hospital.getName();
-                row[1] = hospital;
-                row[2] = hospital;
-                row[3] = hospital.getLocation();
-                tablemodel.addRow(row);
+        if (hospitalDetails != null) {
+            for (Hospital hospital : hospitalDetails) {
+                if (hospital != null) {
+                    Object[] row = new Object[6];
+                    row[0] = hospital;
+                    row[1] = hospital.getManagement().getHospitalAdmin().getName();
+                    row[2] = hospital.getManagement().getHospitalAdmin().getUserAccount().getUsername();
+                    row[3] = hospital.getManagement().getHospitalAdmin().getUserAccount().getPassword();
+                    row[4] = hospital.getLocation();
+                    row[5] = hospital.getStatus() == true ? "In service": "Out of service";
+                    tablemodel.addRow(row);
+                }
             }
         }
     }
@@ -283,41 +299,41 @@ private void initializeTable() {
         txtHospitalAdminUsername.setText("");
         txtHospitalLocation.setText("");
         txtHospitalName.setText("");
+        txtHospitalAdminName.setText("");
+        drpdwnStatus.setSelectedIndex(0);
     }
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        if (selectedHospital != null) {
-            system.getUserAccountDirectory().deleteUserAccount(selectedHospital);
-            system.getCustomerDirectory().removeCustomer(selectedHospital.getUsername());
-            initializeTable();
-            resetFields();
-            JOptionPane.showMessageDialog(this, "Hospital delted successfully");
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a hospital to delete from the table");
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
-            if (selectedHospital != null) {
-                system.getUserAccountDirectory().updateAccount(selectedHospital, txtHospitalName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), txtHospitalLocation.getText());
-                initializeTable();
-                resetFields();
-                JOptionPane.showMessageDialog(this, "Hospital details updated successfully");
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a hospital to update from the table");
-            }
-        }
-
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
+            if (selectedHospital != null) {
+                for (Hospital hospital : system.getHospitals()) {
+                    if (selectedHospital.getName().equals(hospital.getName())) {
+                        //String[] locationData =  txtHospitalLocation.getText().split(", ");
+                        hospital.setName(txtHospitalName.getText());
+                        // hospital.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+                        hospital.setLocation(new Location(42.338767, -71.087863));
+                        hospital.getManagement().getHospitalAdmin().getUserAccount().setUsername(txtHospitalAdminUsername.getText());
+                        hospital.getManagement().getHospitalAdmin().getUserAccount().setPassword(txtHospitalAdminPassword.getText());
+                        hospital.getManagement().getHospitalAdmin().setName(txtHospitalAdminName.getText());
+                        hospital.setStatus(drpdwnStatus.getSelectedIndex() == 0);
+                        initializeTable();
+                        resetFields();
+                        JOptionPane.showMessageDialog(this, "Hospital details updated successfully");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a hospital to update from the table");
+            }
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
@@ -329,17 +345,31 @@ private void initializeTable() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> drpdwnStatus;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblHospitalAdminName;
     private javax.swing.JLabel lblHospitalAdminPassword;
     private javax.swing.JLabel lblHospitalAdminUsername;
     private javax.swing.JLabel lblHospitalLocation;
     private javax.swing.JLabel lblHospitalName;
+    private javax.swing.JLabel lblHospitalStatus;
     private javax.swing.JTable tblHospitals;
+    private javax.swing.JTextField txtHospitalAdminName;
     private javax.swing.JTextField txtHospitalAdminPassword;
     private javax.swing.JTextField txtHospitalAdminUsername;
     private javax.swing.JTextField txtHospitalLocation;
     private javax.swing.JTextField txtHospitalName;
     // End of variables declaration//GEN-END:variables
+
+    private boolean checkIfHospitalNameIsUnique() {
+        if (checkInputFields(txtHospitalName)) {
+            for (Hospital hospital : system.getHospitals()) {
+                if (hospital.getName().equals(txtHospitalName.getText())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

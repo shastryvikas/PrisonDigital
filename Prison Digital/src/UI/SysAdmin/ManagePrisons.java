@@ -7,7 +7,6 @@ package UI.SysAdmin;
 
 import Model.Employee.Employee;
 import Model.Location;
-import Model.Prison.Management;
 import Model.Prison.Prison;
 import Model.PrisonEcosystem;
 import Model.Role.PrisonAdmin;
@@ -24,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Thejas
  */
 public class ManagePrisons extends javax.swing.JPanel {
-
+    
     JPanel container;
     PrisonEcosystem system;
     Prison selectedPrison;
@@ -44,24 +43,24 @@ public class ManagePrisons extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
-
+            
             @Override
             public void mousePressed(MouseEvent e) {
                 initializeFields();
             }
-
+            
             @Override
             public void mouseReleased(MouseEvent e) {
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent e) {
             }
-
+            
             @Override
             public void mouseExited(MouseEvent e) {
             }
-
+            
             private void initializeFields() {
                 selectedPrison = (Prison) tblPrisons.getModel().getValueAt(tblPrisons.getSelectedRow(), 0);
                 txtPrisonName.setText(selectedPrison.getName());
@@ -70,17 +69,6 @@ public class ManagePrisons extends javax.swing.JPanel {
                 txtPrisonAdminPassword.setText(selectedPrison.getManagement().getAdmin().getUserAccount().getPassword());
                 txtPrisonAdminUsername.setText(selectedPrison.getManagement().getAdmin().getUserAccount().getUsername());
                 drpdwnStatus.setSelectedIndex(selectedPrison.getStatus() == true ? 0 : 1);
-//                for (Prison prison : system.getPrisons()) {
-//                    if (prisonName.equals(prison)) {
-//                        txtPrisonName.setText(prison.getName());
-//                        txtPrisonAdminName.setText(prison.getManagement().getAdmin().getName());
-//                        txtPrisonLocation.setText(String.valueOf(prison.getLocation()));
-//                        txtPrisonAdminPassword.setText(prison.getManagement().getAdmin().getUserAccount().getPassword());
-//                        txtPrisonAdminUsername.setText(prison.getManagement().getAdmin().getUserAccount().getUsername());
-//                        selectedPrison = prison;
-//                        break;
-//                    }
-//                }
             }
         });
     }
@@ -269,9 +257,9 @@ public class ManagePrisons extends javax.swing.JPanel {
         if (checkInputFields(txtPrisonName) && checkInputFields(txtPrisonAdminName) && checkInputFields(txtPrisonAdminUsername) && checkInputFields(txtPrisonAdminPassword) && checkInputFields(txtPrisonLocation)) {
 //            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
 
-//String[] locationData =  txtPrisonLocation.getText().split(", ");
-//Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
             if (checkIfPrisonNameIsUnique()) {
+                //String[] locationData =  txtPrisonLocation.getText().split(", ");
+//Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
                 Prison newPrison = new Prison(txtPrisonName.getText(), new Location(42.338767, -71.087863), true);
                 Employee prisonAdmin = new Employee(txtPrisonAdminName.getText(), txtPrisonAdminUsername.getText(), txtPrisonAdminPassword.getText(), newPrison, new PrisonAdmin());
                 newPrison.getManagement().setAdmin(prisonAdmin);
@@ -300,11 +288,13 @@ public class ManagePrisons extends javax.swing.JPanel {
                         prison.getManagement().getAdmin().getUserAccount().setUsername(txtPrisonAdminUsername.getText());
                         prison.getManagement().getAdmin().getUserAccount().setPassword(txtPrisonAdminPassword.getText());
                         prison.getManagement().getAdmin().setName(txtPrisonAdminName.getText());
+                        prison.setStatus(drpdwnStatus.getSelectedIndex() == 0);
+                        initializeTable();
+                        resetFields();
+                        JOptionPane.showMessageDialog(this, "Prison details updated successfully");
+                        break;
                     }
                 }
-                initializeTable();
-                resetFields();
-                JOptionPane.showMessageDialog(this, "Prison details updated successfully");
             } else {
                 JOptionPane.showMessageDialog(this, "Please select a prison to update from the table");
             }
@@ -318,11 +308,11 @@ public class ManagePrisons extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
-
+    
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
-
+    
     public boolean checkInputFields(javax.swing.JTextField txtField) {
         return txtField.getText() != null && !txtField.getText().isEmpty();
     }
@@ -365,18 +355,22 @@ public class ManagePrisons extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void resetFields() {
         txtPrisonLocation.setText("");
         txtPrisonAdminUsername.setText("");
         txtPrisonAdminPassword.setText("");
         txtPrisonName.setText("");
+        txtPrisonAdminName.setText("");
+        drpdwnStatus.setSelectedIndex(0);
     }
-
+    
     private boolean checkIfPrisonNameIsUnique() {
-        for (Prison prison : system.getPrisons()) {
-            if (prison.getName().equals(txtPrisonName.getText())) {
-                return false;
+        if (checkInputFields(txtPrisonName)) {
+            for (Prison prison : system.getPrisons()) {
+                if (prison.getName().equals(txtPrisonName.getText())) {
+                    return false;
+                }
             }
         }
         return true;
