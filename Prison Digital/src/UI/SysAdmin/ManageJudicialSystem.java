@@ -5,8 +5,14 @@
  */
 package UI.SysAdmin;
 
+import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +24,50 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
      * Creates new form ManageJudicialSystem
      */
     JPanel container;
-    public ManageJudicialSystem(JPanel container) {
+    PrisonEcosystem system;
+    CriminalJusticeSystem selectedJudicialSystem;
+
+    public ManageJudicialSystem(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        this.system = system;
+        initializeTable();
+        tblJudicialSytemAdmin.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializeFields() {
+                String username = (String) tblJudicialSytemAdmin.getModel().getValueAt(tblJudicialSytemAdmin.getSelectedRow(), 1);
+                for (UserAccount user : system.getUserAccountDirectory().getUserAccountList()) {
+                    if (username.equals(user.getUsername())) {
+                        txtJudicialSystemAdminName.setText(user.getName());
+                        txtJudicialSystemAdminLocation.setText();
+                        txtJudicialSystemAdminPassword.setText(user.getPassword());
+                        txtJudicialSystemAdminUsername.setText(username);
+                        selectedJudicialSystem = system.getUserAccountDirectory().authenticateUser(user.getUsername(), user.getPassword());
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -200,16 +247,77 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtJudicialSystemAdminLocation) && checkInputFields(txtJudicialSystemAdminName) && checkInputFields(txtJudicialSystemAdminPassword) && checkInputFields(txtJudicialSystemAdminUsername)) {
+            if (system.getPrisons().checkIfUsernameIsUnique(txtJudicialSystemAdminName.getText())) {
+                CriminalJusticeSystem newCriminalJusticeSystem = new CriminalJusticeSystem(txtPrisonAdminUsername.getText(), txtPrisonAdminPassword.getText());
+                system.getCriminalJusticeSystems().addCriminalJusticeSystem(newCriminalJusticeSystem);
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "New Criminal Justice System(CJS) has been added");
+            } else {
+                JOptionPane.showMessageDialog(this, "CJS name already exists, try a different name");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new CJS");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        if (selectedJudicialSystem != null) {
+            system.getUserAccountDirectory().deleteUserAccount(selectedJudicialSystem);
+            system.getCustomerDirectory().removeCustomer(selectedJudicialSystem.getUsername());
+            initializeTable();
+            resetFields();
+            JOptionPane.showMessageDialog(this, "CJS delted successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a CJS to delete from the table");
+        } 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtJudicialSystemAdminLocation) && checkInputFields(txtJudicialSystemAdminName) && checkInputFields(txtJudicialSystemAdminPassword) && checkInputFields(txtJudicialSystemAdminUsername)) {
+            if (selectedJudicialSystem != null) {
+                system.getUserAccountDirectory().updateAccount(selectedJudicialSystem, txtJudicialSystemAdminName.getText(), txtJudicialSystemAdminUsername.getText(), txtJudicialSystemAdminPassword.getText(), txtJudicialSystemAdminLocation.getText());
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "CJS details updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a CJS to update from the table");
+            }
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
+    private void initializeTable() {
+        CriminalJusticeSystem[] cjsDetials = system.getCriminalJusticeSystems();
+        DefaultTableModel tablemodel = (DefaultTableModel) tblJudicialSytemAdmin.getModel();
+        tablemodel.setRowCount(0);
+        for (CriminalJusticeSystem cjs : cjsDetials) {
+            if (cjs != null) {
+                Object[] row = new Object[4];
+                row[0] = cjs.getName();
+                row[1] = cjs;
+                row[2] = cjs;
+                row[3] = cjs.getLocation();
+                tablemodel.addRow(row);
+            }
+        }
+    }
 
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
+
+    private void resetFields() {
+        txtJudicialSystemAdminLocation.setText("");
+        txtJudicialSystemAdminName.setText("");
+        txtJudicialSystemAdminPassword.setText("");
+        txtJudicialSystemAdminUsername.setText("");
+    }
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         container.remove(this);

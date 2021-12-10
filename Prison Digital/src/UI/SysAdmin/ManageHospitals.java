@@ -5,8 +5,15 @@
  */
 package UI.SysAdmin;
 
+import Model.Hospital.Hospital;
+import Model.Hospital.Management;
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +21,55 @@ import javax.swing.JPanel;
  */
 public class ManageHospitals extends javax.swing.JPanel {
     JPanel container;
+    PrisonEcosystem system;
+    Hospital selectedHospital;
+
     /**
      * Creates new form ManageHospitals
      * @param container
      */
-    public ManageHospitals(JPanel container) {
+
+    public ManageHospitals(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        this.system = system;
+        initializeTable();
+        tblHospitals.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializeFields() {
+                String username = (String) tblHospitals.getModel().getValueAt(tblHospitals.getSelectedRow(), 1);
+                for (UserAccount user : system.getUserAccountDirectory().getUserAccountList()) {
+                    if (username.equals(user.getUsername())) {
+                        txtHospitalName.setText(user.getName());
+                        txtHospitalLocation.setText();
+                        txtHospitalAdminPassword.setText(user.getPassword());
+                        txtHospitalAdminUsername.setText(username);
+                        selectedHospital = system.getUserAccountDirectory().authenticateUser(user.getUsername(), user.getPassword());
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -198,14 +247,69 @@ public class ManageHospitals extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
+        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
+            if (system.getPrisons().checkIfUsernameIsUnique(txtHospitalAdminUsername.getText())) {
+                Hospital newHospital = new Hospital(new Management().setAdmin(txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText()));
+                system.getHospitals().addHospital(newHospital);
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "New Hospital has been added");
+            } else {
+                JOptionPane.showMessageDialog(this, "Hospital name already exists, try a different name");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Hospital");
+        }
 
+    }//GEN-LAST:event_btnAddActionPerformed
+private void initializeTable() {
+        Hospital[] HospitalDetails = system.getHospitals();
+        DefaultTableModel tablemodel = (DefaultTableModel) tblHospitals.getModel();
+        tablemodel.setRowCount(0);
+        for (Hospital hospital : HospitalDetails) {
+            if (hospital != null) {
+                Object[] row = new Object[4];
+                row[0] = hospital.getName();
+                row[1] = hospital;
+                row[2] = hospital;
+                row[3] = hospital.getLocation();
+                tablemodel.addRow(row);
+            }
+        }
+    }
+
+    private void resetFields() {
+        txtHospitalAdminPassword.setText("");
+        txtHospitalAdminUsername.setText("");
+        txtHospitalLocation.setText("");
+        txtHospitalName.setText("");
+    }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        if (selectedHospital != null) {
+            system.getUserAccountDirectory().deleteUserAccount(selectedHospital);
+            system.getCustomerDirectory().removeCustomer(selectedHospital.getUsername());
+            initializeTable();
+            resetFields();
+            JOptionPane.showMessageDialog(this, "Hospital delted successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a hospital to delete from the table");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
+            if (selectedHospital != null) {
+                system.getUserAccountDirectory().updateAccount(selectedHospital, txtHospitalName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), txtHospitalLocation.getText());
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "Hospital details updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a hospital to update from the table");
+            }
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -214,7 +318,13 @@ public class ManageHospitals extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
 
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

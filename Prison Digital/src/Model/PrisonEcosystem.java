@@ -18,6 +18,13 @@ import java.util.ArrayList;
  * @author vikasshastry
  */
 public class PrisonEcosystem{
+
+    public PrisonEcosystem() {
+        prisons = new ArrayList<>();
+        cateringServices = new ArrayList<>();
+        hospitals = new ArrayList<>();
+        criminalJusticeSystems = new ArrayList<>();
+    }
     
     private ArrayList<Prison> prisons;
     private ArrayList<FoodCateringService> cateringServices;

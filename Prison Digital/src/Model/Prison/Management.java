@@ -16,6 +16,14 @@ import java.util.ArrayList;
  */
 public class Management extends Organization{
     Employee admin;
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Employee admin) {
+        this.admin = admin;
+    }
     Employee DiningAdmin;
     Employee InfirmaryAdmin;
     EmployeeDirectory staff;

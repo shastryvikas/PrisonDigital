@@ -14,6 +14,16 @@ import Model.WorkQueue.WorkQueue;
  * @author vikasshastry
  */
 public class UserAccount {
+
+    public UserAccount(String username, String password, Enterprise enterprise, Role role) {
+        this.username = username;
+        this.password = password;
+        this.enterprise = enterprise;
+        this.role = role;
+    }
+
+    public UserAccount() {
+    }
     
     private String username;
     private String password;

@@ -35,7 +35,9 @@ public class Person {
     public Location getAddress() {
         return address;
     }
-
+public Person(String name){
+    this.name = name;
+}
     public void setAddress(Location address) {
         this.address = address;
     }

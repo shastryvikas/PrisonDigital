@@ -5,9 +5,10 @@
  */
 package Model.Employee;
 
+import Model.Enterprise;
 import Model.Person;
+import Model.Role.Role;
 import Model.UserAccountManagement.UserAccount;
-import javax.management.relation.Role;
 
 /**
  *
@@ -35,6 +36,15 @@ public class Employee {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Employee(String name, String username, String password, Enterprise enterprise, Role roleType) {
+        Person newPerson = new Person(name);
+        this.person = newPerson;
+        this.userAccount = new UserAccount(username, password, enterprise, roleType);
+        this.role = roleType;
+        id = count;
+        count++;
     }
 
     public Employee() {

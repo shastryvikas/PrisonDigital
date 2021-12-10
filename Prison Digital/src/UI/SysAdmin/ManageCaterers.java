@@ -5,22 +5,73 @@
  */
 package UI.SysAdmin;
 
+import Model.FoodCateringService.FoodCateringService;
+import Model.FoodCateringService.Management;
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Thejas
  */
 public class ManageCaterers extends javax.swing.JPanel {
-JPanel container;
+
+    JPanel container;
+    PrisonEcosystem system;
+    FoodCateringService selectedCateringService;
+
     /**
      * Creates new form ManageCaterers
+     *
      * @param container
+     * @param system
      */
-    public ManageCaterers(JPanel container) {
+    public ManageCaterers(JPanel container, PrisonEcosystem system) {
         initComponents();
         this.container = container;
+        this.system = system;
+        initializeTable();
+        tblCaterers.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializeFields() {
+                String username = (String) tblCaterers.getModel().getValueAt(tblCaterers.getSelectedRow(), 1);
+                for (UserAccount user : system.getUserAccountDirectory().getUserAccountList()) {
+                    if (username.equals(user.getUsername())) {
+                        txtCatererName.setText(user.getName());
+                        txtCatererLocation.setText();
+                        txtCatererAdminPassword.setText(user.getPassword());
+                        txtCatererAdminUsername.setText(username);
+                        selectedCateringService = system.getUserAccountDirectory().authenticateUser(user.getUsername(), user.getPassword());
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -198,17 +249,46 @@ JPanel container;
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-
+        if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
+            if (system.getCateringServices().checkIfUsernameIsUnique(txtCatererName.getText())) {
+                FoodCateringService newCaterer = new FoodCateringService(new Management().setAdmin(txtCatererAdminUsername.getText(), txtCatererAdminPassword.getText()));
+                system.getCateringServices().addFoodCateringService(newCaterer);
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "New Caterer has been added");
+            } else {
+                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Caterer");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-
+        if (selectedCateringService != null) {
+            system.getUserAccountDirectory().deleteUserAccount(selectedCateringService);
+            system.getCustomerDirectory().removeCustomer(selectedCateringService.getUsername());
+            initializeTable();
+            resetFields();
+            JOptionPane.showMessageDialog(this, "Caterer delted successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a caterer to delete from the table");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-
+        if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
+            if (selectedCateringService != null) {
+                system.getUserAccountDirectory().updateAccount(selectedCateringService, txtCatererName.getText(), txtCatererAdminUsername.getText(), txtCatererAdminPassword.getText(), txtCatererLocation.getText());
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "Caterer details updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a caterer to update from the table");
+            }
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -218,6 +298,36 @@ JPanel container;
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
+
+    private void initializeTable() {
+        FoodCateringService[] catererDetails = system.getCateringServices();
+        DefaultTableModel tablemodel = (DefaultTableModel) tblCaterers.getModel();
+        tablemodel.setRowCount(0);
+        for (FoodCateringService caterer : catererDetails) {
+            if (caterer != null) {
+                Object[] row = new Object[4];
+                row[0] = caterer.getName();
+                row[1] = caterer;
+                row[2] = caterer;
+                row[3] = caterer.getLocation();
+                tablemodel.addRow(row);
+            }
+        }
+    }
+
+    private void resetFields() {
+        txtCatererLocation.setText("");
+        txtCatererAdminUsername.setText("");
+        txtCatererAdminPassword.setText("");
+        txtCatererName.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
