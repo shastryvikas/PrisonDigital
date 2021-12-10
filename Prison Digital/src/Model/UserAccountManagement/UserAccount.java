@@ -6,6 +6,7 @@
 package Model.UserAccountManagement;
 
 import Model.Enterprise;
+import Model.PrisonEcosystem;
 import Model.Role.Role;
 import Model.WorkQueue.WorkQueue;
 
@@ -14,6 +15,13 @@ import Model.WorkQueue.WorkQueue;
  * @author vikasshastry
  */
 public class UserAccount {
+
+    private String username;
+    private String password;
+    private Enterprise enterprise;
+    private WorkQueue workQueue;
+    private WorkQueue oldWorkQueue;
+    private Role role;
 
     public UserAccount(String username, String password, Enterprise enterprise, Role role) {
         this.username = username;
@@ -24,13 +32,6 @@ public class UserAccount {
 
     public UserAccount() {
     }
-    
-    private String username;
-    private String password;
-    private Enterprise enterprise;
-    private WorkQueue workQueue;
-    private WorkQueue oldWorkQueue;
-    private Role role;
 
     public WorkQueue getWorkQueue() {
         return workQueue;
@@ -63,7 +64,7 @@ public class UserAccount {
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -79,10 +80,10 @@ public class UserAccount {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     @Override
     public String toString() {
         return username;
     }
-    
+
 }

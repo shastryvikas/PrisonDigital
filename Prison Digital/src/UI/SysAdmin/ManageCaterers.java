@@ -258,7 +258,7 @@ public class ManageCaterers extends javax.swing.JPanel {
         if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
             if (checkIfCatererNameIsUnique()) {
                 FoodCateringService newCaterer = new FoodCateringService(txtCatererName.getText(), new Location(42.338767, -71.087863), true);
-                Employee CateringAdmin = new Employee(txtCatererAdminName.getText(), txtCatererAdminUsername.getText(), txtCatererAdminPassword.getText(), newCaterer, new FoodCateringServiceAdmin());
+                Employee CateringAdmin = new Employee(system,txtCatererAdminName.getText(), txtCatererAdminUsername.getText(), txtCatererAdminPassword.getText(), newCaterer, new FoodCateringServiceAdmin());
                 newCaterer.getManagement().setAdmin(CateringAdmin);
                 system.getCateringServices().add(newCaterer);
                 initializeTable();

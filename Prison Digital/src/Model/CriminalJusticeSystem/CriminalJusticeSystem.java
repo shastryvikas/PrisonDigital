@@ -14,8 +14,8 @@ import java.util.ArrayList;
  *
  * @author vikasshastry
  */
-public class CriminalJusticeSystem extends Enterprise{
-    
+public class CriminalJusticeSystem extends Enterprise {
+
     ArrayList<Court> listOfCourts;
     ArrayList<Police> listOfPolice;
     Employee admin;
@@ -27,22 +27,6 @@ public class CriminalJusticeSystem extends Enterprise{
         this.listOfPolice = new ArrayList<>();
         this.setLocation(location);
         this.setStatus(status);
-    }
-
-    public ArrayList<Court> getListOfCourts() {
-        return listOfCourts;
-    }
-
-    public void setListOfCourts(ArrayList<Court> listOfCourts) {
-        this.listOfCourts = listOfCourts;
-    }
-
-    public ArrayList<Police> getListOfPolice() {
-        return listOfPolice;
-    }
-
-    public void setListOfPolice(ArrayList<Police> listOfPolice) {
-        this.listOfPolice = listOfPolice;
     }
 
     @Override
@@ -65,5 +49,21 @@ public class CriminalJusticeSystem extends Enterprise{
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    public ArrayList<Court> getListOfCourts() {
+        return listOfCourts;
+    }
+
+    public void setListOfCourts(ArrayList<Court> listOfCourts) {
+        this.listOfCourts = listOfCourts;
+    }
+
+    public ArrayList<Police> getListOfPolice() {
+        return listOfPolice;
+    }
+
+    public void setListOfPolice(ArrayList<Police> listOfPolice) {
+        this.listOfPolice = listOfPolice;
+    }
+
 }

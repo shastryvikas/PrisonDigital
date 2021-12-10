@@ -268,7 +268,7 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
 //CriminalJusticeSystem newCJS = new CriminalJusticeSystem(txtJudicialSystemName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), drpdwnStatus.getSelectedIndex()==0);
             if (checkIfCJSNameIsUnique()) {
                 CriminalJusticeSystem newCriminalJusticeSystem = new CriminalJusticeSystem(txtJudicialSystemName.getText(), new Location(42.338767, -71.087863), true);
-                Employee cjsAdmin = new Employee(txtJudicialSystemAdminName.getText(), txtJudicialSystemAdminUsername.getText(), txtJudicialSystemAdminPassword.getText(), newCriminalJusticeSystem, new CriminalJusticeSystemAdmin());
+                Employee cjsAdmin = new Employee(system,txtJudicialSystemAdminName.getText(), txtJudicialSystemAdminUsername.getText(), txtJudicialSystemAdminPassword.getText(), newCriminalJusticeSystem, new CriminalJusticeSystemAdmin());
                 newCriminalJusticeSystem.setAdmin(cjsAdmin);
                 system.getCriminalJusticeSystems().add(newCriminalJusticeSystem);
                 initializeTable();

@@ -14,6 +14,11 @@ import Model.Location;
  */
 public class FoodCateringService extends Enterprise {
 
+    Kitchen kitchen;
+    Management management;
+    Transport transport;
+    String name;
+
     public String getName() {
         return name;
     }
@@ -31,10 +36,10 @@ public class FoodCateringService extends Enterprise {
         this.kitchen = new Kitchen();
     }
 
-    Kitchen kitchen;
-    Management management;
-    Transport transport;
-    String name;
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public Kitchen getKitchen() {
         return kitchen;
@@ -58,10 +63,5 @@ public class FoodCateringService extends Enterprise {
 
     public void setTransport(Transport transport) {
         this.transport = transport;
-    }
-
-    @Override
-    public String toString() {
-        return name; //To change body of generated methods, choose Tools | Templates.
     }
 }

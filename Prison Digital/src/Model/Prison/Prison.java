@@ -5,8 +5,8 @@
  */
 package Model.Prison;
 
-import Model.Enterprise;
 import Model.Location;
+import Model.Enterprise;
 
 /**
  *
@@ -24,6 +24,15 @@ public class Prison extends Enterprise{
         this.management = new Management();
         this.infrastructure = new Infrastructure();
     }
+    
+    public Prison() {
+        
+    }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public String getName() {
         return name;
@@ -32,7 +41,7 @@ public class Prison extends Enterprise{
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public Management getManagement() {
         return management;
     }
@@ -48,11 +57,4 @@ public class Prison extends Enterprise{
     public void setInfrastructure(Infrastructure infrastructure) {
         this.infrastructure = infrastructure;
     }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-    
-    
 }

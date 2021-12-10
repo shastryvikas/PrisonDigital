@@ -260,7 +260,7 @@ public class ManageHospitals extends javax.swing.JPanel {
 //                String[] locationData = txtHospitalLocation.getText().split(", ");
 //Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), (drpdwnStatus.getSelectedIndex()==0));
                 Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(42.338767, -71.087863), true);
-                Employee hospitalAdmin = new Employee(txtHospitalAdminName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), newHospital, new HospitalAdmin());
+                Employee hospitalAdmin = new Employee(system,txtHospitalAdminName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), newHospital, new HospitalAdmin());
                 newHospital.getManagement().setHospitalAdmin(hospitalAdmin);
                 system.getHospitals().add(newHospital);
                 initializeTable();

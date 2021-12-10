@@ -12,18 +12,11 @@ import Model.Location;
  *
  * @author vikasshastry
  */
-public class Hospital extends Enterprise{
+public class Hospital extends Enterprise {
+
     Management management;
     PatientCare patientCare;
     String name;
-
-    public Hospital(String name, Location location, Boolean status) {
-        this.name = name;
-        this.setLocation(location);
-        this.setStatus(status);
-        this.management = new Management();
-        this.patientCare = new PatientCare();
-    }
 
     public Management getManagement() {
         return management;
@@ -41,6 +34,14 @@ public class Hospital extends Enterprise{
         this.patientCare = patientCare;
     }
 
+    public Hospital(String name, Location location, Boolean status) {
+        this.name = name;
+        this.setLocation(location);
+        this.setStatus(status);
+        this.management = new Management();
+        this.patientCare = new PatientCare();
+    }
+
     @Override
     public String toString() {
         return name;
@@ -53,5 +54,4 @@ public class Hospital extends Enterprise{
     public void setName(String name) {
         this.name = name;
     }
-    
 }

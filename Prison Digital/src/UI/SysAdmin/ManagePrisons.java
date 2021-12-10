@@ -261,7 +261,7 @@ public class ManagePrisons extends javax.swing.JPanel {
                 //String[] locationData =  txtPrisonLocation.getText().split(", ");
 //Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
                 Prison newPrison = new Prison(txtPrisonName.getText(), new Location(42.338767, -71.087863), true);
-                Employee prisonAdmin = new Employee(txtPrisonAdminName.getText(), txtPrisonAdminUsername.getText(), txtPrisonAdminPassword.getText(), newPrison, new PrisonAdmin());
+                Employee prisonAdmin = new Employee(system,txtPrisonAdminName.getText(), txtPrisonAdminUsername.getText(), txtPrisonAdminPassword.getText(), newPrison, new PrisonAdmin());
                 newPrison.getManagement().setAdmin(prisonAdmin);
                 system.getPrisons().add(newPrison);
                 initializeTable();
