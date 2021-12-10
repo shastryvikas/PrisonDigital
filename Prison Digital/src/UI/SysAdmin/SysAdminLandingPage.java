@@ -110,14 +110,14 @@ public class SysAdminLandingPage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManagePrisonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagePrisonsActionPerformed
-        ManagePrisons managePrisons = new  ManagePrisons(this.container);
+        ManagePrisons managePrisons = new ManagePrisons(this.container, system);
         container.add("Manage Prison", managePrisons);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);
     }//GEN-LAST:event_btnManagePrisonsActionPerformed
 
     private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdminActionPerformed
-        ManageCaterers manageCaterers = new ManageCaterers(container);
+        ManageCaterers manageCaterers = new ManageCaterers(container, system);
         container.add("Manage Caterers", manageCaterers);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);
@@ -125,7 +125,7 @@ public class SysAdminLandingPage extends javax.swing.JPanel {
 
     private void btnManageHospitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageHospitalsActionPerformed
         // TODO add your handling code here:
-        ManageHospitals manageHospitals = new  ManageHospitals(container);
+        ManageHospitals manageHospitals = new ManageHospitals(container, system);
         container.add("Manage Hospitals", manageHospitals);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);
@@ -133,7 +133,7 @@ public class SysAdminLandingPage extends javax.swing.JPanel {
 
     private void btnManageJudicialSystemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageJudicialSystemsActionPerformed
         // TODO add your handling code here:
-        ManageJudicialSystem manageJudicialSystem = new ManageJudicialSystem(container);
+        ManageJudicialSystem manageJudicialSystem = new ManageJudicialSystem(container, system);
         container.add("Manage Judicial System", manageJudicialSystem);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);
