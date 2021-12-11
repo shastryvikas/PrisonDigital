@@ -13,9 +13,10 @@ import java.util.ArrayList;
  */
 public class CaseDirectory {
     private ArrayList<Case> listOfCases;
-    private static int count = 2361;
 
     public ArrayList<Case> getListOfCases() {
+        if(listOfCases == null)
+            listOfCases = new ArrayList<Case>();
         return listOfCases;
     }
 
@@ -23,8 +24,8 @@ public class CaseDirectory {
         this.listOfCases = listOfCases;
     }
     
-    public void addCase(){
-        
+    public void addCase(Case e){
+        listOfCases.add(e);
     }
     
     public void modifyCase(){

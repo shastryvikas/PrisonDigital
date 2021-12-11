@@ -7,19 +7,19 @@ package Model.Role;
 
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
-import UI.Hospital.HospitalAdminLandingPage;
-import UI.Prison.InfirmarySupervisorJPanel;
+import UI.Catering.CateringAdminJPanel;
+import UI.Hospital.HospitalStaffLogin;
 import javax.swing.JPanel;
 
 /**
  *
  * @author vikasshastry
  */
-public class InfirmaryAdmin extends Role{
+public class psychologyStaff extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new InfirmarySupervisorJPanel(userProcessContainer,account, business);
+        return new HospitalStaffLogin(userProcessContainer, business);
     }
     
 }

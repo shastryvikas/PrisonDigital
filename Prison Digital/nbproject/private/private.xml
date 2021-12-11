@@ -3,8 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/SysAdmin/ManageJudicialSystem.java</file>
-            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/ConfigureEcosystem.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/Case.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/JudgeLandingPage.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/Court.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/CriminalJusticeSystem.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/Police.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/PoliceOfficerLogin.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/PoliceAdminLogin.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/JudgementPage.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/Employee/Employee.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/CaseDirectory.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/Catering/CateringAdminJPanel.java</file>
         </group>
     </open-files>
 </project-private>

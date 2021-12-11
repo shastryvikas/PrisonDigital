@@ -9,6 +9,7 @@ import Model.Employee.Employee;
 import Model.Hospital.*;
 import Model.Prison.*;
 import Model.Organization;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +17,17 @@ import Model.Organization;
  */
 public class Management extends Organization{
     Employee admin;
+    ArrayList<CateringContract> foodOrders;
+
+    public ArrayList<CateringContract> getFoodOrders() {
+        if(foodOrders == null)
+            foodOrders = new ArrayList<CateringContract>();
+        return foodOrders;
+    }
+
+    public void setFoodOrders(ArrayList<CateringContract> foodOrders) {
+        this.foodOrders = foodOrders;
+    }
 
     public Employee getAdmin() {
         return admin;

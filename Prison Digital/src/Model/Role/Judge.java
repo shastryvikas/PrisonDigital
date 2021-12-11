@@ -19,7 +19,7 @@ public class Judge extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new JudgeLandingPage(userProcessContainer, business);
+        return new JudgeLandingPage(userProcessContainer, account,business);
     }
     
 }

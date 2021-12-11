@@ -8,6 +8,7 @@ package UI.Catering;
 import Model.Employee.Employee;
 import Model.Employee.EmployeeDirectory;
 import Model.FoodCateringService.FoodCateringService;
+import Model.Prison.CateringContract;
 import Model.PrisonEcosystem;
 import Model.Role.Chef;
 import Model.Role.DeliveryMan;
@@ -43,6 +44,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
         layout = (CardLayout) container.getLayout();
         this.system = system;
         this.account = account;
+        cateringService = (FoodCateringService) account.getEnterprise();
         initializeStaffTable();
         tblCateringStaff.addMouseListener(new MouseListener() {
             @Override
@@ -75,6 +77,117 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                 drpdwnDesignation.setSelectedIndex(getRole(selectedStaff).equals("Chef") ? 0 : 1);
             }
         });
+        
+        populateContractTable();
+        PrisonStaffJTable1.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+                updateDetails(a);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+        
+    }
+    
+    private void updateDetails(CateringContract contract){
+        
+        if(contract.getChefApproval() && contract.getDeliveryManApproval()){
+            btnSubmit.setEnabled(true);
+        } else {
+            btnSubmit.setEnabled(false);
+        }
+        
+        if(contract.getStatus().equals("Approved and Active")){
+            btnSubmit.setEnabled(false);
+        }
+       
+        
+        if(contract.getChef() != null){
+            jComboChefAssignement.setEnabled(false);
+            jButton2.setEnabled(false);
+        } else {
+            ArrayList<Employee> chefs = cateringService.getKitchen().getStaff().getEmployeeList();
+            for(CateringContract c : cateringService.getManagement().getFoodOrders()){
+                if(chefs.contains(c.getChef())){
+                    chefs.remove(c.getChef());
+                }
+            }
+            jComboChefAssignement.removeAllItems();
+            for(Employee e : chefs){
+                jComboChefAssignement.addItem(e.getUserAccount().getUsername());
+            }
+            jComboChefAssignement.setEnabled(true);
+            jButton2.setEnabled(true);
+        }
+        
+        if(contract.getDeliveryMan() != null){
+            jComboDeleiveryManAssignment.setEnabled(false);
+            jButton1.setEnabled(false);
+        } else {
+            ArrayList<Employee> del = cateringService.getTransport().getStaff().getEmployeeList();
+            for(CateringContract c : cateringService.getManagement().getFoodOrders()){
+                if(del.contains(c.getChef())){
+                    del.remove(c.getChef());
+                }
+            }
+            jComboDeleiveryManAssignment.removeAllItems();
+            for(Employee e : del){
+                jComboDeleiveryManAssignment.addItem(e.getUserAccount().getUsername());
+            }
+            jComboDeleiveryManAssignment.setEnabled(true);
+            jButton1.setEnabled(true);
+        }
+        
+        
+    }
+    
+    private void populateContractTable() {
+        
+        DefaultTableModel tablemodel = (DefaultTableModel) PrisonStaffJTable1.getModel();
+        tablemodel.setRowCount(0);
+        for (CateringContract c : cateringService.getManagement().getFoodOrders()) {
+                if (c != null) {
+                    Object[] row = new Object[7];
+                    row[0] = c;
+                    row[1] = c.getPrisonerCount() + "";
+                    
+                    if(c.getChef() == null)
+                        row[2] = "Not Assigned";
+                    else    
+                        row[2] = c.getChef().getName();
+                    
+                    if(c.getDeliveryMan() == null)
+                        row[4] = "Not Assigned";
+                    else
+                        row[4] = c.getDeliveryMan().getName();
+                        
+                    
+                    row[3] = c.getChefApproval().toString();
+                    row[5] = c.getDeliveryManApproval().toString();
+                    row[6] = c.getStatus();
+                    
+                    tablemodel.addRow(row);
+                }
+            }
+        
+        
     }
 
     /**
@@ -102,14 +215,13 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         PrisonStaffJTable1 = new javax.swing.JTable();
-        lblChangeOrderStatus = new javax.swing.JLabel();
-        btnLogout = new javax.swing.JButton();
-        jComboOrderStatus = new javax.swing.JComboBox<>();
         lblChefAssignment = new javax.swing.JLabel();
         jComboChefAssignement = new javax.swing.JComboBox<>();
         lblDeliveryManAssignement = new javax.swing.JLabel();
         jComboDeleiveryManAssignment = new javax.swing.JComboBox<>();
         btnSubmit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -176,11 +288,11 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order ID", "Prisoner Count", "Contract Duration", "Chef", "Delivery Agent", "Order Status"
+                "Prison", "Prisoner Count", "Chef Assigned", "Chef Approval", "Delivery Man Assigned", "Delivery Man Approval", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -189,21 +301,39 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(PrisonStaffJTable1);
 
-        lblChangeOrderStatus.setText("Change Order Status");
-
-        btnLogout.setText("Logout");
-
-        jComboOrderStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lblChefAssignment.setText("Chef Assignment");
 
         jComboChefAssignement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboChefAssignement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboChefAssignementActionPerformed(evt);
+            }
+        });
 
         lblDeliveryManAssignement.setText("Delivery Man Assignment");
 
         jComboDeleiveryManAssignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnSubmit.setText("Submit");
+        btnSubmit.setText("Approve");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Assign Delivery Man");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Assign Chef");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,33 +341,29 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 366, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblChangeOrderStatus)
-                                    .addComponent(lblChefAssignment))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboChefAssignement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(89, 89, 89)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSubmit)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblDeliveryManAssignement)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboDeleiveryManAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnLogout)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboDeleiveryManAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton1))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblChefAssignment)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(jComboChefAssignement, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton2))
+                                .addGap(85, 85, 85)
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -247,9 +373,9 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(drpdwnDesignation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtStaffName, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(txtStaffName)
                     .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(234, 234, 234)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -303,18 +429,16 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblChangeOrderStatus)
-                    .addComponent(jComboOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDeliveryManAssignement)
-                    .addComponent(jComboDeleiveryManAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboDeleiveryManAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblChefAssignment)
                     .addComponent(jComboChefAssignement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSubmit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(5, 5, 5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -415,6 +539,47 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void jComboChefAssignementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboChefAssignementActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboChefAssignementActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        for(Employee e : cateringService.getTransport().getStaff().getEmployeeList()){
+            if(e.getUserAccount().getUsername().equals(jComboDeleiveryManAssignment.getSelectedItem().toString())){
+                CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+                a.setDeliveryMan(e);
+            }
+        }
+        
+        populateContractTable();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        for(Employee e : cateringService.getKitchen().getStaff().getEmployeeList()){
+            if(e.getUserAccount().getUsername().equals(jComboChefAssignement.getSelectedItem().toString())){
+                CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+                a.setChef(e);
+            }
+        }
+        
+        populateContractTable();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        
+        CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+        a.setStatus("Approved and Active");
+        populateContractTable();
+        
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
@@ -434,17 +599,16 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JTable PrisonStaffJTable1;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> drpdwnDesignation;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboChefAssignement;
     private javax.swing.JComboBox<String> jComboDeleiveryManAssignment;
-    private javax.swing.JComboBox<String> jComboOrderStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblChangeOrderStatus;
     private javax.swing.JLabel lblChefAssignment;
     private javax.swing.JLabel lblDeliveryManAssignement;
     private javax.swing.JLabel lblDesignation;

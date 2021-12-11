@@ -543,7 +543,8 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 //            if (checkIfPrisonNameIsUnique()) {
             //String[] locationData =  txtPrisonLocation.getText().split(", ");
 //Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-            Employee newPoliceAdmin = new Employee(system, txtPoliceDepartmentAdminName.getText(), txtPolcieDepartmentAdminUsername.getText(), txtPoliceDepartmentAdminPassword.getText(), criminalJusticeSystem, new PoliceAdmin());
+            Employee newPoliceAdmin = new Employee(system, txtPoliceDepartmentAdminName.getText(), txtPolcieDepartmentAdminUsername.getText(),
+                    txtPoliceDepartmentAdminPassword.getText(), criminalJusticeSystem, new PoliceAdmin());
             Police newPoliceDepartment = new Police(newPoliceAdmin, txtPoliceDepartmentName.getText());
             criminalJusticeSystem.getListOfPolice().add(newPoliceDepartment);
             inititalizePoliceDepartmentTable();
@@ -682,9 +683,9 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     }
 
     private void resetPolcieDepartmentFields() {
-    txtPoliceDepartmentName.setText("");
-    txtPoliceDepartmentAdminPassword.setText("");
-    txtPoliceDepartmentAdminName.setText("");
-    txtPolcieDepartmentAdminUsername.setText("");
+        txtPoliceDepartmentName.setText("");
+        txtPoliceDepartmentAdminPassword.setText("");
+        txtPoliceDepartmentAdminName.setText("");
+        txtPolcieDepartmentAdminUsername.setText("");
     }
 }
