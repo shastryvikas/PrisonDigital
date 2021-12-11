@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author vikasshastry
  */
-public class Doctor extends Role{
+public class generalStaff extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
