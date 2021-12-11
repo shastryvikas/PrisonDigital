@@ -16,6 +16,11 @@ public class Court extends Organization{
     Employee judge;
     CaseDirectory caseDirectory;
 
+    public Court(Employee judge, String name) {
+        this.judge = judge;
+        this.setName(name);
+    }
+
     public Employee getJudge() {
         return judge;
     }
@@ -31,4 +36,10 @@ public class Court extends Organization{
     public void setCaseDirectory(CaseDirectory caseDirectory) {
         this.caseDirectory = caseDirectory;
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+    
 }
