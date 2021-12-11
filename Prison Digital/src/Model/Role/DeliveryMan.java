@@ -18,7 +18,7 @@ public class DeliveryMan extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new DeliveryJPanel(userProcessContainer, business);
+        return new DeliveryJPanel(userProcessContainer,account, business);
     }
     
 }

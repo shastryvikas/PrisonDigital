@@ -19,7 +19,7 @@ public class Chef extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new ChefJPanel(userProcessContainer, business);
+        return new ChefJPanel(userProcessContainer, account, business);
     }
     
 }
