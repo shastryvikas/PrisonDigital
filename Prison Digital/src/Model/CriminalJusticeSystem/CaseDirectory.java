@@ -16,6 +16,8 @@ public class CaseDirectory {
     private static int count = 2361;
 
     public ArrayList<Case> getListOfCases() {
+        if(listOfCases == null)
+            listOfCases = new ArrayList<Case>();
         return listOfCases;
     }
 

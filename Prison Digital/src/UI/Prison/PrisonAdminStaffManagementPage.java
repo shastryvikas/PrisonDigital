@@ -165,7 +165,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             }
         });
 
-        des.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guard", "Infirmary Supervisor", "Dining Supervisor" }));
+        des.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Security Supervisor", "Infirmary Supervisor", "Dining Supervisor" }));
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +182,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -192,10 +192,6 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblStaffName)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblUserName)
@@ -208,11 +204,17 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(btnDelete))
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblStaffName)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(53, 53, 53)
                         .addComponent(lblDesignation)
-                        .addGap(32, 32, 32)
-                        .addComponent(des, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(des, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -258,9 +260,13 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         String username = txtUserName.getText().toString();
         String password = txtPassword.getText().toString();
 
-        if (des.getSelectedItem().toString().equals("Guard")) {
+        if (des.getSelectedItem().toString().equals("Security Supervisor")) {
+            if (prison.getManagement().getGuardAdmin() != null) {
+                JOptionPane.showMessageDialog(null, "Security Supervisor Already Exists");
+                return;
+            }
             Employee staff = new Employee(system, name, username, password, user.getEnterprise(), new PrisonStaff());
-            prison.getManagement().getStaff().addEmployee(staff);
+            prison.getManagement().setGuardAdmin(staff);
             JOptionPane.showMessageDialog(null, "Guard Added");
         } else if (des.getSelectedItem().toString().equals("Infirmary Supervisor")) {
             if (prison.getManagement().getInfirmaryAdmin() != null) {
@@ -299,8 +305,10 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                 } else if (e.getRole().toString() == "Model.Role.DiningAdmin") {
                     prison.getManagement().setDiningAdmin(null);
                 } else {
-                    prison.getManagement().getStaff().removeEmployee(e);
+                    prison.getManagement().setGuardAdmin(null);
                 }
+                
+                system.getUserAccountDirectory().deleteUserAccount(e.getUserAccount());
 
                 populateTable();
             }
@@ -317,7 +325,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         int selectedRow = PrisonStaffJTable.getSelectedRow();
         if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm update?", "Warning", selectionButton);
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm update? (Note: Role cannot be changed)", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Employee e = (Employee) PrisonStaffJTable.getValueAt(selectedRow, 0);
 
@@ -325,40 +333,45 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                 String username = txtUserName.getText().toString();
                 String password = txtPassword.getText().toString();
                 
+                e.setName(name);
+                e.getUserAccount().setUsername(username);
+                e.getUserAccount().setPassword(password);
                 
-                if(e.getRole().equals(InfirmaryAdmin.class.getName()) || e.getRole().equals(DiningAdmin.class.getName())){
-                    e.setRole(null);
-                }
-
-                if (des.getSelectedItem().toString().equals("Guard")) {
-                    e.setRole(new PrisonStaff());
-                    e.setName(name);
-                    e.getUserAccount().setUsername(username);
-                    e.getUserAccount().setPassword(password);
-                    JOptionPane.showMessageDialog(null, "Guard Added");
-                } else if (des.getSelectedItem().toString().equals("Infirmary Supervisor")) {
-                    if (prison.getManagement().getInfirmaryAdmin() == null) {
-                        JOptionPane.showMessageDialog(null, "Infirmary Supervisor Already Exists");
-                        return;
-                    }
-                    e.setRole(new InfirmaryAdmin());
-                    prison.getManagement().setInfirmaryAdmin(e);
-                    e.setName(name);
-                    e.getUserAccount().setUsername(username);
-                    e.getUserAccount().setPassword(password);
-                    JOptionPane.showMessageDialog(null, "Infirmary Supervisor Added");
-                } else if (des.getSelectedItem().toString().equals("Dining Supervisor")) {
-                    if (prison.getManagement().getDiningAdmin() == null) {
-                        JOptionPane.showMessageDialog(null, "Dining Supervisor Already Exists");
-                        return;
-                    }
-                    e.setRole(new DiningAdmin());
-                    prison.getManagement().setInfirmaryAdmin(e);
-                    e.setName(name);
-                    e.getUserAccount().setUsername(username);
-                    e.getUserAccount().setPassword(password);
-                    JOptionPane.showMessageDialog(null, "Dining Supervisor Added");
-                };
+//                if (des.getSelectedItem().toString().equals("Guard")) {
+//                    if (prison.getManagement().getGuardAdmin() != null) {
+//                        JOptionPane.showMessageDialog(null, "Security Supervisor Already Exists");
+//                        return;
+//                    }
+//                    e.setRole(new PrisonStaff());
+//                    e.setName(name);
+//                    e.getUserAccount().setUsername(username);
+//                    e.getUserAccount().setPassword(password);
+//                    JOptionPane.showMessageDialog(null, "Guard Added");
+//                } else if (des.getSelectedItem().toString().equals("Infirmary Supervisor")) {
+//                    if (prison.getManagement().getInfirmaryAdmin() != null) {
+//                        JOptionPane.showMessageDialog(null, "Infirmary Supervisor Already Exists");
+//                        return;
+//                    }
+//                    e.setRole(new InfirmaryAdmin());
+//                    prison.getManagement().setInfirmaryAdmin(e);
+//                    e.setName(name);
+//                    e.getUserAccount().setUsername(username);
+//                    e.getUserAccount().setPassword(password);
+//                    JOptionPane.showMessageDialog(null, "Infirmary Supervisor Added");
+//                } else if (des.getSelectedItem().toString().equals("Dining Supervisor")) {
+//                    if (prison.getManagement().getDiningAdmin() != null) {
+//                        JOptionPane.showMessageDialog(null, "Dining Supervisor Already Exists");
+//                        return;
+//                    }
+//                    e.setRole(new DiningAdmin());
+//                    prison.getManagement().setInfirmaryAdmin(e);
+//                    e.setName(name);
+//                    e.getUserAccount().setUsername(username);
+//                    e.getUserAccount().setPassword(password);
+//                    JOptionPane.showMessageDialog(null, "Dining Supervisor Added");
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Cannot Update");
+//                };
 
                 populateTable();
             }
@@ -412,14 +425,14 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             tablemodel.addRow(row);
         }
         
-
-        for (Employee user : prison.getManagement().getStaff().getEmployeeList()) {
+        //adding Guard
+        Employee g = prison.getManagement().getGuardAdmin();
+        if (g != null) {
             Object[] row = new Object[4];
-            row[0] = user;
-            row[1] = user.getRole().toString();
-            row[2] = user.getUserAccount().getUsername();
-            row[3] = user.getUserAccount().getPassword();
-
+            row[0] = g;
+            row[1] = g.getRole().toString();
+            row[2] = g.getUserAccount().getUsername();
+            row[3] = g.getUserAccount().getPassword();
             tablemodel.addRow(row);
         }
         

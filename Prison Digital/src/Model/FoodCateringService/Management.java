@@ -20,6 +20,8 @@ public class Management extends Organization{
     ArrayList<CateringContract> foodOrders;
 
     public ArrayList<CateringContract> getFoodOrders() {
+        if(foodOrders == null)
+            foodOrders = new ArrayList<CateringContract>();
         return foodOrders;
     }
 

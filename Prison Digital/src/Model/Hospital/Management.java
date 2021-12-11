@@ -19,6 +19,8 @@ public class Management extends Organization{
     ArrayList<HospitalContract> contract;
 
     public ArrayList<HospitalContract> getContract() {
+        if(contract == null)
+            contract = new ArrayList<HospitalContract>();
         return contract;
     }
 

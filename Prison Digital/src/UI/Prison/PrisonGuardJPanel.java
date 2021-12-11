@@ -80,7 +80,7 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
         lblGuardWorkArea.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblGuardWorkArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblGuardWorkArea.setText("Prison Guard Work Area");
+        lblGuardWorkArea.setText("Security Supervisor Work Area");
         lblGuardWorkArea.setOpaque(true);
 
         btnSubmitAttendance.setText("Submit Attendance");
