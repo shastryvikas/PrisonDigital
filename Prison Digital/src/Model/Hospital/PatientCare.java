@@ -5,6 +5,7 @@
  */
 package Model.Hospital;
 
+import Model.Employee.Employee;
 import Model.Employee.EmployeeDirectory;
 import Model.Organization;
 
@@ -13,31 +14,35 @@ import Model.Organization;
  * @author vikasshastry
  */
 public class PatientCare extends Organization{
-    EmployeeDirectory psychologyStaff;
-    EmployeeDirectory generalStaff;
-    EmployeeDirectory physiotherapyStaff;
+    Employee psychologist;
+    Employee generalPhysician;
+    Employee patientCareTechnician;
 
-    public EmployeeDirectory getPsychologyStaff() {
-        return psychologyStaff;
+    public Employee getPsychologist() {
+        return psychologist;
     }
 
-    public void setPsychologyStaff(EmployeeDirectory psychologyStaff) {
-        this.psychologyStaff = psychologyStaff;
+    public void setPsychologist(Employee psychologist) {
+        this.psychologist = psychologist;
     }
 
-    public EmployeeDirectory getGeneralStaff() {
-        return generalStaff;
+    public Employee getGeneralPhysician() {
+        return generalPhysician;
     }
 
-    public void setGeneralStaff(EmployeeDirectory generalStaff) {
-        this.generalStaff = generalStaff;
+    public void setGeneralPhysician(Employee generalPhysician) {
+        this.generalPhysician = generalPhysician;
     }
 
-    public EmployeeDirectory getPhysiotherapyStaff() {
-        return physiotherapyStaff;
+    public Employee getPatientCareTechnician() {
+        return patientCareTechnician;
     }
 
-    public void setPhysiotherapyStaff(EmployeeDirectory physiotherapyStaff) {
-        this.physiotherapyStaff = physiotherapyStaff;
+    public void setPatientCareTechnician(Employee patientCareTechnician) {
+        this.patientCareTechnician = patientCareTechnician;
     }
+
+    
+
+    
 }

@@ -7,6 +7,8 @@ package UI.Hospital;
 
 import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -28,6 +30,18 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
         this.container = container;
         layout = layout = (CardLayout) container.getLayout();
         this.system = system;
+        
+        
+        //Designation drop down list.
+        ArrayList<String> designationDownList = new ArrayList<String>();
+        
+        designationDownList.add("Accept");
+        designationDownList.add("Deny");
+        
+        for(String x : designationDownList){
+            drpdwnChangeStatus.addItem(x);
+        }
+        
     }
 
     /**
@@ -44,6 +58,7 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
         lblChangeStatus = new javax.swing.JLabel();
         drpdwnChangeStatus = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         tblInfirmaryOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,12 +75,17 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
 
         lblChangeStatus.setText("Change Status");
 
-        drpdwnChangeStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -79,28 +99,31 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(lblChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(drpdwnChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnBack)))
-                        .addGap(0, 143, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addComponent(btnBack)
+                        .addGap(0, 713, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblChangeStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(drpdwnChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(drpdwnChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addContainerGap())
         );
@@ -111,9 +134,23 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
         layout.previous(this);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        int viewselectedRowIndex = tblInfirmaryOrders.getSelectedRow();
+        
+        if(viewselectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row before saving");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblInfirmaryOrders.getModel();
+        Request selectedCar = (car) model.getValueAt(viewselectedRowIndex, 0);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> drpdwnChangeStatus;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblChangeStatus;
