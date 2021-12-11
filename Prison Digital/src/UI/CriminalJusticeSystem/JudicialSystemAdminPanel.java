@@ -5,9 +5,21 @@
  */
 package UI.CriminalJusticeSystem;
 
+import Model.CriminalJusticeSystem.Court;
+import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.Employee.Employee;
 import Model.PrisonEcosystem;
+import Model.CriminalJusticeSystem.Police;
+import Model.Role.Judge;
+import Model.Role.PoliceAdmin;
+import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,16 +30,89 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     JPanel container;
     CardLayout layout;
     PrisonEcosystem system;
-    
+    Court selectedCourt;
+    UserAccount account;
+    CriminalJusticeSystem criminalJusticeSystem;
+    ArrayList<Court> courts;
+    Police selectedPoliceDepartment;
+    ArrayList<Police> policeDepartments;
+
     /**
      * Creates new form JudicialSystemAdminPanel
+     *
      * @param container
+     * @param account
+     * @param system
      */
-    public JudicialSystemAdminPanel(JPanel container, PrisonEcosystem system) {
+    public JudicialSystemAdminPanel(JPanel container, UserAccount account, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
         this.system = system;
+        this.account = account;
+        criminalJusticeSystem = (CriminalJusticeSystem) account.getEnterprise();
+        initializeCourtTable();
+        inititalizePoliceDepartmentTable();
+        tblCourts.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeCourtFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializeCourtFields() {
+                selectedCourt = (Court) tblCourts.getModel().getValueAt(tblCourts.getSelectedRow(), 0);
+                txtCourtName.setText(selectedCourt.getName());
+                txtJudgeName.setText(selectedCourt.getJudge().getName());
+                txtJudgeUsername.setText(selectedCourt.getJudge().getUserAccount().getUsername());
+                txtJudgePassword.setText(selectedCourt.getJudge().getUserAccount().getPassword());
+            }
+        });
+        tblPoliceDepartments.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializePoliceDepartmentTable();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializePoliceDepartmentTable() {
+                selectedPoliceDepartment = (Police) tblPoliceDepartments.getModel().getValueAt(tblPoliceDepartments.getSelectedRow(), 0);
+                txtPoliceDepartmentName.setText(selectedPoliceDepartment.getName());
+                txtPoliceDepartmentAdminName.setText(selectedPoliceDepartment.getPoliceAdmin().getName());
+                txtPolcieDepartmentAdminUsername.setText(selectedPoliceDepartment.getPoliceAdmin().getUserAccount().getUsername());
+                txtPoliceDepartmentAdminPassword.setText(selectedPoliceDepartment.getPoliceAdmin().getUserAccount().getUsername());
+            }
+        });
     }
 
     /**
@@ -46,8 +131,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         tblCourts = new javax.swing.JTable();
         lblCourtName = new javax.swing.JLabel();
         txtCourtName = new javax.swing.JTextField();
-        lblCourtLocation = new javax.swing.JLabel();
-        txtJudicialSystemAdminLocation = new javax.swing.JTextField();
         lblJudgeUsername = new javax.swing.JLabel();
         txtJudgeUsername = new javax.swing.JTextField();
         lblJudgePassword = new javax.swing.JLabel();
@@ -55,15 +138,17 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        txtJudgeName = new javax.swing.JTextField();
+        lblJudgeName = new javax.swing.JLabel();
         PoliceDepartmentManagementPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPoliceDepartments = new javax.swing.JTable();
         lblPoliceDepartmentName = new javax.swing.JLabel();
         txtPoliceDepartmentName = new javax.swing.JTextField();
-        lblPoliceDepartmentLocation = new javax.swing.JLabel();
-        txtPoliceDepartmentAdminLocation = new javax.swing.JTextField();
+        lblPoliceDepartmentAdminName = new javax.swing.JLabel();
+        txtPoliceDepartmentAdminName = new javax.swing.JTextField();
         lblPoliceDepartmentAdminUsername = new javax.swing.JLabel();
-        txtJudicialSystemAdminUsername1 = new javax.swing.JTextField();
+        txtPolcieDepartmentAdminUsername = new javax.swing.JTextField();
         lblPoliceDepartmentAdminPassword = new javax.swing.JLabel();
         txtPoliceDepartmentAdminPassword = new javax.swing.JTextField();
         btnPoliceDepartmentAdd = new javax.swing.JButton();
@@ -80,7 +165,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Username", "Password", "Location"
+                "Court name", "Judge name", "Username", "Password"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -96,9 +181,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         lblCourtName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCourtName.setText("Court Name");
 
-        lblCourtLocation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblCourtLocation.setText("Location");
-
         lblJudgeUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblJudgeUsername.setText("Judge Username");
 
@@ -107,7 +189,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnAdd.setBackground(new java.awt.Color(244, 208, 129));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
         btnAdd.setText("Add");
         btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +199,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnDelete.setBackground(new java.awt.Color(244, 208, 129));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
         btnDelete.setText("Delete");
         btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +209,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
         btnUpdate.setText("Update");
         btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -138,11 +217,23 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             }
         });
 
+        lblJudgeName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblJudgeName.setText("Judge Name");
+
         javax.swing.GroupLayout CourtManagementPanelLayout = new javax.swing.GroupLayout(CourtManagementPanel);
         CourtManagementPanel.setLayout(CourtManagementPanelLayout);
         CourtManagementPanelLayout.setHorizontalGroup(
             CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(CourtManagementPanelLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCourtName)
+                    .addComponent(lblJudgeName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtJudgeName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCourtName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(CourtManagementPanelLayout.createSequentialGroup()
                     .addGap(5, 5, 5)
@@ -158,18 +249,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                                            .addComponent(lblCourtLocation))
-                                        .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                                            .addGap(0, 49, Short.MAX_VALUE)
-                                            .addComponent(lblCourtName)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtCourtName)
-                                        .addComponent(txtJudicialSystemAdminLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(158, 158, 158)
+                                    .addGap(0, 414, Short.MAX_VALUE)
                                     .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(lblJudgeUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblJudgePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -182,29 +262,28 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         );
         CourtManagementPanelLayout.setVerticalGroup(
             CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 473, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CourtManagementPanelLayout.createSequentialGroup()
+                .addContainerGap(327, Short.MAX_VALUE)
+                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCourtName)
+                    .addComponent(txtCourtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtJudgeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJudgeName))
+                .addGap(98, 98, 98))
             .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(CourtManagementPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblCourtName)
-                                .addComponent(txtCourtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblCourtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtJudicialSystemAdminLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblJudgeUsername)
-                                .addComponent(txtJudgeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblJudgePassword)
-                                .addComponent(txtJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblJudgeUsername)
+                        .addComponent(txtJudgeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblJudgePassword)
+                        .addComponent(txtJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(69, 69, 69)
                     .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,7 +297,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Username", "Password", "Location"
+                "Department name", "Admin name", "Username", "Password"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -232,10 +311,10 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tblPoliceDepartments);
 
         lblPoliceDepartmentName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPoliceDepartmentName.setText("Name");
+        lblPoliceDepartmentName.setText("Department Name");
 
-        lblPoliceDepartmentLocation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPoliceDepartmentLocation.setText("Location");
+        lblPoliceDepartmentAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPoliceDepartmentAdminName.setText("Admin name");
 
         lblPoliceDepartmentAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPoliceDepartmentAdminUsername.setText("Admin Username");
@@ -245,7 +324,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnPoliceDepartmentAdd.setBackground(new java.awt.Color(244, 208, 129));
         btnPoliceDepartmentAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPoliceDepartmentAdd.setForeground(new java.awt.Color(0, 0, 0));
         btnPoliceDepartmentAdd.setText("Add");
         btnPoliceDepartmentAdd.setPreferredSize(new java.awt.Dimension(85, 30));
         btnPoliceDepartmentAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +334,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnPoliceDepartmentDelete.setBackground(new java.awt.Color(244, 208, 129));
         btnPoliceDepartmentDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPoliceDepartmentDelete.setForeground(new java.awt.Color(0, 0, 0));
         btnPoliceDepartmentDelete.setText("Delete");
         btnPoliceDepartmentDelete.setPreferredSize(new java.awt.Dimension(85, 30));
         btnPoliceDepartmentDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +344,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnPoliceDepartmentUpdate.setBackground(new java.awt.Color(244, 208, 129));
         btnPoliceDepartmentUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPoliceDepartmentUpdate.setForeground(new java.awt.Color(0, 0, 0));
         btnPoliceDepartmentUpdate.setText("Update");
         btnPoliceDepartmentUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
         btnPoliceDepartmentUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -281,29 +357,30 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         PoliceDepartmentManagementPanelLayout.setHorizontalGroup(
             PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
                 .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
                         .addComponent(btnPoliceDepartmentAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(150, 150, 150)
                         .addComponent(btnPoliceDepartmentUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(197, 197, 197)
                         .addComponent(btnPoliceDepartmentDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblPoliceDepartmentLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblPoliceDepartmentName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPoliceDepartmentAdminName)
+                            .addComponent(lblPoliceDepartmentName))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPoliceDepartmentName)
-                            .addComponent(txtPoliceDepartmentAdminLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(158, 158, 158)
+                            .addComponent(txtPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(109, 109, 109)
                         .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblPoliceDepartmentAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtJudicialSystemAdminUsername1)
+                            .addComponent(txtPolcieDepartmentAdminUsername)
                             .addComponent(txtPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(141, Short.MAX_VALUE))
             .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,12 +400,12 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
                             .addComponent(txtPoliceDepartmentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPoliceDepartmentLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPoliceDepartmentAdminLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
                         .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPoliceDepartmentAdminUsername)
-                            .addComponent(txtJudicialSystemAdminUsername1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPolcieDepartmentAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPoliceDepartmentAdminPassword)
@@ -338,7 +415,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
                     .addComponent(btnPoliceDepartmentAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPoliceDepartmentUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPoliceDepartmentDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -348,7 +425,6 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
         btnBack.setBackground(new java.awt.Color(244, 208, 129));
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(0, 0, 0));
         btnBack.setText("Back");
         btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -395,26 +471,129 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtCourtName) && checkInputFields(txtJudgeUsername) && checkInputFields(txtJudgePassword)) {
+//            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
+
+//            if (checkIfPrisonNameIsUnique()) {
+            //String[] locationData =  txtPrisonLocation.getText().split(", ");
+//Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+            Employee newJudge = new Employee(system, txtJudgeName.getText(), txtJudgeUsername.getText(), txtJudgePassword.getText(), criminalJusticeSystem, new Judge());
+            Court newCourt = new Court(newJudge, txtCourtName.getText());
+            criminalJusticeSystem.getListOfCourts().add(newCourt);
+            initializeCourtTable();
+            resetCourtFields();
+            JOptionPane.showMessageDialog(this, "New Court has been added");
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Prison name already exists, try a different name");
+//            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Court");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        if (selectedCourt != null) {
+            courts.remove(selectedCourt);
+            system.getUserAccountDirectory().deleteUserAccount(selectedCourt.getJudge().getUserAccount());
+            initializeCourtTable();
+            resetCourtFields();
+            JOptionPane.showMessageDialog(this, "Court and Judge details deleted successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a court to delete from the table");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtCourtName) && checkInputFields(txtJudgeUsername) && checkInputFields(txtJudgePassword)) {
+            if (selectedCourt != null) {
+                for (Court court : courts) {
+                    if (selectedCourt.getName().equals(court.getName())) {
+                        court.getJudge().setName(txtJudgeName.getText());
+                        court.getJudge().getUserAccount().setUsername(txtJudgeUsername.getText());
+                        court.getJudge().getUserAccount().setPassword(txtJudgePassword.getText());
+                        court.setName(txtCourtName.getText());
+                        initializeCourtTable();
+                        resetCourtFields();
+                        JOptionPane.showMessageDialog(this, "Court and judge details updated successfully");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a court to update from the table");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for updating the court details");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnPoliceDepartmentAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliceDepartmentAddActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtPolcieDepartmentAdminUsername) && checkInputFields(txtPoliceDepartmentAdminName) && checkInputFields(txtPoliceDepartmentAdminPassword) && checkInputFields(txtPoliceDepartmentName)) {
+//            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
+
+//            if (checkIfPrisonNameIsUnique()) {
+            //String[] locationData =  txtPrisonLocation.getText().split(", ");
+//Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+            Employee newPoliceAdmin = new Employee(system, txtPoliceDepartmentAdminName.getText(), txtPolcieDepartmentAdminUsername.getText(), txtPoliceDepartmentAdminPassword.getText(), criminalJusticeSystem, new PoliceAdmin());
+            Police newPoliceDepartment = new Police(newPoliceAdmin, txtPoliceDepartmentName.getText());
+            criminalJusticeSystem.getListOfPolice().add(newPoliceDepartment);
+            inititalizePoliceDepartmentTable();
+            resetPolcieDepartmentFields();
+            JOptionPane.showMessageDialog(this, "New Police department has been added");
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Prison name already exists, try a different name");
+//            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new police department");
+        }
     }//GEN-LAST:event_btnPoliceDepartmentAddActionPerformed
 
     private void btnPoliceDepartmentDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliceDepartmentDeleteActionPerformed
         // TODO add your handling code here:
+        if (selectedPoliceDepartment != null) {
+            policeDepartments.remove(selectedPoliceDepartment);
+            system.getUserAccountDirectory().deleteUserAccount(selectedPoliceDepartment.getPoliceAdmin().getUserAccount());
+            inititalizePoliceDepartmentTable();
+            resetPolcieDepartmentFields();
+            JOptionPane.showMessageDialog(this, "Police department details deleted successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a police department to delete from the table");
+        }
+
     }//GEN-LAST:event_btnPoliceDepartmentDeleteActionPerformed
 
     private void btnPoliceDepartmentUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliceDepartmentUpdateActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtPolcieDepartmentAdminUsername) && checkInputFields(txtPoliceDepartmentAdminName) && checkInputFields(txtPoliceDepartmentAdminPassword) && checkInputFields(txtPoliceDepartmentName)) {
+            if (selectedPoliceDepartment != null) {
+                for (Police police : policeDepartments) {
+                    if (selectedPoliceDepartment.getName().equals(police.getName())) {
+                        police.getPoliceAdmin().setName(txtPoliceDepartmentAdminName.getText());
+                        police.getPoliceAdmin().getUserAccount().setUsername(txtPolcieDepartmentAdminUsername.getText());
+                        police.getPoliceAdmin().getUserAccount().setPassword(txtPoliceDepartmentAdminPassword.getText());
+                        police.setName(txtPoliceDepartmentName.getText());
+                        inititalizePoliceDepartmentTable();
+                        resetPolcieDepartmentFields();
+                        JOptionPane.showMessageDialog(this, "Polcie department and polcie admin details updated successfully");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select a police department to update from the table");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for updating the police department details");
+        }
+
     }//GEN-LAST:event_btnPoliceDepartmentUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -439,23 +618,73 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblCourtLocation;
     private javax.swing.JLabel lblCourtName;
+    private javax.swing.JLabel lblJudgeName;
     private javax.swing.JLabel lblJudgePassword;
     private javax.swing.JLabel lblJudgeUsername;
+    private javax.swing.JLabel lblPoliceDepartmentAdminName;
     private javax.swing.JLabel lblPoliceDepartmentAdminPassword;
     private javax.swing.JLabel lblPoliceDepartmentAdminUsername;
-    private javax.swing.JLabel lblPoliceDepartmentLocation;
     private javax.swing.JLabel lblPoliceDepartmentName;
     private javax.swing.JTable tblCourts;
     private javax.swing.JTable tblPoliceDepartments;
     private javax.swing.JTextField txtCourtName;
+    private javax.swing.JTextField txtJudgeName;
     private javax.swing.JTextField txtJudgePassword;
     private javax.swing.JTextField txtJudgeUsername;
-    private javax.swing.JTextField txtJudicialSystemAdminLocation;
-    private javax.swing.JTextField txtJudicialSystemAdminUsername1;
-    private javax.swing.JTextField txtPoliceDepartmentAdminLocation;
+    private javax.swing.JTextField txtPolcieDepartmentAdminUsername;
+    private javax.swing.JTextField txtPoliceDepartmentAdminName;
     private javax.swing.JTextField txtPoliceDepartmentAdminPassword;
     private javax.swing.JTextField txtPoliceDepartmentName;
     // End of variables declaration//GEN-END:variables
+
+    private void initializeCourtTable() {
+        courts = criminalJusticeSystem.getListOfCourts();
+        DefaultTableModel tablemodel = (DefaultTableModel) tblCourts.getModel();
+        tablemodel.setRowCount(0);
+        if (!courts.isEmpty()) {
+            for (Court court : courts) {
+                if (court != null) {
+                    Object[] row = new Object[4];
+                    row[0] = court;
+                    row[1] = court.getJudge().getName();
+                    row[2] = court.getJudge().getUserAccount().getUsername();
+                    row[3] = court.getJudge().getUserAccount().getPassword();
+                    tablemodel.addRow(row);
+                }
+            }
+        }
+    }
+
+    private void resetCourtFields() {
+        txtCourtName.setText("");
+        txtJudgeName.setText("");
+        txtJudgePassword.setText("");
+        txtJudgeUsername.setText("");
+    }
+
+    private void inititalizePoliceDepartmentTable() {
+        policeDepartments = criminalJusticeSystem.getListOfPolice();
+        DefaultTableModel tablemodel = (DefaultTableModel) tblPoliceDepartments.getModel();
+        tablemodel.setRowCount(0);
+        if (!policeDepartments.isEmpty()) {
+            for (Police police : policeDepartments) {
+                if (police != null) {
+                    Object[] row = new Object[4];
+                    row[0] = police;
+                    row[1] = police.getPoliceAdmin().getName();
+                    row[2] = police.getPoliceAdmin().getUserAccount().getUsername();
+                    row[3] = police.getPoliceAdmin().getUserAccount().getPassword();
+                    tablemodel.addRow(row);
+                }
+            }
+        }
+    }
+
+    private void resetPolcieDepartmentFields() {
+    txtPoliceDepartmentName.setText("");
+    txtPoliceDepartmentAdminPassword.setText("");
+    txtPoliceDepartmentAdminName.setText("");
+    txtPolcieDepartmentAdminUsername.setText("");
+    }
 }
