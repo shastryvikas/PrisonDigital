@@ -22,6 +22,33 @@ public class Management extends Organization{
     EmployeeDirectory staff;
     ArrayList<Prisoner> prisoners;
     CaseDirectory caseDirectory;
+    HospitalContract hospitalContract;
+    CateringContract cateringContract;
+    ArrayList<Attendance> attendanceRecords;
+
+    public ArrayList<Attendance> getAttendanceRecords() {
+        return attendanceRecords;
+    }
+
+    public void setAttendanceRecords(ArrayList<Attendance> attendanceRecords) {
+        this.attendanceRecords = attendanceRecords;
+    }
+
+    public CateringContract getCateringContract() {
+        return cateringContract;
+    }
+
+    public void setCateringContract(CateringContract cateringContract) {
+        this.cateringContract = cateringContract;
+    }
+
+    public HospitalContract getHospitalContract() {
+        return hospitalContract;
+    }
+
+    public void setHospitalContract(HospitalContract hospitalContract) {
+        this.hospitalContract = hospitalContract;
+    }
 
     public CaseDirectory getCaseDirectory() {
         return caseDirectory;

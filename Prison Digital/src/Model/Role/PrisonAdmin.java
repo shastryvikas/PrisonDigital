@@ -7,7 +7,7 @@ package Model.Role;
 
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
-import UI.Prison.PrisonAdminJPanel;
+import UI.Prison.PrisonAdminStaffManagementPage;
 import UI.SysAdmin.SysAdminLandingPage;
 import javax.swing.JPanel;
 
@@ -19,7 +19,7 @@ public class PrisonAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new PrisonAdminJPanel(userProcessContainer, business);
+        return new PrisonAdminStaffManagementPage(userProcessContainer,account, business);
     }
     
 }
