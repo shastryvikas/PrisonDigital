@@ -7,18 +7,48 @@ package Model.CriminalJusticeSystem;
 
 import Model.Employee.Employee;
 import Model.Enterprise;
+import Model.Location;
 import java.util.ArrayList;
 
 /**
  *
  * @author vikasshastry
  */
-public class CriminalJusticeSystem extends Enterprise{
-    
+public class CriminalJusticeSystem extends Enterprise {
+
     ArrayList<Court> listOfCourts;
     ArrayList<Police> listOfPolice;
     Employee admin;
     String name;
+
+    public CriminalJusticeSystem(String name, Location location, Boolean status) {
+        this.name = name;
+        this.listOfCourts = new ArrayList<>();
+        this.listOfPolice = new ArrayList<>();
+        this.setLocation(location);
+        this.setStatus(status);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Employee admin) {
+        this.admin = admin;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public ArrayList<Court> getListOfCourts() {
         return listOfCourts;
@@ -35,4 +65,5 @@ public class CriminalJusticeSystem extends Enterprise{
     public void setListOfPolice(ArrayList<Police> listOfPolice) {
         this.listOfPolice = listOfPolice;
     }
+
 }

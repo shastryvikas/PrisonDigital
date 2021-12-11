@@ -12,9 +12,14 @@ import java.util.Date;
  * @author vikasshastry
  */
 public class Person {
+
     String name;
     Date dob;
     Location address;
+
+    public Person(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -39,5 +44,5 @@ public class Person {
     public void setAddress(Location address) {
         this.address = address;
     }
-    
+
 }

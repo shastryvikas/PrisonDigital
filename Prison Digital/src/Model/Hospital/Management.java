@@ -8,6 +8,7 @@ package Model.Hospital;
 import Model.Employee.Employee;
 import Model.Prison.*;
 import Model.Organization;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +16,16 @@ import Model.Organization;
  */
 public class Management extends Organization{
     Employee hospitalAdmin;
+    ArrayList<HospitalContract> contract;
 
+    public ArrayList<HospitalContract> getContract() {
+        return contract;
+    }
+
+    public void setContract(ArrayList<HospitalContract> contract) {
+        this.contract = contract;
+    }
+    
     public Employee getHospitalAdmin() {
         return hospitalAdmin;
     }

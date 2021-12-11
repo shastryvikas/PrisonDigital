@@ -6,12 +6,14 @@
 package Model.Hospital;
 
 import Model.Enterprise;
+import Model.Location;
 
 /**
  *
  * @author vikasshastry
  */
-public class Hospital extends Enterprise{
+public class Hospital extends Enterprise {
+
     Management management;
     PatientCare patientCare;
     String name;
@@ -30,5 +32,26 @@ public class Hospital extends Enterprise{
 
     public void setPatientCare(PatientCare patientCare) {
         this.patientCare = patientCare;
+    }
+
+    public Hospital(String name, Location location, Boolean status) {
+        this.name = name;
+        this.setLocation(location);
+        this.setStatus(status);
+        this.management = new Management();
+        this.patientCare = new PatientCare();
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

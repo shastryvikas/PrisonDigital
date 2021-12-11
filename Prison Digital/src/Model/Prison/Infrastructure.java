@@ -13,14 +13,45 @@ import java.util.ArrayList;
  * @author vikasshastry
  */
 public class Infrastructure extends Organization{
-    ArrayList<Unit> units;
+    ArrayList<Unit> cellsEmpty;
+    ArrayList<Unit> cellsOccupied;
+    Unit Infirmary; //not used
+    Unit Dining;  //not used
 
-    public ArrayList<Unit> getUnits() {
-        return units;
+    public ArrayList<Unit> getCellsEmpty() {
+        if(cellsEmpty == null)
+            cellsEmpty = new ArrayList<Unit>();
+        return cellsEmpty;
     }
 
-    public void setUnits(ArrayList<Unit> units) {
-        this.units = units;
+    public void setCellsEmpty(ArrayList<Unit> cellsEmpty) {
+        this.cellsEmpty = cellsEmpty;
+    }
+
+    public ArrayList<Unit> getCellsOccupied() {
+        if(cellsOccupied == null)
+            cellsOccupied = new ArrayList<Unit>();
+        return cellsOccupied;
+    }
+
+    public void setCellsOccupied(ArrayList<Unit> cellsOccupied) {
+        this.cellsOccupied = cellsOccupied;
+    }
+    
+    public Unit getInfirmary() {
+        return Infirmary;
+    }
+
+    public void setInfirmary(Unit Infirmary) {
+        this.Infirmary = Infirmary;
+    }
+
+    public Unit getDining() {
+        return Dining;
+    }
+
+    public void setDining(Unit Dining) {
+        this.Dining = Dining;
     }
     
 }

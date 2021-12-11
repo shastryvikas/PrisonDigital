@@ -8,7 +8,7 @@ package Model.Role;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
 import UI.CriminalJusticeSystem.JudgeLandingPage;
-import UI.Prison.PrisonAdminJPanel;
+import UI.Prison.PrisonAdminStaffManagementPage;
 import javax.swing.JPanel;
 
 /**

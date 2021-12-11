@@ -12,8 +12,13 @@ import Model.Organization;
  *
  * @author vikasshastry
  */
-public class Transport extends Organization{
+public class Transport extends Organization {
+
     EmployeeDirectory staff;
+
+    public Transport() {
+        this.staff = new EmployeeDirectory();
+    }
 
     public EmployeeDirectory getStaff() {
         return staff;

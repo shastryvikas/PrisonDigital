@@ -15,6 +15,10 @@ import Model.Organization;
 public class Kitchen extends Organization{
     EmployeeDirectory staff;
 
+    public Kitchen() {
+        this.staff = new EmployeeDirectory();
+    }
+
     public EmployeeDirectory getStaff() {
         return staff;
     }

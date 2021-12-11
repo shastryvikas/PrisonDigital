@@ -5,6 +5,7 @@
  */
 package Model.Prison;
 
+import Model.CriminalJusticeSystem.CaseDirectory;
 import Model.Employee.Employee;
 import Model.Employee.EmployeeDirectory;
 import Model.Organization;
@@ -20,6 +21,50 @@ public class Management extends Organization{
     Employee InfirmaryAdmin;
     EmployeeDirectory staff;
     ArrayList<Prisoner> prisoners;
+    CaseDirectory caseDirectory;
+    HospitalContract hospitalContract;
+    CateringContract cateringContract;
+    ArrayList<Attendance> attendanceRecords;
+
+    public ArrayList<Attendance> getAttendanceRecords() {
+        return attendanceRecords;
+    }
+
+    public void setAttendanceRecords(ArrayList<Attendance> attendanceRecords) {
+        this.attendanceRecords = attendanceRecords;
+    }
+
+    public CateringContract getCateringContract() {
+        return cateringContract;
+    }
+
+    public void setCateringContract(CateringContract cateringContract) {
+        this.cateringContract = cateringContract;
+    }
+
+    public HospitalContract getHospitalContract() {
+        return hospitalContract;
+    }
+
+    public void setHospitalContract(HospitalContract hospitalContract) {
+        this.hospitalContract = hospitalContract;
+    }
+
+    public CaseDirectory getCaseDirectory() {
+        return caseDirectory;
+    }
+
+    public void setCaseDirectory(CaseDirectory caseDirectory) {
+        this.caseDirectory = caseDirectory;
+    }
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Employee admin) {
+        this.admin = admin;
+    }
 
     public Employee getDiningAdmin() {
         return DiningAdmin;
@@ -38,6 +83,8 @@ public class Management extends Organization{
     }
 
     public EmployeeDirectory getStaff() {
+        if(staff == null)
+            staff = new EmployeeDirectory();
         return staff;
     }
 

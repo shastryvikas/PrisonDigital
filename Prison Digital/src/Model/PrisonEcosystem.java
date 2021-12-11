@@ -10,6 +10,8 @@ import Model.Employee.Employee;
 import Model.FoodCateringService.FoodCateringService;
 import Model.Hospital.Hospital;
 import Model.Prison.Prison;
+import Model.Role.Role;
+import Model.UserAccountManagement.UserAccount;
 import Model.UserAccountManagement.UserAccountDirectory;
 import java.util.ArrayList;
 
@@ -17,8 +19,8 @@ import java.util.ArrayList;
  *
  * @author vikasshastry
  */
-public class PrisonEcosystem{
-    
+public class PrisonEcosystem {
+
     private ArrayList<Prison> prisons;
     private ArrayList<FoodCateringService> cateringServices;
     private ArrayList<Hospital> hospitals;
@@ -27,10 +29,21 @@ public class PrisonEcosystem{
     private UserAccountDirectory userAccountDirectory;
 
     public UserAccountDirectory getUserAccountDirectory() {
-        if(userAccountDirectory == null){
+        if (userAccountDirectory == null) {
             userAccountDirectory = new UserAccountDirectory();
         }
         return userAccountDirectory;
+    }
+    
+    public UserAccount getNewUserAccount(String username, String password, Enterprise enterprise, Role role){
+        return getUserAccountDirectory().addAccount(username, password, enterprise, role);
+    }
+
+    public PrisonEcosystem() {
+        prisons = new ArrayList<>();
+        cateringServices = new ArrayList<>();
+        hospitals = new ArrayList<>();
+        criminalJusticeSystems = new ArrayList<>();
     }
 
     public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {

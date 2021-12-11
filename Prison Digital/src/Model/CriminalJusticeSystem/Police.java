@@ -13,10 +13,18 @@ import java.util.ArrayList;
  *
  * @author vikasshastry
  */
-public class Police extends Organization{
+public class Police extends Organization {
+
     Employee policeAdmin;
     ArrayList<Employee> listOfPoliceOfficers;
     CaseDirectory caseDirectory;
+    String name;
+
+    public Police(Employee policeAdmin, String name) {
+        this.policeAdmin = policeAdmin;
+        listOfPoliceOfficers = new ArrayList<>();
+        this.setName(name);
+    }
 
     public CaseDirectory getCaseDirectory() {
         return caseDirectory;
@@ -41,4 +49,10 @@ public class Police extends Organization{
     public void setListOfPoliceOfficers(ArrayList<Employee> listOfPoliceOfficers) {
         this.listOfPoliceOfficers = listOfPoliceOfficers;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
 }

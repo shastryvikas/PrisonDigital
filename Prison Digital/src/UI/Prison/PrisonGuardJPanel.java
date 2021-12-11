@@ -5,9 +5,14 @@
  */
 package UI.Prison;
 
+import Model.CriminalJusticeSystem.Case;
+import Model.Prison.Attendance;
+import Model.Prison.Prison;
 import Model.PrisonEcosystem;
+import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,12 +27,35 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
     CardLayout cardLayoutPointer;
     JPanel container;
     PrisonEcosystem system;
+    UserAccount user;
+    Prison prison;
     
-    public PrisonGuardJPanel(JPanel container, PrisonEcosystem system) {
+    public PrisonGuardJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         cardLayoutPointer = (CardLayout) container.getLayout();
         this.system = system;
+        this.user = user;
+        this.prison = (Prison) user.getEnterprise();
+
+    }
+    
+    private void populateTable() {
+
+        DefaultTableModel tablemodel = (DefaultTableModel) jTable1.getModel();
+
+        tablemodel.setRowCount(0);
+       
+        for (Attendance c : prison.getManagement().getAttendanceRecords()) {
+            Object[] row = new Object[4];
+            row[0] = c.getDate();
+            row[1] = c.getPresent() + "";
+            row[2] = (c.getTotal() - c.getPresent()) + "";
+            row[3] = c.getTotal() + "";
+
+            tablemodel.addRow(row);
+        }
+        
     }
 
     /**
@@ -41,7 +69,14 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
         lblGuardWorkArea = new javax.swing.JLabel();
         btnSubmitAttendance = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        date = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        present = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        total = new javax.swing.JTextField();
 
         lblGuardWorkArea.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblGuardWorkArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -49,42 +84,111 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         lblGuardWorkArea.setOpaque(true);
 
         btnSubmitAttendance.setText("Submit Attendance");
+        btnSubmitAttendance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitAttendanceActionPerformed(evt);
+            }
+        });
 
-        btnLogout.setText("Logout");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date", "Present", "Absent", "Total"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("Date:");
+
+        date.setText("jTextField1");
+
+        jLabel2.setText("Present:");
+
+        present.setText("jTextField2");
+
+        jLabel3.setText("Total:");
+
+        total.setText("jTextField3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblGuardWorkArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(lblGuardWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSubmitAttendance)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogout)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(present, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblGuardWorkArea)
-                .addGap(308, 308, 308)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(present, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(btnSubmitAttendance)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addContainerGap())
+                .addContainerGap(133, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSubmitAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitAttendanceActionPerformed
+        // TODO add your handling code here:
+        
+        Attendance a = new Attendance();
+        a.setDate(date.getText());
+        a.setPresent(Integer.parseInt(present.getText()));
+        a.setTotal(Integer.parseInt(total.getText()));
+        prison.getManagement().getAttendanceRecords().add(a);
+        populateTable();
+        
+    }//GEN-LAST:event_btnSubmitAttendanceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSubmitAttendance;
+    private javax.swing.JTextField date;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblGuardWorkArea;
+    private javax.swing.JTextField present;
+    private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
 }
