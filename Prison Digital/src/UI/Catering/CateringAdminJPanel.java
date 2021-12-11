@@ -393,7 +393,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Please select a staff member to update from the table");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Employee");
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new employee");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
