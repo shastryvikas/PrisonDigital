@@ -11,31 +11,43 @@ package Model.Prison;
  */
 public class Unit {
     
-    protected enum UnitType{
-        Cell("Cell"),
-        Infirmary("Infirmary"),
-        Dining("Dining");
-        
-        private String value;
-        
-        private UnitType(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
-    }
+//    protected enum UnitType{
+//        Cell("Cell"),
+//        Infirmary("Infirmary"),
+//        Dining("Dining");
+//        
+//        private String value;
+//        
+//        private UnitType(String value){
+//            this.value = value;
+//        }
+//
+//        public String getValue() {
+//            return value;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return value;
+//        }
+//    }
     
-    private UnitType unitType;
+    //private UnitType unitType;
     private int capacity;
     private int unitID;
     private int currentOccupancy;
+    private static int count = 2689;
+
+//    public Unit(UnitType unitType, int capacity, int currentOccupancy) {
+//        this.unitType = unitType;
+//        this.capacity = capacity;
+//        this.currentOccupancy = currentOccupancy;
+//        int unitID = count++;
+//    }
+
+    public Unit() {
+        this.capacity = 1;
+    }
 
     public int getCapacity() {
         return capacity;
@@ -61,12 +73,12 @@ public class Unit {
         this.currentOccupancy = currentOccupancy;
     }
 
-    public UnitType getUnitType() {
-        return unitType;
-    }
-
-    public void setUnitType(UnitType unitType) {
-        this.unitType = unitType;
-    }
+//    public UnitType getUnitType() {
+//        return unitType;
+//    }
+//
+//    public void setUnitType(UnitType unitType) {
+//        this.unitType = unitType;
+//    }
     
 }

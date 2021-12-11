@@ -8,6 +8,7 @@ package Model.CriminalJusticeSystem;
 import Model.Employee.Employee;
 import Model.Person;
 import Model.Prison.Prison;
+import Model.Prison.Unit;
 import java.util.Date;
 
 /**
@@ -25,6 +26,15 @@ public class Case {
     private Police processingPoliceDepartment;
     private Employee transportedToPrisonBy;
     private Prison prison;
+    private Unit cell;
+
+    public Unit getCell() {
+        return cell;
+    }
+
+    public void setCell(Unit cell) {
+        this.cell = cell;
+    }
 
     public String getVerdict() {
         return verdict;

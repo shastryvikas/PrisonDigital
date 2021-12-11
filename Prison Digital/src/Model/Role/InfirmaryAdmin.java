@@ -19,7 +19,7 @@ public class InfirmaryAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new InfirmarySupervisorJPanel(userProcessContainer, business);
+        return new InfirmarySupervisorJPanel(userProcessContainer,account, business);
     }
     
 }

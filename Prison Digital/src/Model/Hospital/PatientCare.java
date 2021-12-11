@@ -14,35 +14,31 @@ import Model.Organization;
  * @author vikasshastry
  */
 public class PatientCare extends Organization{
-    Employee psychologist;
-    Employee generalPhysician;
-    Employee patientCareTechnician;
+    Employee psychologyStaff;
+    Employee generalStaff;
+    Employee physiotherapyStaff;
 
-    public Employee getPsychologist() {
-        return psychologist;
+    public Employee getPsychologyStaff() {
+        return psychologyStaff;
     }
 
-    public void setPsychologist(Employee psychologist) {
-        this.psychologist = psychologist;
+    public void setPsychologyStaff(Employee psychologyStaff) {
+        this.psychologyStaff = psychologyStaff;
     }
 
-    public Employee getGeneralPhysician() {
-        return generalPhysician;
+    public Employee getGeneralStaff() {
+        return generalStaff;
     }
 
-    public void setGeneralPhysician(Employee generalPhysician) {
-        this.generalPhysician = generalPhysician;
+    public void setGeneralStaff(Employee generalStaff) {
+        this.generalStaff = generalStaff;
     }
 
-    public Employee getPatientCareTechnician() {
-        return patientCareTechnician;
+    public Employee getPhysiotherapyStaff() {
+        return physiotherapyStaff;
     }
 
-    public void setPatientCareTechnician(Employee patientCareTechnician) {
-        this.patientCareTechnician = patientCareTechnician;
+    public void setPhysiotherapyStaff(Employee physiotherapyStaff) {
+        this.physiotherapyStaff = physiotherapyStaff;
     }
-
-    
-
-    
 }

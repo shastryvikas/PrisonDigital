@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -144,7 +145,10 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
         }
         
         DefaultTableModel model = (DefaultTableModel) tblInfirmaryOrders.getModel();
-        Request selectedCar = (car) model.getValueAt(viewselectedRowIndex, 0);
+        //Request selectedRequest = (Request) model.getValueAt(viewselectedRowIndex, 0);
+        
+        //Cgange Status
+        //selectedRequest.setStatus(drpdwnChangeStatus.getSelectedItem().toString());
     }//GEN-LAST:event_btnSaveActionPerformed
 
 

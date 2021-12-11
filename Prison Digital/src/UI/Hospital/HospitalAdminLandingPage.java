@@ -8,6 +8,10 @@ package UI.Hospital;
 import Model.Employee.Employee;
 import Model.Hospital.Hospital;
 import Model.PrisonEcosystem;
+import Model.Role.PatientCareTechStaff;
+import Model.Role.generalStaff;
+import Model.Role.psychologyStaff;
+import Model.UserAccountManagement.UserAccount;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,16 +26,20 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
     PrisonEcosystem system;
     Hospital hospital;
     String currDesignation;
+    UserAccount account;
 
     /**
      * Creates new form InfirmaryAdminLandingPage
+     *
      * @param container
      */
-    public HospitalAdminLandingPage(JPanel container, PrisonEcosystem system) {
+    public HospitalAdminLandingPage(JPanel container, UserAccount account, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         this.system = system;
-        
+        this.account = account;
+        hospital = (Hospital)account.getEnterprise();
+
         /*
         //Designation drop down list.
         ArrayList<String> designationDownList = new ArrayList<String>();
@@ -43,7 +51,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         for(String x : designationDownList){
             jComboBox1.addItem(x);
         }
-        */
+         */
     }
 
     /**
@@ -355,49 +363,49 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
     private void btnGeneralPhyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralPhyActionPerformed
         // TODO add your handling code here:
         currDesignation = "General Physician";
-        
-        if(hospital.getPatientCare().getGeneralPhysician().getName().isEmpty() || hospital.getPatientCare().getGeneralPhysician().getName() == null){
+
+        if (hospital.getPatientCare().getGeneralStaff()==null || hospital.getPatientCare().getGeneralStaff().getName().isEmpty() || hospital.getPatientCare().getGeneralStaff().getName() == null) {
             JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
             return;
         }
-        
-        txtInfirmaryStaffName.setText(hospital.getPatientCare().getGeneralPhysician().getName());
-        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getGeneralPhysician().getUserAccount().getPassword());
-        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getGeneralPhysician().getUserAccount().getUsername());
+
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getGeneralStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getGeneralStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getGeneralStaff().getUserAccount().getUsername());
         txtDesignation.setText(currDesignation);
-        txtDesignation.disable();
+        txtDesignation.setEnabled(false);
     }//GEN-LAST:event_btnGeneralPhyActionPerformed
 
     private void btnPatientCarTecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientCarTecActionPerformed
         // TODO add your handling code here:
         currDesignation = "Patient Care Technician";
-        
-        if(hospital.getPatientCare().getPatientCareTechnician().getName().isEmpty() || hospital.getPatientCare().getPatientCareTechnician().getName() == null){
+
+        if (hospital.getPatientCare().getPhysiotherapyStaff() == null || hospital.getPatientCare().getPhysiotherapyStaff().getName().isEmpty() || hospital.getPatientCare().getPhysiotherapyStaff().getName() == null) {
             JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
             return;
         }
-        
-        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPatientCareTechnician().getName());
-        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPatientCareTechnician().getUserAccount().getPassword());
-        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPatientCareTechnician().getUserAccount().getUsername());
+
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPhysiotherapyStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPhysiotherapyStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPhysiotherapyStaff().getUserAccount().getUsername());
         txtDesignation.setText(currDesignation);
-        txtDesignation.disable();
+        txtDesignation.setEnabled(false);
     }//GEN-LAST:event_btnPatientCarTecActionPerformed
 
     private void btnPsychologistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPsychologistActionPerformed
         // TODO add your handling code here:
         currDesignation = "Psychologist";
-        
-        if(hospital.getPatientCare().getPsychologist().getName().isEmpty() || hospital.getPatientCare().getPsychologist().getName() == null){
+
+        if (hospital.getPatientCare().getPsychologyStaff() == null || hospital.getPatientCare().getPsychologyStaff().getName().isEmpty() || hospital.getPatientCare().getPsychologyStaff().getName() == null) {
             JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
             return;
         }
-        
-        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPsychologist().getName());
-        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPsychologist().getUserAccount().getPassword());
-        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPsychologist().getUserAccount().getUsername());
+
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPsychologyStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPsychologyStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPsychologyStaff().getUserAccount().getUsername());
         txtDesignation.setText(currDesignation);
-        txtDesignation.disable();
+        txtDesignation.setEnabled(false);
 
     }//GEN-LAST:event_btnPsychologistActionPerformed
 
@@ -422,23 +430,22 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         if (checkInputFields(txtInfirmaryStaffName) && checkInputFields(txtInfirmaryStaffUsername) && checkInputFields(txtInfirmaryStaffPassword)) {
 //            if (checkIfCatererNameIsUnique()) {
             Employee newEmployee;
-            
-            if(txtDesignation.equals("General Physician")){
-            newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new Chef());
-            hospital.getPatientCare().setGeneralPhysician(newEmployee);
-                }
-            else if(txtDesignation.equals("Patient Care Technician")){
-            newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new Chef());
-            hospital.getPatientCare().setPatientCareTechnician(newEmployee);
+
+            if (txtDesignation.getText().equals("General Physician")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new generalStaff());
+                hospital.getPatientCare().setGeneralStaff(newEmployee);
+            } else if (txtDesignation.getText().equals("Patient Care Technician")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new PatientCareTechStaff());
+                hospital.getPatientCare().setPhysiotherapyStaff(newEmployee);
+            } else if (txtDesignation.getText().equals("Psychologist")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new psychologyStaff());
+                hospital.getPatientCare().setPsychologyStaff(newEmployee);
             }
-            else if(txtDesignation.equals("Psychologist")){
-            newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new Chef());
-            hospital.getPatientCare().setPsychologist(newEmployee);
-            }
-            
+
             //initializeStaffTable();
+            
+            JOptionPane.showMessageDialog(this, txtDesignation.getText() + " Head Appointed");
             resetFields();
-            JOptionPane.showMessageDialog(this, txtDesignation + " Head Appointed");
 //            } else {
 //                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
 //            }
@@ -482,7 +489,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void resetFields() {
-        
+
         txtInfirmaryStaffName.setText("");
         txtInfirmaryStaffPassword.setText("");
         txtInfirmaryStaffUsername.setText("");

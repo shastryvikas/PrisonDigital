@@ -19,7 +19,7 @@ public class CriminalJusticeSystemAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new JudicialSystemAdminPanel(userProcessContainer, business);
+        return new JudicialSystemAdminPanel(userProcessContainer, account, business);
     }
     
 }
