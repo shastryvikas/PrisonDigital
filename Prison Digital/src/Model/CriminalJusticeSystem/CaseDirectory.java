@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class CaseDirectory {
     private ArrayList<Case> listOfCases;
-    
 
     public ArrayList<Case> getListOfCases() {
         if(listOfCases == null)
@@ -25,8 +24,8 @@ public class CaseDirectory {
         this.listOfCases = listOfCases;
     }
     
-    public void addCase(){
-        
+    public void addCase(Case e){
+        listOfCases.add(e);
     }
     
     public void modifyCase(){

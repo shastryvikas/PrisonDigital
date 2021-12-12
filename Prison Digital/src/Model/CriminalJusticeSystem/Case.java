@@ -16,6 +16,7 @@ import java.util.Date;
  * @author vikasshastry
  */
 public class Case {
+
     private String verdict;
     private Person accused;
     private Boolean isImprisoned;
@@ -28,13 +29,29 @@ public class Case {
     private Prison prison;
     private Unit cell;
     private static int count = 2361;
+    private String status = "New Case";
 
-    public Unit getCell() {
-        return cell;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCell(Unit cell) {
+    public void setStatus(String status) {
+        this.status = status;
+    }
+ public Unit getCell() {
+        return cell;
+    }
+	   public void setCell(Unit cell) {
         this.cell = cell;
+    }
+    public Case(String verdict, Person accused, Boolean isImprisoned, Date startDate, int yearsOfImprisonment, Court processingCourt) {
+        this.verdict = verdict;
+        this.accused = accused;
+        this.isImprisoned = isImprisoned;
+        this.startDate = startDate;
+        this.yearsOfImprisonment = yearsOfImprisonment;
+        this.caseNumber = count++;
+        this.processingCourt = processingCourt;
     }
 
     public String getVerdict() {
@@ -116,10 +133,10 @@ public class Case {
     public void setPrison(Prison prison) {
         this.prison = prison;
     }
-    
+
     @Override
     public String toString() {
         return this.caseNumber + "";
     }
-    
+
 }
