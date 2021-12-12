@@ -50,8 +50,20 @@
                               <Component id="lblImprisonmentStartDate" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtYearsOfImprisonment" min="-2" pref="201" max="-2" attributes="0"/>
-                                  <Component id="txtImprisonmentStartDate" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txtYearsOfImprisonment" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                                      <Component id="lblPrisonWorkrequestFeedback" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtPrisonWorkrequestFeedback" pref="158" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txtImprisonmentStartDate" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                                      <Component id="lblPoliceWorkrequestFeedback" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtPoliceWorkrequestFeedback" pref="158" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -66,6 +78,8 @@
                       <Component id="btnCreateCase" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnUpdateCase" min="-2" pref="118" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="btnProvideFeedback" min="-2" pref="156" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnProvideJudgement" min="-2" pref="201" max="-2" attributes="0"/>
                   </Group>
@@ -102,17 +116,26 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblImprisonmentStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtImprisonmentStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="lblPoliceWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPoliceWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblYearsOfImprisonment" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtYearsOfImprisonment" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="lblPrisonWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPrisonWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCreateCase" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUpdateCase" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnProvideJudgement" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnProvideFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
@@ -300,6 +323,37 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPoliceWorkrequestFeedback">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Police workrequest feedback"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPoliceWorkrequestFeedback">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPrisonWorkrequestFeedback">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prison workrequest feedback"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPrisonWorkrequestFeedback">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProvideFeedback">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="81" green="d0" red="f4" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Provide Feedback"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[85, 30]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProvideFeedbackActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

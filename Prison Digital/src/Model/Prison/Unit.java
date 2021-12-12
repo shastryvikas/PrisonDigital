@@ -5,6 +5,8 @@
  */
 package Model.Prison;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  *
  * @author vikasshastry
@@ -47,6 +49,7 @@ public class Unit {
 
     public Unit() {
         this.capacity = 1;
+        unitID = ThreadLocalRandom.current().nextInt(00000, 99999 + 1);
     }
 
     public int getCapacity() {

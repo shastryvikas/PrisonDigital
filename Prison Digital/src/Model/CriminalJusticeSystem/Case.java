@@ -11,12 +11,13 @@ import Model.Prison.Prison;
 import Model.Prison.Unit;
 import Model.WorkQueue.WorkRequest;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
  * @author vikasshastry
  */
-public class Case extends WorkRequest{
+public class Case extends WorkRequest {
 
     private String verdict;
     private Person accused;
@@ -29,6 +30,15 @@ public class Case extends WorkRequest{
     private Employee transportedToPrisonBy;
     private Prison prison;
     private Unit cell;
+    WorkRequest policeworkRequest;
+
+    public WorkRequest getPoliceworkRequest() {
+        return policeworkRequest;
+    }
+
+    public void setPoliceworkRequest(WorkRequest policeworkRequest) {
+        this.policeworkRequest = policeworkRequest;
+    }
     private static int count = 2361;
 
     private String status = "New Case";
@@ -40,19 +50,22 @@ public class Case extends WorkRequest{
     public void setStatus(String status) {
         this.status = status;
     }
- public Unit getCell() {
+
+    public Unit getCell() {
         return cell;
     }
-	   public void setCell(Unit cell) {
+
+    public void setCell(Unit cell) {
         this.cell = cell;
     }
+
     public Case(String verdict, Person accused, Boolean isImprisoned, Date startDate, int yearsOfImprisonment, Court processingCourt) {
         this.verdict = verdict;
         this.accused = accused;
         this.isImprisoned = isImprisoned;
         this.startDate = startDate;
         this.yearsOfImprisonment = yearsOfImprisonment;
-        this.caseNumber = count++;
+        this.caseNumber = ThreadLocalRandom.current().nextInt(00000, 99999 + 1);
         this.processingCourt = processingCourt;
     }
 

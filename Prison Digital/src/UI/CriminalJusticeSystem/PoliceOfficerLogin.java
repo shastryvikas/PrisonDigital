@@ -25,13 +25,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Thejas
  */
 public class PoliceOfficerLogin extends javax.swing.JPanel {
-
+    
     JPanel container;
     UserAccount account;
     PrisonEcosystem system;
     Case selectedCase;
     CriminalJusticeSystem cjs;
     Court currentCourt;
+    WorkRequest workreq;
 
     /**
      * Creates new form PoliceOfficerLogin
@@ -46,33 +47,55 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         this.account = account;
         this.system = system;
         initializeTable();
+        txtFeedback.setVisible(false);
+        lblFeedback.setVisible(false);
         tblPrisonersToBeTransported.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
-
+            
             @Override
             public void mousePressed(MouseEvent e) {
                 initializeFields();
             }
-
+            
             @Override
             public void mouseReleased(MouseEvent e) {
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent e) {
             }
-
+            
             @Override
             public void mouseExited(MouseEvent e) {
             }
-
+            
             private void initializeFields() {
                 selectedCase = (Case) tblPrisonersToBeTransported.getModel().getValueAt(tblPrisonersToBeTransported.getSelectedRow(), 0);
+                ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+                for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                    if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getStatus() != null
+                            && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName()) 
+                            && listOfWorkRequest.getStatus().contains("Police work req")) {
+                        workreq = listOfWorkRequest;
+                        if (workreq.getStatus().equals("Police work req, Prisoner imprisoned") && workreq.getMessage() != null && !workreq.getMessage().isEmpty()) {
+                            lblFeedback.setVisible(true);
+                            txtFeedback.setText(workreq.getMessage());
+                            txtFeedback.setVisible(true);
+                            break;
+                        } else {
+                            txtFeedback.setVisible(false);
+                            lblFeedback.setVisible(false);
+                        }
+                    } else {
+                        txtFeedback.setVisible(false);
+                        lblFeedback.setVisible(false);
+                    }
+                }
             }
         });
-
+        
     }
 
     /**
@@ -89,6 +112,8 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         btnTransportInProgress = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPrisonersToBeTransported = new javax.swing.JTable();
+        txtFeedback = new javax.swing.JTextField();
+        lblFeedback = new javax.swing.JLabel();
 
         btnPrisonerTransportCompleted.setText("Prisoner Transport Completed");
         btnPrisonerTransportCompleted.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +154,10 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblPrisonersToBeTransported);
 
+        txtFeedback.setEnabled(false);
+
+        lblFeedback.setText("Feedback");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,14 +165,19 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBeginTransport)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBeginTransport)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTransportInProgress))
+                            .addComponent(lblFeedback))
                         .addGap(18, 18, 18)
-                        .addComponent(btnTransportInProgress)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPrisonerTransportCompleted)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPrisonerTransportCompleted)
+                            .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -156,7 +190,11 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
                     .addComponent(btnBeginTransport)
                     .addComponent(btnTransportInProgress)
                     .addComponent(btnPrisonerTransportCompleted))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFeedback))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,8 +203,8 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         if (selectedCase != null) {
             ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
             for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
-                if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getStatus().equals("Police Assigned")) {
-                    listOfWorkRequest.setStatus("Prisoner transported");
+                if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getStatus().equals("Police work req, Police Assigned")) {
+                    listOfWorkRequest.setStatus("Police work req, Prisoner transported");
                     listOfWorkRequest.setResolveDate(new Date());
                 }
             }
@@ -206,7 +244,9 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
     private javax.swing.JButton btnPrisonerTransportCompleted;
     private javax.swing.JButton btnTransportInProgress;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFeedback;
     private javax.swing.JTable tblPrisonersToBeTransported;
+    private javax.swing.JTextField txtFeedback;
     // End of variables declaration//GEN-END:variables
 
     private void initializeTable() {
@@ -214,17 +254,18 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         ArrayList<Court> courtList = cjs.getListOfCourts();
         for (Court court : courtList) {
             ArrayList<Case> cases = court.getCaseDirectory().getListOfCases();
+            DefaultTableModel model = (DefaultTableModel) tblPrisonersToBeTransported.getModel();
+            model.setRowCount(0);
             for (Case aCase : cases) {
                 if (aCase.getTransportedToPrisonBy() != null && aCase.getTransportedToPrisonBy().getUserAccount().getUsername().equals(account.getUsername())) {
-                    DefaultTableModel model = (DefaultTableModel) tblPrisonersToBeTransported.getModel();
-                    model.setRowCount(0);
+                    
                     Object[] row = new Object[7];
                     row[0] = aCase;
                     row[1] = aCase.getAccused().getName();
                     row[2] = aCase.getStartDate().toString();
                     row[3] = aCase.getYearsOfImprisonment() + "";
-                    row[4] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
-                    row[5] = aCase.isImprisoned() == true ? "Yes" : "No";
+                    row[4] = aCase.isImprisoned() == true ? "Yes" : "No";
+                    row[5] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
                     row[6] = aCase.getStatus();
                     model.addRow(row);
                 }

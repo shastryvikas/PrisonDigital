@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +56,11 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         this.account = account;
 
         initializeTable();
+        lblPrisonWorkrequestFeedback.setVisible(false);
+        lblPoliceWorkrequestFeedback.setVisible(false);
+        txtPrisonWorkrequestFeedback.setVisible(false);
+        txtPoliceWorkrequestFeedback.setVisible(false);
+        btnProvideFeedback.setVisible(false);
         tblCases.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -78,10 +84,18 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
 
         });
+        lblPrisonWorkrequestFeedback.setVisible(false);
+        lblPoliceWorkrequestFeedback.setVisible(false);
+        txtPrisonWorkrequestFeedback.setVisible(false);
+        txtPoliceWorkrequestFeedback.setVisible(false);
+        btnProvideFeedback.setVisible(false);
     }
 
     private void initializeFields() {
         selectedCase = (Case) tblCases.getModel().getValueAt(tblCases.getSelectedRow(), 0);
+//         ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+//         listOfWorkRequests.removeAll(listOfWorkRequests);
+//         currentCourt.getCaseDirectory().getListOfCases().removeAll(currentCourt.getCaseDirectory().getListOfCases());
         txtCaseVerdict.setText(selectedCase.getVerdict());
         txtPersonName.setText(selectedCase.getAccused().getName());
         txtImprisonmentStartDate.setText(selectedCase.getStartDate().toString());
@@ -97,7 +111,34 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         } else {
             jTextField3.setText(selectedCase.getProcessingPoliceDepartment().getName());
         }
+        if (selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue() != null && selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList() != null) {
+            ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+            for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                if (listOfWorkRequest.getPrisoner() != null && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())
+                        && listOfWorkRequest.getStatus() != null && listOfWorkRequest.getStatus().contains("Prisoner work req")) {
 
+                    prisonWorkreq = listOfWorkRequest;
+
+                }
+                if (listOfWorkRequest.getReceiver() != null && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())
+                        && listOfWorkRequest.getStatus() != null && listOfWorkRequest.getStatus().contains("Police work req")) {
+                    policeWorkreq = listOfWorkRequest;
+                }
+            }
+            if (selectedCase.isImprisoned() && null != prisonWorkreq && (prisonWorkreq.getMessage() == null || prisonWorkreq.getMessage().isEmpty()) && null != policeWorkreq && (policeWorkreq.getMessage() == null || policeWorkreq.getMessage().isEmpty())) {
+                lblPrisonWorkrequestFeedback.setVisible(true);
+                lblPoliceWorkrequestFeedback.setVisible(true);
+                txtPrisonWorkrequestFeedback.setVisible(true);
+                txtPoliceWorkrequestFeedback.setVisible(true);
+                btnProvideFeedback.setVisible(true);
+            } else {
+                lblPrisonWorkrequestFeedback.setVisible(false);
+                lblPoliceWorkrequestFeedback.setVisible(false);
+                txtPrisonWorkrequestFeedback.setVisible(false);
+                txtPoliceWorkrequestFeedback.setVisible(false);
+                btnProvideFeedback.setVisible(false);
+            }
+        }
     }
 
     /**
@@ -127,6 +168,11 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         btnRefresh = new javax.swing.JButton();
+        lblPoliceWorkrequestFeedback = new javax.swing.JLabel();
+        txtPoliceWorkrequestFeedback = new javax.swing.JTextField();
+        lblPrisonWorkrequestFeedback = new javax.swing.JLabel();
+        txtPrisonWorkrequestFeedback = new javax.swing.JTextField();
+        btnProvideFeedback = new javax.swing.JButton();
 
         tblCases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,6 +255,20 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
         });
 
+        lblPoliceWorkrequestFeedback.setText("Police workrequest feedback");
+
+        lblPrisonWorkrequestFeedback.setText("Prison workrequest feedback");
+
+        btnProvideFeedback.setBackground(new java.awt.Color(244, 208, 129));
+        btnProvideFeedback.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnProvideFeedback.setText("Provide Feedback");
+        btnProvideFeedback.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnProvideFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProvideFeedbackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,8 +301,18 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                                 .addComponent(lblImprisonmentStartDate)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(112, 112, 112)
+                                        .addComponent(lblPrisonWorkrequestFeedback)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(112, 112, 112)
+                                        .addComponent(lblPoliceWorkrequestFeedback)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblYearsOfImprisonment)
@@ -252,6 +322,8 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                         .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(btnProvideFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -280,16 +352,23 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImprisonmentStartDate)
-                    .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPoliceWorkrequestFeedback)
+                        .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblYearsOfImprisonment)
-                    .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPrisonWorkrequestFeedback)
+                        .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProvideFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(btnRefresh)
                 .addGap(100, 100, 100))
@@ -304,14 +383,16 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 Case newCase;
                 newCase = new Case(txtCaseVerdict.getText(), person, false, new SimpleDateFormat("MM-dd-YYYY").parse(txtImprisonmentStartDate.getText()), Integer.parseInt(txtYearsOfImprisonment.getText()), currentCourt);
 
-                WorkRequest prisonWorkreq = new WorkRequest();
+                prisonWorkreq = new WorkRequest();
                 prisonWorkreq.setSender(account);
-                prisonWorkreq.setStatus("New Case");
-
-                WorkRequest policeWorkreq = new WorkRequest();
+                prisonWorkreq.setPrisoner(person);
+                prisonWorkreq.setStatus("Prisoner work req, New Case");
+                newCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList().add(prisonWorkreq);
+                policeWorkreq = new WorkRequest();
                 policeWorkreq.setSender(account);
-                policeWorkreq.setStatus("New Case");
-                
+                policeWorkreq.setPrisoner(person);
+                policeWorkreq.setStatus("Police work req, New Case");
+                newCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList().add(policeWorkreq);
                 currentCourt.getCaseDirectory().addCase(newCase);
             } catch (ParseException ex) {
                 Logger.getLogger(JudgeLandingPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -327,9 +408,13 @@ public class JudgeLandingPage extends javax.swing.JPanel {
 
     private void btnProvideJudgementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvideJudgementActionPerformed
         // TODO add your handling code here:
-        JudgementPage judgementPage = new JudgementPage(container, selectedCase, account, criminalJusticeSystem, prisonWorkreq, policeWorkreq, system);
-        container.add("judgementPage", judgementPage);
-        layout.next(container);
+        if (selectedCase != null) {
+            JudgementPage judgementPage = new JudgementPage(container, selectedCase, account, criminalJusticeSystem, prisonWorkreq, policeWorkreq, system);
+            container.add("judgementPage", judgementPage);
+            layout.next(container);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a case from table to assign prison and police to");
+        }
 
     }//GEN-LAST:event_btnProvideJudgementActionPerformed
 
@@ -371,9 +456,26 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         resetFields();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
+    private void btnProvideFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvideFeedbackActionPerformed
+        // TODO add your handling code here:
+        if (checkInputFields(txtPrisonWorkrequestFeedback) && checkInputFields(txtPoliceWorkrequestFeedback)) {
+            prisonWorkreq.setMessage(txtPrisonWorkrequestFeedback.getText());
+            policeWorkreq.setMessage(txtPoliceWorkrequestFeedback.getText());
+            JOptionPane.showMessageDialog(this, "Feedback updated successfully");
+            lblPrisonWorkrequestFeedback.setVisible(false);
+            lblPoliceWorkrequestFeedback.setVisible(false);
+            txtPrisonWorkrequestFeedback.setVisible(false);
+            txtPoliceWorkrequestFeedback.setVisible(false);
+            btnProvideFeedback.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Feedback fields can't be empty");
+        }
+    }//GEN-LAST:event_btnProvideFeedbackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateCase;
+    private javax.swing.JButton btnProvideFeedback;
     private javax.swing.JButton btnProvideJudgement;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateCase;
@@ -385,11 +487,15 @@ public class JudgeLandingPage extends javax.swing.JPanel {
     private javax.swing.JLabel lblCaseVerdict;
     private javax.swing.JLabel lblImprisonmentStartDate;
     private javax.swing.JLabel lblPersonName;
+    private javax.swing.JLabel lblPoliceWorkrequestFeedback;
+    private javax.swing.JLabel lblPrisonWorkrequestFeedback;
     private javax.swing.JLabel lblYearsOfImprisonment;
     private javax.swing.JTable tblCases;
     private javax.swing.JTextField txtCaseVerdict;
     private javax.swing.JTextField txtImprisonmentStartDate;
     private javax.swing.JTextField txtPersonName;
+    private javax.swing.JTextField txtPoliceWorkrequestFeedback;
+    private javax.swing.JTextField txtPrisonWorkrequestFeedback;
     private javax.swing.JTextField txtYearsOfImprisonment;
     // End of variables declaration//GEN-END:variables
 

@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import Model.CriminalJusticeSystem.Police;
+import Model.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -142,6 +143,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         btnAssignCase = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCasesAssigned = new javax.swing.JTable();
+        btnRefresh = new javax.swing.JButton();
 
         lblOfficerName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblOfficerName.setText("Name");
@@ -225,44 +227,55 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCasesAssigned);
 
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblOfficerName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtOfficerName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblOfficerPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblOfficerUsername, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtOfficerUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOfficerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(103, 103, 103))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(drpdwnPoliceOfficers, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAssignCase))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 137, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(drpdwnPoliceOfficers, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAssignCase))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblOfficerName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtOfficerName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblOfficerPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblOfficerUsername, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtOfficerUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtOfficerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(103, 103, 103))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnRefresh)
+                                .addGap(196, 196, 196))))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -294,7 +307,9 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(drpdwnPoliceOfficers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAssignCase))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRefresh)
+                .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -367,25 +382,50 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
 
     private void btnAssignCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignCaseActionPerformed
         // TODO add your handling code here:
+
         if (drpdwnPoliceOfficers.getSelectedIndex() > 0) {
             if (selectedCase.getTransportedToPrisonBy() == null) {
+                ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+                WorkRequest tempWorkRequest = null;
+                for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                    if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())) {
+                        tempWorkRequest = listOfWorkRequest;
+                    }
+                }
                 for (Employee employee : policeDepartment.getListOfPoliceOfficers()) {
                     if (employee.getUserAccount().getUsername().equals(drpdwnPoliceOfficers.getSelectedItem())) {
                         selectedCase.setTransportedToPrisonBy(employee);
+                        if (tempWorkRequest != null) {
+                            tempWorkRequest.setReceiver(employee.getUserAccount());
+                        }
                         JOptionPane.showMessageDialog(this, "Assigned the case to the selected police officer");
                         initializeCaseTable();
                         break;
                     }
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Officer already assigned");
             }
         }
     }//GEN-LAST:event_btnAssignCaseActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        initializeStaffTable();
+        initializeCaseTable();
+        drpdwnPoliceOfficers.removeAllItems();
+        drpdwnPoliceOfficers.addItem("");
+        for (Employee employee : policeDepartment.getListOfPoliceOfficers()) {
+            drpdwnPoliceOfficers.addItem(employee.getUserAccount().getUsername());
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAssignCase;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> drpdwnPoliceOfficers;
     private javax.swing.JScrollPane jScrollPane1;
@@ -433,19 +473,20 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         ArrayList<Court> courtList = criminalJusticeSystem.getListOfCourts();
         for (Court court : courtList) {
             ArrayList<Case> cases = court.getCaseDirectory().getListOfCases();
+            DefaultTableModel model = (DefaultTableModel) tblCasesAssigned.getModel();
+            model.setRowCount(0);
             for (Case aCase : cases) {
                 if (aCase.getProcessingPoliceDepartment().getPoliceAdmin().getUserAccount().getUsername()
                         .equals(account.getUsername())) {
-                    DefaultTableModel model = (DefaultTableModel) tblCasesAssigned.getModel();
-                    model.setRowCount(0);                    
+
                     Object[] row = new Object[7];
-                        row[0] = aCase;
-                        row[1] = aCase.getAccused().getName();
-                        row[2] = aCase.getStartDate().toString();
-                        row[3] = aCase.getYearsOfImprisonment() + "";
-                        row[4] = aCase.isImprisoned()==true?"Yes":"No";
-                        row[5] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
-                        row[6] = aCase.getStatus();
+                    row[0] = aCase;
+                    row[1] = aCase.getAccused().getName();
+                    row[2] = aCase.getStartDate().toString();
+                    row[3] = aCase.getYearsOfImprisonment() + "";
+                    row[4] = aCase.isImprisoned() == true ? "Yes" : "No";
+                    row[5] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
+                    row[6] = aCase.getStatus();
                     model.addRow(row);
                 }
             }

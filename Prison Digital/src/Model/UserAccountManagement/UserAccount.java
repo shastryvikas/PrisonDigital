@@ -28,6 +28,7 @@ public class UserAccount {
         this.password = password;
         this.enterprise = enterprise;
         this.role = role;
+        workQueue = new WorkQueue();
     }
 
     public UserAccount() {

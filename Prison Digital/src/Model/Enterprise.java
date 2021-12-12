@@ -17,7 +17,7 @@ public abstract class Enterprise {
     String name;
     Location location;
     Boolean status;
-    WorkQueue workqueue;
+    WorkQueue workqueue = new WorkQueue();
 
     public WorkQueue getWorkqueue() {
         return workqueue;

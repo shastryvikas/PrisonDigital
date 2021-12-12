@@ -56,7 +56,9 @@ public class JudgementPage extends javax.swing.JPanel {
         this.criminalJusticeSystem = criminalJusticeSystem;
         listOfPrisons = system.getPrisons();
         listOfPoliceDepartments = this.criminalJusticeSystem.getListOfPolice();
+        this.account = account;
         this.prisonWorkreq = prisonWorkreq;
+        this.policeWorkreq = policeWorkreq;
         initializeTables();
         prisontbl.addMouseListener(new MouseListener() {
             @Override
@@ -240,13 +242,13 @@ public class JudgementPage extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedPrison != null) {
             currentCase.setPrison(selectedPrison);
-            if (prisonWorkreq.getStatus().equals("New Case")) {
+            if (prisonWorkreq.getStatus() != null && prisonWorkreq.getStatus().equals("Prisoner work req, New Case")) {
                 prisonWorkreq.setReceiver(selectedPrison.getManagement().getAdmin().getUserAccount());
-                prisonWorkreq.setStatus("Prison Assigned");
+                prisonWorkreq.setStatus("Prisoner work req, Prison Assigned");
                 account.getEnterprise().getWorkqueue().getWorkRequestList().add(prisonWorkreq);
             }
 
-            if (currentCase.getProcessingPoliceDepartment() == null) {
+            if (currentCase.getProcessingPoliceDepartment()== null) {
                 currentCase.setStatus("Prison Assigned");
                 selectedPrison.getManagement().getCaseDirectory().getListOfCases().add(currentCase);
             } else {
@@ -262,12 +264,12 @@ public class JudgementPage extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedPoliceDepartment != null) {
             currentCase.setProcessingPoliceDepartment(selectedPoliceDepartment);
-            if (currentCase.getPrison() == null) {
-                if (prisonWorkreq.getStatus().equals("Prison Assigned")) {
+            if (policeWorkreq.getStatus() != null && policeWorkreq.getStatus().equals("Police work req, New Case")) {
                     policeWorkreq.setReceiver(selectedPoliceDepartment.getPoliceAdmin().getUserAccount());
-                    prisonWorkreq.setStatus("Police Assigned");
+                    policeWorkreq.setStatus("Police work req, Police Assigned");
                     account.getEnterprise().getWorkqueue().getWorkRequestList().add(prisonWorkreq);
                 }
+            if (currentCase.getPrison()== null) {
                 currentCase.setStatus("Police Assigned");
             } else {
                 currentCase.setStatus("Prison and Police Assigned");

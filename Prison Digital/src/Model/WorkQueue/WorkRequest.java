@@ -5,6 +5,7 @@
  */
 package Model.WorkQueue;
 
+import Model.Person;
 import Model.UserAccountManagement.UserAccount;
 import java.util.Date;
 
@@ -20,6 +21,15 @@ public class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private Person Prisoner;
+
+    public Person getPrisoner() {
+        return Prisoner;
+    }
+
+    public void setPrisoner(Person Prisoner) {
+        this.Prisoner = Prisoner;
+    }
     private final int ID;
     private static int count = 1;
 
@@ -30,8 +40,8 @@ public class WorkRequest {
     public static void setCount(int count) {
         WorkRequest.count = count;
     }
-    
-    public WorkRequest(){
+
+    public WorkRequest() {
         requestDate = new Date();
         ID = count++;
     }
@@ -84,4 +94,3 @@ public class WorkRequest {
         this.resolveDate = resolveDate;
     }
 }
-

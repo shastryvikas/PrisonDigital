@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author udayindukuri
  */
 public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
-    
+
     CardLayout cardLayoutPointer;
     JPanel container;
     PrisonEcosystem system;
@@ -45,45 +45,64 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         this.user = user;
         this.prison = (Prison) user.getEnterprise();
         populateTable();
-        
+        lblFeedback.setVisible(false);
+        txtFeedback.setVisible(false);
         caseTable.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
-            
+
             @Override
             public void mousePressed(MouseEvent e) {
                 Case a = (Case) caseTable.getModel().getValueAt(caseTable.getSelectedRow(), 0);
                 displayDataInFields(a);
             }
-            
+
             @Override
             public void mouseReleased(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseEntered(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseExited(MouseEvent e) {
             }
-            
+
         });
-        
+
     }
-    
+
     private void displayDataInFields(Case a) {
-        
+
         jLabel7.setText(a.getAccused().getName());
         jLabel8.setText(a.getVerdict());
         jLabel9.setText(a.getProcessingCourt().getName());
         jLabel10.setText(a.getProcessingPoliceDepartment().getName());
-        jLabel11.setText(a.getTransportedToPrisonBy().getName());
+        if (a.getTransportedToPrisonBy() != null) {
+            jLabel11.setText(a.getTransportedToPrisonBy().getName());
+        } else {
+            jLabel11.setText("-");
+        }
         if (a.getCell() != null) {
             jLabel19.setText(a.getCell().getUnitID() + "");
+        } else {
+            jLabel19.setText("-");
         }
-        
+        ArrayList<WorkRequest> listOfWorkRequests = a.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+        for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+            if (a.getAccused().getName().equals(listOfWorkRequest.getPrisoner().getName()) && listOfWorkRequest.getStatus() != null
+                    && listOfWorkRequest.getStatus().equals("Prisoner work req, Prisoner imprisoned") && listOfWorkRequest.getMessage() != null && !listOfWorkRequest.getMessage().isEmpty()) {
+                lblFeedback.setVisible(true);
+                txtFeedback.setText(listOfWorkRequest.getMessage());
+                txtFeedback.setVisible(true);
+                break;
+            } else {
+                lblFeedback.setVisible(false);
+                txtFeedback.setVisible(false);
+            }
+        }
     }
 
     /**
@@ -121,6 +140,8 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        txtFeedback = new javax.swing.JLabel();
+        lblFeedback = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -129,15 +150,20 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
         caseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Case ID", "Start Date", "Years", "Processed"
+                "Case ID", "Start Date", "Years", "Processed", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(caseTable);
 
         jButton2.setText("Back");
@@ -211,6 +237,10 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
             }
         });
 
+        txtFeedback.setText("-");
+
+        lblFeedback.setText("Feedback:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,8 +274,15 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton2)))
+                                        .addComponent(lblFeedback)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(jButton2))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtFeedback)
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
                                 .addGap(17, 17, 17)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -320,7 +357,7 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                     .addComponent(jLabel14)
                     .addComponent(jLabel17))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -332,14 +369,20 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel19))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE))
+                            .addComponent(jLabel19)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
-                        .addGap(48, 48, 48)))
-                .addComponent(jButton2)
+                        .addComponent(jButton5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblFeedback)
+                            .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -354,24 +397,39 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Case c = (Case) caseTable.getValueAt(selectedRow, 0);
                 ArrayList<WorkRequest> listOfWorkRequests = c.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
-                for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
-                    if (listOfWorkRequest.getReceiver().equals(user) && listOfWorkRequest.getStatus().equals("Prison Assigned")) {
-                        listOfWorkRequest.setStatus("Prisoner imprisoned");
-                        listOfWorkRequest.setResolveDate(new Date());
-                    }
-                }
+
                 if (!prison.getInfrastructure().getCellsEmpty().isEmpty()) {
-                    Unit u = prison.getInfrastructure().getCellsEmpty().get(0);
-                    c.setCell(u);
-                    c.setImprisoned(Boolean.TRUE);
-                    prison.getInfrastructure().getCellsEmpty().remove(u);
-                    prison.getInfrastructure().getCellsOccupied().add(u);
-                    populateTable();
-                    JOptionPane.showMessageDialog(null, "Prisoner has been locked up in the cell");
+
+                    if (c.getStatus() != null && (c.getStatus().equals("Transport Success") || c.getStatus().equals("Released"))) {
+                        Unit u = prison.getInfrastructure().getCellsEmpty().get(0);
+                        c.setCell(u);
+                        c.setImprisoned(Boolean.TRUE);
+                        c.setStatus("Imprisoned");
+                        prison.getInfrastructure().getCellsEmpty().remove(u);
+                        prison.getInfrastructure().getCellsOccupied().add(u);
+                        for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                            if (listOfWorkRequest.getPrisoner().getName().equals(c.getAccused().getName())
+                                    && listOfWorkRequest.getStatus() != null
+                                    && (listOfWorkRequest.getStatus().equals("Prisoner work req, Prison Assigned")
+                                    || listOfWorkRequest.getStatus().equals("Prisoner work req, Prisoner released"))) {
+                                listOfWorkRequest.setStatus("Prisoner work req, Prisoner imprisoned");
+                                listOfWorkRequest.setResolveDate(new Date());
+                            } else if (listOfWorkRequest.getPrisoner().getName().equals(c.getAccused().getName()) && listOfWorkRequest.getStatus() != null
+                                    && (listOfWorkRequest.getStatus().equals("Police work req, Prisoner transported")
+                                    || listOfWorkRequest.getStatus().equals("Police work req, Prisoner released"))) {
+                                listOfWorkRequest.setStatus("Police work req, Prisoner imprisoned");
+                                listOfWorkRequest.setResolveDate(new Date());
+                            }
+                        }
+                        populateTable();
+                        JOptionPane.showMessageDialog(null, "Prisoner has been locked up in the cell");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Prisoner not yet transported to prison");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "No room in the prison.");
                 }
-                
+
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to process the case");
@@ -391,6 +449,17 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                 Unit u = c.getCell();
                 c.setImprisoned(Boolean.FALSE);
                 c.setStatus("Released");
+                ArrayList<WorkRequest> listOfWorkRequests = c.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+                for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                    if (listOfWorkRequest.getPrisoner().getName().equals(c.getAccused().getName())
+                            && listOfWorkRequest.getStatus() != null && listOfWorkRequest.getStatus().equals("Prisoner work req, Prisoner imprisoned")) {
+                        listOfWorkRequest.setStatus("Prisoner work req, Prisoner released");
+                        listOfWorkRequest.setResolveDate(new Date());
+                    } else if (listOfWorkRequest.getPrisoner().getName().equals(c.getAccused().getName()) && listOfWorkRequest.getStatus() != null
+                            && listOfWorkRequest.getStatus().equals("Police work req, Prisoner imprisoned")) {
+                        listOfWorkRequest.setStatus("Police work req, Prisoner released");
+                    }
+                }
                 c.setCell(null);
                 prison.getInfrastructure().getCellsEmpty().add(u);
                 prison.getInfrastructure().getCellsOccupied().remove(u);
@@ -405,9 +474,12 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-        prison.getInfrastructure().getCellsEmpty().remove(0);
-        populateTable();
+        if (!prison.getInfrastructure().getCellsEmpty().isEmpty()) {
+            prison.getInfrastructure().getCellsEmpty().remove(0);
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "There are no more cells to remove");
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -455,30 +527,32 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblFeedback;
+    private javax.swing.JLabel txtFeedback;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        
+//        prison.getManagement().getCaseDirectory().getListOfCases().removeAll(prison.getManagement().getCaseDirectory().getListOfCases());
         DefaultTableModel tablemodel = (DefaultTableModel) caseTable.getModel();
-        
+
         tablemodel.setRowCount(0);
-        
+
         for (Case c : prison.getManagement().getCaseDirectory().getListOfCases()) {
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             row[0] = c;
             row[1] = c.getStartDate().toString();
             row[2] = c.getYearsOfImprisonment() + "";
             row[3] = c.isImprisoned() == true ? "Yes" : "No";
-            
+            row[4] = c.getStatus();
             tablemodel.addRow(row);
         }
-        
+
         jLabel15.setText((prison.getInfrastructure().getCellsEmpty().size() + prison.getInfrastructure().getCellsOccupied().size()) + "");
         jLabel16.setText(prison.getInfrastructure().getCellsOccupied().size() + "");
         jLabel17.setText(prison.getInfrastructure().getCellsEmpty().size() + "");
-        
+
     }
-    
+
     private void resetPrisonerDetails() {
         jLabel7.setText("-");
         jLabel8.setText("-");
