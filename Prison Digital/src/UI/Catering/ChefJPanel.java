@@ -12,6 +12,7 @@ import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,21 +25,20 @@ public class ChefJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ChefJPanel
      */
-    
     JPanel container;
     CardLayout layout;
     PrisonEcosystem system;
     FoodCateringService cateringService;
     UserAccount user;
-    
-    public ChefJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
+
+    public ChefJPanel(JPanel container, UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
         this.system = system;
         cateringService = (FoodCateringService) user.getEnterprise();
         this.user = user;
-        
+
         populateTable();
         PrisonStaffJTable1.addMouseListener(new MouseListener() {
             @Override
@@ -62,35 +62,35 @@ public class ChefJPanel extends javax.swing.JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
             }
-            
+
         });
 
     }
-    
-    private void updateDetails(CateringContract contract){
-        if(contract.getChefApproval()){
+
+    private void updateDetails(CateringContract contract) {
+        if (contract.getChefApproval()) {
             jButton1.setEnabled(false);
         } else {
             jButton1.setEnabled(true);
         }
     }
-    
-    private void populateTable(){
-        
+
+    private void populateTable() {
+
         DefaultTableModel tablemodel = (DefaultTableModel) PrisonStaffJTable1.getModel();
         tablemodel.setRowCount(0);
         for (CateringContract c : cateringService.getManagement().getFoodOrders()) {
-                if (c != null & c.getChef().getUserAccount().getUsername().equals(user.getUsername())) {
-                    Object[] row = new Object[5];
-                    row[0] = c;
-                    row[1] = c.getPrisonerCount() + "";
-                    row[2] = c.getChef().getName();
-                    row[3] = c.getChefApproval().toString();
-                    row[4] = c.getStatus();
-                    
-                    tablemodel.addRow(row);
-                }
+            if (c != null & c.getChef().getUserAccount().getUsername().equals(user.getUsername())) {
+                Object[] row = new Object[5];
+                row[0] = c;
+                row[1] = c.getPrisonerCount() + "";
+                row[2] = c.getChef().getName();
+                row[3] = c.getChefApproval() == true ? "Yes" : "No";
+                row[4] = c.getStatus();
+
+                tablemodel.addRow(row);
             }
+        }
     }
 
     /**
@@ -161,12 +161,16 @@ public class ChefJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
-        a.setChefApproval(Boolean.TRUE);
-        jButton1.setEnabled(false);
-        populateTable();
-        
+        if (PrisonStaffJTable1.getSelectedRow() > -1) {
+            CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+            a.setChefApproval(Boolean.TRUE);
+            jButton1.setEnabled(false);
+            populateTable();
+            JOptionPane.showMessageDialog(this, "Contract approved");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a contract from the table to approve");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

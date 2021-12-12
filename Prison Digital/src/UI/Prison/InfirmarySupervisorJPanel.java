@@ -32,25 +32,23 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     UserAccount user;
     Prison prison;
     
-
-    public InfirmarySupervisorJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
+    public InfirmarySupervisorJPanel(JPanel container, UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = layout = (CardLayout) container.getLayout();
         this.system = system;
         this.user = user;
         this.prison = (Prison) user.getEnterprise();
-
-        populateTable();
         
+        populateTable();
         
     }
     
     private void populateTable() {
-
+        
         DefaultTableModel tablemodel = (DefaultTableModel) HospitalJTable.getModel();
         tablemodel.setRowCount(0);
-       
+        
         for (Hospital c : system.getHospitals()) {
             Object[] row = new Object[4];
             row[0] = c;
@@ -59,7 +57,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         }
         
         HospitalContract contract = prison.getManagement().getHospitalContract();
-        if(contract == null){
+        if (contract == null) {
             endButton.setEnabled(false);
             btnPlaceRequest.setEnabled(true);
             status.setText("");
@@ -76,7 +74,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
             pc.setText(contract.getPatientCareTech() + "");
             name.setText(contract.getHospital().getName());
         }
-
+        
     }
 
     /**
@@ -147,19 +145,19 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Hospital Name:");
 
-        name.setText("jTextField1");
+        name.setEnabled(false);
 
         jLabel3.setText("Patient Care Technitians allotted:");
 
-        pc.setText("jTextField2");
+        pc.setEnabled(false);
 
         jLabel4.setText("Psychologists allotted:");
 
-        psy.setText("jTextField3");
+        psy.setEnabled(false);
 
         jLabel5.setText("General Physicians allotted:");
 
-        gp.setText("jTextField4");
+        gp.setEnabled(false);
 
         endButton.setText("End Contract");
         endButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +170,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Contract Status:");
 
-        status.setText("jTextField5");
+        status.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -293,7 +291,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm request?", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Hospital e = (Hospital) HospitalJTable.getValueAt(selectedRow, 0);
-
+                
                 HospitalContract c = new HospitalContract();
                 c.setHospital(e);
                 c.setGeneralDocs(Integer.parseInt(txtGeneralPhysicianReq.getText().toString()));
@@ -306,6 +304,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
                 e.getManagement().getContract().add(c);
                 
                 populateTable();
+                resetFields();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
@@ -317,13 +316,13 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm Termination?", "Warning", selectionButton);
-            if (selectionResult == JOptionPane.YES_OPTION) {
-                HospitalContract c = prison.getManagement().getHospitalContract();
-                prison.getManagement().setHospitalContract(null);
-                c.getHospital().getManagement().getContract().remove(c);
-                populateTable();
-            }
+        int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm Termination?", "Warning", selectionButton);
+        if (selectionResult == JOptionPane.YES_OPTION) {
+            HospitalContract c = prison.getManagement().getHospitalContract();
+            prison.getManagement().setHospitalContract(null);
+            c.getHospital().getManagement().getContract().remove(c);
+            populateTable();
+        }
         
     }//GEN-LAST:event_endButtonActionPerformed
 
@@ -354,5 +353,10 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTechnician;
     // End of variables declaration//GEN-END:variables
 
+    private void resetFields() {
+        txtGeneralPhysicianReq.setText("");
+        txtPsychologistReq.setText("");
+        txtTechnician.setText("");
+    }
     
 }

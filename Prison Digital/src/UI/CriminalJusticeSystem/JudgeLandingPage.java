@@ -114,7 +114,6 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         btnCreateCase = new javax.swing.JButton();
         btnProvideJudgement = new javax.swing.JButton();
         btnUpdateCase = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         lblImprisonmentStartDate = new javax.swing.JLabel();
         txtImprisonmentStartDate = new javax.swing.JTextField();
         lblYearsOfImprisonment = new javax.swing.JLabel();
@@ -124,6 +123,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        btnRefresh = new javax.swing.JButton();
 
         tblCases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,16 +179,6 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(244, 208, 129));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
         lblImprisonmentStartDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblImprisonmentStartDate.setText("Imprisonment start date");
 
@@ -203,7 +193,18 @@ public class JudgeLandingPage extends javax.swing.JPanel {
 
         jLabel1.setText("Prison Assigned:");
 
+        jTextField2.setEnabled(false);
+
         jLabel2.setText("Police Department Assigned:");
+
+        jTextField3.setEnabled(false);
+
+        btnRefresh.setText("Refresh Table");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -213,11 +214,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 703, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +232,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                     .addComponent(jTextField2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblImprisonmentStartDate)
@@ -255,6 +252,10 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(357, 357, 357)
+                .addComponent(btnRefresh)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,9 +287,9 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                     .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(123, 123, 123)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(37, 37, 37)
+                .addComponent(btnRefresh)
+                .addGap(100, 100, 100))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -335,7 +336,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 for (Case cases : currentCourt.getCaseDirectory().getListOfCases()) {
                     if (selectedCase.getCaseNumber() == cases.getCaseNumber()) {
                         cases.setAccused(new Person(txtPersonName.getText()));
-                        JOptionPane.showMessageDialog(this, "Staff details updated successfully");
+                        JOptionPane.showMessageDialog(this, "Case details updated successfully");
                         initializeTable();
                         resetFields();
                     }
@@ -348,21 +349,21 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpdateCaseActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        container.remove(this);
-        layout.previous(container);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void txtCaseVerdictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseVerdictActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCaseVerdictActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        initializeTable();
+        resetFields();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateCase;
     private javax.swing.JButton btnProvideJudgement;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateCase;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -398,7 +399,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                         row[2] = tempCase.getVerdict();
                         row[3] = tempCase.getStartDate().toString();
                         row[4] = tempCase.getYearsOfImprisonment() + "";
-                        row[5] = tempCase.isImprisoned().toString();
+                        row[5] = tempCase.isImprisoned()==true?"Yes":"No";
                         row[6] = tempCase.getStatus();
                         tablemodel.addRow(row);
                     }

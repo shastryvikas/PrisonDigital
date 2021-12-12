@@ -5,7 +5,6 @@
  */
 package UI.Prison;
 
-import Model.CriminalJusticeSystem.Case;
 import Model.Prison.Attendance;
 import Model.Prison.Prison;
 import Model.PrisonEcosystem;
@@ -23,14 +22,13 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PrisonGuardJPanel
      */
-    
     CardLayout cardLayoutPointer;
     JPanel container;
     PrisonEcosystem system;
     UserAccount user;
     Prison prison;
-    
-    public PrisonGuardJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
+
+    public PrisonGuardJPanel(JPanel container, UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         cardLayoutPointer = (CardLayout) container.getLayout();
@@ -39,13 +37,13 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         this.prison = (Prison) user.getEnterprise();
 
     }
-    
+
     private void populateTable() {
 
         DefaultTableModel tablemodel = (DefaultTableModel) jTable1.getModel();
 
         tablemodel.setRowCount(0);
-       
+
         for (Attendance c : prison.getManagement().getAttendanceRecords()) {
             Object[] row = new Object[4];
             row[0] = c.getDate();
@@ -55,7 +53,7 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
             tablemodel.addRow(row);
         }
-        
+
     }
 
     /**
@@ -92,10 +90,7 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Date", "Present", "Absent", "Total"
@@ -105,15 +100,15 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Date:");
 
-        date.setText("jTextField1");
+        date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Present:");
 
-        present.setText("jTextField2");
-
         jLabel3.setText("Total:");
-
-        total.setText("jTextField3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -135,11 +130,11 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(present, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(present)
+                    .addComponent(total))
+                .addContainerGap(611, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,17 +163,25 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
     private void btnSubmitAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitAttendanceActionPerformed
         // TODO add your handling code here:
-        
+
         Attendance a = new Attendance();
         a.setDate(date.getText());
         a.setPresent(Integer.parseInt(present.getText()));
         a.setTotal(Integer.parseInt(total.getText()));
         prison.getManagement().getAttendanceRecords().add(a);
         populateTable();
-        
+        resetFields();  
     }//GEN-LAST:event_btnSubmitAttendanceActionPerformed
 
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateActionPerformed
 
+    private void resetFields() {
+        date.setText("");
+        present.setText("");
+        total.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmitAttendance;
     private javax.swing.JTextField date;

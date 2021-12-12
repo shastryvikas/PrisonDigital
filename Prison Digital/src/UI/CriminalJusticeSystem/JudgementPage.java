@@ -104,7 +104,7 @@ public class JudgementPage extends javax.swing.JPanel {
 
             private void initializeFields() {
                 selectedPoliceDepartment = (Police) policetbl.getModel().getValueAt(policetbl.getSelectedRow(), 0);
-                
+
             }
         });
     }
@@ -151,7 +151,7 @@ public class JudgementPage extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(prisontbl);
 
-        btnAssignPrison.setText("Assign prisons");
+        btnAssignPrison.setText("Assign prison");
         btnAssignPrison.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssignPrisonActionPerformed(evt);
@@ -235,10 +235,13 @@ public class JudgementPage extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedPrison != null) {
             currentCase.setPrison(selectedPrison);
-            if(currentCase.getProcessingPoliceDepartment() == null)
+            if (currentCase.getProcessingPoliceDepartment() == null) {
                 currentCase.setStatus("Prison Assigned");
-            else
+                selectedPrison.getManagement().getCaseDirectory().getListOfCases().add(currentCase);
+            } else {
                 currentCase.setStatus("Prison and Police Assigned");
+            }
+            JOptionPane.showMessageDialog(this, "Case updated");
         } else {
             JOptionPane.showMessageDialog(this, "Please select a prison from the table to assign to the case");
         }
@@ -248,10 +251,12 @@ public class JudgementPage extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedPoliceDepartment != null) {
             currentCase.setProcessingPoliceDepartment(selectedPoliceDepartment);
-            if(currentCase.getPrison() == null)
+            if (currentCase.getPrison() == null) {
                 currentCase.setStatus("Police Assigned");
-            else
+            } else {
                 currentCase.setStatus("Prison and Police Assigned");
+            }
+            JOptionPane.showMessageDialog(this, "Case updated");
         } else {
             JOptionPane.showMessageDialog(this, "Please select a police department from the table to assign to the case");
         }
@@ -281,8 +286,7 @@ public class JudgementPage extends javax.swing.JPanel {
                 }
             }
         }
-        
-        
+
         DefaultTableModel prisonTableModel = (DefaultTableModel) prisontbl.getModel();
         prisonTableModel.setRowCount(0);
         if (!listOfPrisons.isEmpty()) {

@@ -70,7 +70,7 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
                 selectedCase = (Case) tblPrisonersToBeTransported.getModel().getValueAt(tblPrisonersToBeTransported.getSelectedRow(), 0);
             }
         });
-        
+
     }
 
     /**
@@ -82,30 +82,30 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnChangeStatus = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnPrisonerTransportCompleted = new javax.swing.JButton();
+        btnBeginTransport = new javax.swing.JButton();
+        btnTransportInProgress = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPrisonersToBeTransported = new javax.swing.JTable();
 
-        btnChangeStatus.setText("Prisoner Transport Completed");
-        btnChangeStatus.addActionListener(new java.awt.event.ActionListener() {
+        btnPrisonerTransportCompleted.setText("Prisoner Transport Completed");
+        btnPrisonerTransportCompleted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeStatusActionPerformed(evt);
+                btnPrisonerTransportCompletedActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Begin Transport");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBeginTransport.setText("Begin Transport");
+        btnBeginTransport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBeginTransportActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Transport in progress");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnTransportInProgress.setText("Transport in progress");
+        btnTransportInProgress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnTransportInProgressActionPerformed(evt);
             }
         });
 
@@ -135,11 +135,11 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnBeginTransport)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnTransportInProgress)
                         .addGap(18, 18, 18)
-                        .addComponent(btnChangeStatus)
+                        .addComponent(btnPrisonerTransportCompleted)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE))
                 .addContainerGap())
@@ -151,66 +151,72 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(btnChangeStatus))
+                    .addComponent(btnBeginTransport)
+                    .addComponent(btnTransportInProgress)
+                    .addComponent(btnPrisonerTransportCompleted))
                 .addContainerGap(203, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnChangeStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeStatusActionPerformed
-        // TODO add your handling code here:
-        if (selectedCase != null) {
-            selectedCase.setStatus("Accepted for transport");
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a officer to delete from the table");
-        }
-    }//GEN-LAST:event_btnChangeStatusActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (selectedCase != null) {
-            selectedCase.setStatus("Transport in progress");
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a officer to delete from the table");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnPrisonerTransportCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrisonerTransportCompletedActionPerformed
         // TODO add your handling code here:
         if (selectedCase != null) {
             selectedCase.setStatus("Transport Success");
+            JOptionPane.showMessageDialog(this, "Case status changed successfully");
+            initializeTable();
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a officer to delete from the table");
+            JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnPrisonerTransportCompletedActionPerformed
+
+    private void btnBeginTransportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginTransportActionPerformed
+        // TODO add your handling code here:
+        if (selectedCase != null) {
+            selectedCase.setStatus("Accepted for transport");
+            JOptionPane.showMessageDialog(this, "Case status changed successfully");
+            initializeTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
+        }
+    }//GEN-LAST:event_btnBeginTransportActionPerformed
+
+    private void btnTransportInProgressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransportInProgressActionPerformed
+        // TODO add your handling code here:
+        if (selectedCase != null) {
+            selectedCase.setStatus("Transport in progress");
+            JOptionPane.showMessageDialog(this, "Case status changed successfully");
+            initializeTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
+        }
+    }//GEN-LAST:event_btnTransportInProgressActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChangeStatus;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnBeginTransport;
+    private javax.swing.JButton btnPrisonerTransportCompleted;
+    private javax.swing.JButton btnTransportInProgress;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblPrisonersToBeTransported;
     // End of variables declaration//GEN-END:variables
 
     private void initializeTable() {
-    cjs = (CriminalJusticeSystem) account.getEnterprise();
-         ArrayList<Court> courtList = cjs.getListOfCourts();
+        cjs = (CriminalJusticeSystem) account.getEnterprise();
+        ArrayList<Court> courtList = cjs.getListOfCourts();
         for (Court court : courtList) {
             ArrayList<Case> cases = court.getCaseDirectory().getListOfCases();
             for (Case aCase : cases) {
-                if (aCase.getTransportedToPrisonBy().getUserAccount().getUsername().equals(account.getUsername())) {
+                if (aCase.getTransportedToPrisonBy() != null && aCase.getTransportedToPrisonBy().getUserAccount().getUsername().equals(account.getUsername())) {
                     DefaultTableModel model = (DefaultTableModel) tblPrisonersToBeTransported.getModel();
                     model.setRowCount(0);
-                    Object[] row = new Object[5];
+                    Object[] row = new Object[7];
                     row[0] = aCase;
-                        row[1] = aCase.getAccused().getName();
-                        row[2] = aCase.getStartDate().toString();
-                        row[3] = aCase.getYearsOfImprisonment() + "";
-                        row[4] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
-                        row[5] = aCase.isImprisoned().toString();
-                        row[6] = aCase.getStatus();
+                    row[1] = aCase.getAccused().getName();
+                    row[2] = aCase.getStartDate().toString();
+                    row[3] = aCase.getYearsOfImprisonment() + "";
+                    row[4] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
+                    row[5] = aCase.isImprisoned() == true ? "Yes" : "No";
+                    row[6] = aCase.getStatus();
                     model.addRow(row);
                 }
             }

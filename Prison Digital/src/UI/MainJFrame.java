@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package UI;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Lingfeng
+ * @author theja
  */
 public class MainJFrame extends javax.swing.JFrame {
 
@@ -52,21 +53,15 @@ public class MainJFrame extends javax.swing.JFrame {
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(600, 700));
-        setSize(new java.awt.Dimension(600, 700));
 
         jSplitPane1.setBackground(new java.awt.Color(169, 214, 229));
         jSplitPane1.setDividerSize(0);
         jSplitPane1.setMaximumSize(new java.awt.Dimension(600, 700));
         jSplitPane1.setMinimumSize(new java.awt.Dimension(600, 700));
         jSplitPane1.setPreferredSize(new java.awt.Dimension(600, 700));
-        jSplitPane1.setSize(new java.awt.Dimension(600, 700));
 
         jPanel1.setBackground(new java.awt.Color(20, 79, 134));
         jPanel1.setForeground(new java.awt.Color(137, 194, 217));
-        jPanel1.setMaximumSize(new java.awt.Dimension(150, 700));
-        jPanel1.setMinimumSize(new java.awt.Dimension(150, 700));
-        jPanel1.setPreferredSize(new java.awt.Dimension(150, 700));
 
         loginJButton.setBackground(new java.awt.Color(42, 111, 151));
         loginJButton.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 17)); // NOI18N
@@ -85,7 +80,6 @@ public class MainJFrame extends javax.swing.JFrame {
         passwordField.setMaximumSize(new java.awt.Dimension(11, 34));
         passwordField.setMinimumSize(new java.awt.Dimension(11, 34));
         passwordField.setPreferredSize(new java.awt.Dimension(11, 34));
-        passwordField.setSize(new java.awt.Dimension(11, 34));
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
@@ -181,7 +175,6 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setMaximumSize(new java.awt.Dimension(450, 700));
         container.setMinimumSize(new java.awt.Dimension(450, 700));
         container.setPreferredSize(new java.awt.Dimension(450, 700));
-        container.setSize(new java.awt.Dimension(450, 700));
         container.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(container);
 
@@ -189,6 +182,22 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
+        // Get user name and authenticate him
+        UserAccount ua = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText());
+
+        if (ua == null){
+            JOptionPane.showMessageDialog(null, "Invalid User Name or Password entered.");
+            return;
+        }
+        else{
+            CardLayout cardLayout = (CardLayout) container.getLayout();
+            container.add("Login", ua.getRole().createWorkArea(container, ua, system));
+            cardLayout.next(container);
+            logoutJButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
@@ -210,23 +219,7 @@ public class MainJFrame extends javax.swing.JFrame {
         crdLyt.next(container);
         dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
-
-    private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
-        // Get user name and authenticate him
-        UserAccount ua = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText());
-
-        if (ua == null){
-            JOptionPane.showMessageDialog(null, "Invalid User Name or Password entered.");
-            return;
-        }
-        else{
-            CardLayout cardLayout = (CardLayout) container.getLayout();
-            container.add("Login", ua.getRole().createWorkArea(container, ua, system));
-            cardLayout.next(container);
-            logoutJButton.setEnabled(true);
-        }
-
-    }//GEN-LAST:event_loginJButtonActionPerformed
+                                           
 
     /**
      * @param args the command line arguments

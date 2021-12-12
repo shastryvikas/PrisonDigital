@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author udayindukuri
  */
 public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
-
+    
     CardLayout cardLayoutPointer;
     JPanel container;
     PrisonEcosystem system;
@@ -44,30 +44,29 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         populateTable();
         
         PrisonStaffJTable.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    Employee a = (Employee) PrisonStaffJTable.getModel().getValueAt(PrisonStaffJTable.getSelectedRow(), 0);
-                    displayDataInFields(a);
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
             
-            });
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Employee a = (Employee) PrisonStaffJTable.getModel().getValueAt(PrisonStaffJTable.getSelectedRow(), 0);
+                displayDataInFields(a);
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
         
     }
     
@@ -77,9 +76,9 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         txtUserName.setText(a.getUserAccount().getUsername());
         txtPassword.setText(a.getUserAccount().getPassword());
         
-        if(a.getRole().equals(InfirmaryAdmin.class.getName())){
+        if (a.getRole().toString().equals(InfirmaryAdmin.class.getName())) {
             des.setSelectedIndex(1);
-        } else if(a.getRole().equals(DiningAdmin.class.getName())){
+        } else if (a.getRole().toString().equals(DiningAdmin.class.getName())) {
             des.setSelectedIndex(2);
         } else {
             des.setSelectedIndex(0);
@@ -259,7 +258,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         String name = txtStaffName.getText().toString();
         String username = txtUserName.getText().toString();
         String password = txtPassword.getText().toString();
-
+        
         if (des.getSelectedItem().toString().equals("Security Supervisor")) {
             if (prison.getManagement().getGuardAdmin() != null) {
                 JOptionPane.showMessageDialog(null, "Security Supervisor Already Exists");
@@ -285,8 +284,9 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             prison.getManagement().setDiningAdmin(staff);
             JOptionPane.showMessageDialog(null, "Dining Supervisor Added");
         };
-
+        
         populateTable();
+        resetFields();
 
     }//GEN-LAST:event_btnCreate1ActionPerformed
 
@@ -299,7 +299,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm delete?", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Employee e = (Employee) PrisonStaffJTable.getValueAt(selectedRow, 0);
-
+                
                 if (e.getRole().toString() == "Model.Role.InfirmaryAdmin") {
                     prison.getManagement().setInfirmaryAdmin(null);
                 } else if (e.getRole().toString() == "Model.Role.DiningAdmin") {
@@ -309,13 +309,14 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                 }
                 
                 system.getUserAccountDirectory().deleteUserAccount(e.getUserAccount());
-
+                
                 populateTable();
+                resetFields();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
         }
-
+        
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -328,7 +329,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm update? (Note: Role cannot be changed)", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Employee e = (Employee) PrisonStaffJTable.getValueAt(selectedRow, 0);
-
+                
                 String name = txtStaffName.getText().toString();
                 String username = txtUserName.getText().toString();
                 String password = txtPassword.getText().toString();
@@ -336,7 +337,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                 e.setName(name);
                 e.getUserAccount().setUsername(username);
                 e.getUserAccount().setPassword(password);
-                
+
 //                if (des.getSelectedItem().toString().equals("Guard")) {
 //                    if (prison.getManagement().getGuardAdmin() != null) {
 //                        JOptionPane.showMessageDialog(null, "Security Supervisor Already Exists");
@@ -372,8 +373,8 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
 //                } else {
 //                    JOptionPane.showMessageDialog(null, "Cannot Update");
 //                };
-
                 populateTable();
+                resetFields();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
@@ -383,10 +384,10 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         container.remove(this);
         cardLayoutPointer.previous(container);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -409,9 +410,9 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-
+        
         DefaultTableModel tablemodel = (DefaultTableModel) PrisonStaffJTable.getModel();
-
+        
         tablemodel.setRowCount(0);
 
         //adding infirmary
@@ -419,33 +420,49 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         if (e != null) {
             Object[] row = new Object[4];
             row[0] = e;
-            row[1] = e.getRole().toString();
+            row[1] = getRole(e);
             row[2] = e.getUserAccount().getUsername();
             row[3] = e.getUserAccount().getPassword();
             tablemodel.addRow(row);
         }
-        
+
         //adding Guard
         Employee g = prison.getManagement().getGuardAdmin();
         if (g != null) {
             Object[] row = new Object[4];
             row[0] = g;
-            row[1] = g.getRole().toString();
+            row[1] = getRole(g);
             row[2] = g.getUserAccount().getUsername();
             row[3] = g.getUserAccount().getPassword();
             tablemodel.addRow(row);
         }
-        
+
         //adding Dining
         Employee f = prison.getManagement().getDiningAdmin();
         if (f != null) {
             Object[] row = new Object[4];
             row[0] = f;
-            row[1] = f.getRole().toString();
+            
+            row[1] = getRole(f);
             row[2] = f.getUserAccount().getUsername();
             row[3] = f.getUserAccount().getPassword();
             tablemodel.addRow(row);
         }
-
+        
+    }
+    
+    private String getRole(Employee employee) {
+        if (employee != null) {
+            String roleName = employee.getRole().toString();
+            return roleName.subSequence(roleName.lastIndexOf(".") + 1, roleName.length()).toString();
+        }
+        return null;
+    }
+    
+    private void resetFields() {
+        txtUserName.setText("");
+        txtStaffName.setText("");
+        txtPassword.setText("");
+        des.setSelectedIndex(0);
     }
 }

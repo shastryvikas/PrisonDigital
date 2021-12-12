@@ -23,17 +23,17 @@ import javax.swing.table.DefaultTableModel;
  * @author udayindukuri
  */
 public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
-
+    
     CardLayout cardLayoutPointer;
     JPanel container;
     PrisonEcosystem system;
     UserAccount user;
     Prison prison;
-    
+
     /**
      * Creates new form PrisonAdminJPanel
      */
-    public PrisonAdminWorkManagementPage(JPanel container,UserAccount user, PrisonEcosystem system) {
+    public PrisonAdminWorkManagementPage(JPanel container, UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         cardLayoutPointer = (CardLayout) container.getLayout();
@@ -42,31 +42,29 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         this.prison = (Prison) user.getEnterprise();
         populateTable();
         
-        
-        
         caseTable.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    Case a = (Case) caseTable.getModel().getValueAt(caseTable.getSelectedRow(), 0);
-                    displayDataInFields(a);
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Case a = (Case) caseTable.getModel().getValueAt(caseTable.getSelectedRow(), 0);
+                displayDataInFields(a);
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
         });
         
     }
@@ -78,7 +76,9 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         jLabel9.setText(a.getProcessingCourt().getName());
         jLabel10.setText(a.getProcessingPoliceDepartment().getName());
         jLabel11.setText(a.getTransportedToPrisonBy().getName());
-        jLabel19.setText(a.getCell().getUnitID()+"");
+        if (a.getCell() != null) {
+            jLabel19.setText(a.getCell().getUnitID() + "");
+        }
         
     }
 
@@ -153,15 +153,15 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
         jLabel6.setText("Transported to Prison By:");
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setText("-");
 
-        jLabel8.setText("jLabel8");
+        jLabel8.setText("-");
 
-        jLabel9.setText("jLabel9");
+        jLabel9.setText("-");
 
-        jLabel10.setText("jLabel10");
+        jLabel10.setText("-");
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("-");
 
         jLabel12.setText("Total Cells:");
 
@@ -169,11 +169,11 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
         jLabel14.setText("Available Cells:");
 
-        jLabel15.setText("jLabel15");
+        jLabel15.setText("-");
 
-        jLabel16.setText("jLabel16");
+        jLabel16.setText("-");
 
-        jLabel17.setText("jLabel17");
+        jLabel17.setText("-");
 
         jButton3.setText("Assign a Cell");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +191,7 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
         jLabel18.setText("Cell Number: ");
 
-        jLabel19.setText("jLabel19");
+        jLabel19.setText("-");
 
         jButton1.setText("Remove a Cell");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -342,15 +342,15 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRow = caseTable.getSelectedRow();
         if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm imprisonment?", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Case c = (Case) caseTable.getValueAt(selectedRow, 0);
-
-                if(!prison.getInfrastructure().getCellsEmpty().isEmpty()){
+                
+                if (!prison.getInfrastructure().getCellsEmpty().isEmpty()) {
                     Unit u = prison.getInfrastructure().getCellsEmpty().get(0);
                     c.setCell(u);
                     c.setImprisoned(Boolean.TRUE);
@@ -361,17 +361,17 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "No room in the prison.");
                 }
-
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to process the case");
         }
-        
+        resetPrisonerDetails();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRow = caseTable.getSelectedRow();
         if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
@@ -379,39 +379,42 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Case c = (Case) caseTable.getValueAt(selectedRow, 0);
                 Unit u = c.getCell();
+                c.setImprisoned(Boolean.FALSE);
+                c.setStatus("Released");
+                c.setCell(null);
                 prison.getInfrastructure().getCellsEmpty().add(u);
                 prison.getInfrastructure().getCellsOccupied().remove(u);
                 populateTable();
-                JOptionPane.showMessageDialog(null, "Prisoner has been released");  
+                JOptionPane.showMessageDialog(null, "Prisoner has been released");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to process the case");
         }
-        
+        resetPrisonerDetails();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         prison.getInfrastructure().getCellsEmpty().remove(0);
         populateTable();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+
         prison.getInfrastructure().getCellsEmpty().add(new Unit());
         populateTable();
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         container.remove(this);
         cardLayoutPointer.previous(container);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -445,25 +448,33 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-
+        
         DefaultTableModel tablemodel = (DefaultTableModel) caseTable.getModel();
-
+        
         tablemodel.setRowCount(0);
         
-       
         for (Case c : prison.getManagement().getCaseDirectory().getListOfCases()) {
             Object[] row = new Object[4];
             row[0] = c;
             row[1] = c.getStartDate().toString();
             row[2] = c.getYearsOfImprisonment() + "";
-            row[3] = c.isImprisoned().toString();
-
+            row[3] = c.isImprisoned() == true ? "Yes" : "No";
+            
             tablemodel.addRow(row);
         }
         
         jLabel15.setText((prison.getInfrastructure().getCellsEmpty().size() + prison.getInfrastructure().getCellsOccupied().size()) + "");
         jLabel16.setText(prison.getInfrastructure().getCellsOccupied().size() + "");
         jLabel17.setText(prison.getInfrastructure().getCellsEmpty().size() + "");
-
+        
+    }
+    
+    private void resetPrisonerDetails() {
+        jLabel7.setText("-");
+        jLabel8.setText("-");
+        jLabel9.setText("-");
+        jLabel10.setText("-");
+        jLabel11.setText("-");
+        jLabel19.setText("-");
     }
 }

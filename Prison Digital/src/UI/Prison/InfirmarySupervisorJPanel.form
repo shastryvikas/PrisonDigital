@@ -226,7 +226,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="name">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -236,7 +236,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="pc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -246,7 +246,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="psy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -256,7 +256,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="gp">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="endButton">
@@ -279,7 +279,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="status">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField5"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

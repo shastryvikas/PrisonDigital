@@ -77,7 +77,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                 drpdwnDesignation.setSelectedIndex(getRole(selectedStaff).equals("Chef") ? 0 : 1);
             }
         });
-        
+
         populateContractTable();
         PrisonStaffJTable1.addMouseListener(new MouseListener() {
             @Override
@@ -101,93 +101,91 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
             }
-            
+
         });
-        
+
     }
-    
-    private void updateDetails(CateringContract contract){
-        
-        if(contract.getChefApproval() && contract.getDeliveryManApproval()){
+
+    private void updateDetails(CateringContract contract) {
+
+        if (contract.getChefApproval() && contract.getDeliveryManApproval()) {
             btnSubmit.setEnabled(true);
         } else {
             btnSubmit.setEnabled(false);
         }
-        
-        if(contract.getStatus().equals("Approved and Active")){
+
+        if (contract.getStatus().equals("Approved and Active")) {
             btnSubmit.setEnabled(false);
         }
-       
-        
-        if(contract.getChef() != null){
+
+        if (contract.getChef() != null) {
             jComboChefAssignement.setEnabled(false);
             jButton2.setEnabled(false);
         } else {
             ArrayList<Employee> chefs = cateringService.getKitchen().getStaff().getEmployeeList();
-            for(CateringContract c : cateringService.getManagement().getFoodOrders()){
-                if(chefs.contains(c.getChef())){
+            for (CateringContract c : cateringService.getManagement().getFoodOrders()) {
+                if (chefs.contains(c.getChef())) {
                     chefs.remove(c.getChef());
                 }
             }
             jComboChefAssignement.removeAllItems();
-            for(Employee e : chefs){
+            for (Employee e : chefs) {
                 jComboChefAssignement.addItem(e.getUserAccount().getUsername());
             }
             jComboChefAssignement.setEnabled(true);
             jButton2.setEnabled(true);
         }
-        
-        if(contract.getDeliveryMan() != null){
+
+        if (contract.getDeliveryMan() != null) {
             jComboDeleiveryManAssignment.setEnabled(false);
             jButton1.setEnabled(false);
         } else {
             ArrayList<Employee> del = cateringService.getTransport().getStaff().getEmployeeList();
-            for(CateringContract c : cateringService.getManagement().getFoodOrders()){
-                if(del.contains(c.getChef())){
+            for (CateringContract c : cateringService.getManagement().getFoodOrders()) {
+                if (del.contains(c.getChef())) {
                     del.remove(c.getChef());
                 }
             }
             jComboDeleiveryManAssignment.removeAllItems();
-            for(Employee e : del){
+            for (Employee e : del) {
                 jComboDeleiveryManAssignment.addItem(e.getUserAccount().getUsername());
             }
             jComboDeleiveryManAssignment.setEnabled(true);
             jButton1.setEnabled(true);
         }
-        
-        
+
     }
-    
+
     private void populateContractTable() {
-        
+
         DefaultTableModel tablemodel = (DefaultTableModel) PrisonStaffJTable1.getModel();
         tablemodel.setRowCount(0);
         for (CateringContract c : cateringService.getManagement().getFoodOrders()) {
-                if (c != null) {
-                    Object[] row = new Object[7];
-                    row[0] = c;
-                    row[1] = c.getPrisonerCount() + "";
-                    
-                    if(c.getChef() == null)
-                        row[2] = "Not Assigned";
-                    else    
-                        row[2] = c.getChef().getName();
-                    
-                    if(c.getDeliveryMan() == null)
-                        row[4] = "Not Assigned";
-                    else
-                        row[4] = c.getDeliveryMan().getName();
-                        
-                    
-                    row[3] = c.getChefApproval().toString();
-                    row[5] = c.getDeliveryManApproval().toString();
-                    row[6] = c.getStatus();
-                    
-                    tablemodel.addRow(row);
+            if (c != null) {
+                Object[] row = new Object[7];
+                row[0] = c;
+                row[1] = c.getPrisonerCount() + "";
+
+                if (c.getChef() == null) {
+                    row[2] = "Not Assigned";
+                } else {
+                    row[2] = c.getChef().getName();
                 }
+
+                if (c.getDeliveryMan() == null) {
+                    row[4] = "Not Assigned";
+                } else {
+                    row[4] = c.getDeliveryMan().getName();
+                }
+
+                row[3] = c.getChefApproval().toString();
+                row[5] = c.getDeliveryManApproval().toString();
+                row[6] = c.getStatus();
+
+                tablemodel.addRow(row);
             }
-        
-        
+        }
+
     }
 
     /**
@@ -303,7 +301,6 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
 
         lblChefAssignment.setText("Chef Assignment");
 
-        jComboChefAssignement.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboChefAssignement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboChefAssignementActionPerformed(evt);
@@ -311,8 +308,6 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
         });
 
         lblDeliveryManAssignement.setText("Delivery Man Assignment");
-
-        jComboDeleiveryManAssignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSubmit.setText("Approve");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -362,8 +357,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                                         .addComponent(jComboChefAssignement, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton2))
                                 .addGap(85, 85, 85)
-                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -545,39 +539,44 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        for(Employee e : cateringService.getTransport().getStaff().getEmployeeList()){
-            if(e.getUserAccount().getUsername().equals(jComboDeleiveryManAssignment.getSelectedItem().toString())){
+
+        for (Employee e : cateringService.getTransport().getStaff().getEmployeeList()) {
+            if (e.getUserAccount().getUsername().equals(jComboDeleiveryManAssignment.getSelectedItem().toString())) {
                 CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
                 a.setDeliveryMan(e);
             }
         }
-        
+
         populateContractTable();
-        
+        JOptionPane.showMessageDialog(this, "Delivery Man Assigned");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        for(Employee e : cateringService.getKitchen().getStaff().getEmployeeList()){
-            if(e.getUserAccount().getUsername().equals(jComboChefAssignement.getSelectedItem().toString())){
+
+        for (Employee e : cateringService.getKitchen().getStaff().getEmployeeList()) {
+            if (e.getUserAccount().getUsername().equals(jComboChefAssignement.getSelectedItem().toString())) {
                 CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
                 a.setChef(e);
             }
         }
-        
+
         populateContractTable();
-        
+        JOptionPane.showMessageDialog(this, "Chef Assigned");
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        
-        CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
-        a.setStatus("Approved and Active");
-        populateContractTable();
-        
+        if (PrisonStaffJTable1.getSelectedRow() > -1) {
+            CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+            a.setStatus("Approved and Active");
+            populateContractTable();
+            JOptionPane.showMessageDialog(this, "Contract approved");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a contract to approve");
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
@@ -627,7 +626,5 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
         txtUserName.setText("");
         drpdwnDesignation.setSelectedIndex(0);
     }
-
-    
 
 }

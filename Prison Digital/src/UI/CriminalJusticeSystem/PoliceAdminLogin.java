@@ -75,7 +75,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
             }
 
             private void initializeFields() {
-                selectedStaff = (Employee) tblCasesAssigned.getModel().getValueAt(tblCasesAssigned.getSelectedRow(), 0);
+                selectedStaff = (Employee) tblPoliceOfficers.getModel().getValueAt(tblPoliceOfficers.getSelectedRow(), 0);
                 txtOfficerName.setText(selectedStaff.getName());
                 txtOfficerUsername.setText(selectedStaff.getUserAccount().getUsername());
                 txtOfficerPassword.setText(selectedStaff.getUserAccount().getPassword());
@@ -135,7 +135,6 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         txtOfficerPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPoliceOfficers = new javax.swing.JTable();
@@ -170,16 +169,6 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnBack.setBackground(new java.awt.Color(244, 208, 129));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
             }
         });
 
@@ -270,8 +259,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(drpdwnPoliceOfficers, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAssignCase))))
@@ -306,9 +294,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(drpdwnPoliceOfficers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAssignCase))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -365,13 +351,6 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         if (selectedStaff != null) {
@@ -389,10 +368,13 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
     private void btnAssignCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignCaseActionPerformed
         // TODO add your handling code here:
         if (drpdwnPoliceOfficers.getSelectedIndex() > 0) {
-            if (selectedCase.getTransportedToPrisonBy() != null) {
+            if (selectedCase.getTransportedToPrisonBy() == null) {
                 for (Employee employee : policeDepartment.getListOfPoliceOfficers()) {
                     if (employee.getUserAccount().getUsername().equals(drpdwnPoliceOfficers.getSelectedItem())) {
                         selectedCase.setTransportedToPrisonBy(employee);
+                        JOptionPane.showMessageDialog(this, "Assigned the case to the selected police officer");
+                        initializeCaseTable();
+                        break;
                     }
                 }
             }
@@ -403,7 +385,6 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAssignCase;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> drpdwnPoliceOfficers;
@@ -426,7 +407,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                 policeDepartment = police;
                 employeeList = new ArrayList<>();
                 employeeList = police.getListOfPoliceOfficers();
-                DefaultTableModel tablemodel = (DefaultTableModel) tblCasesAssigned.getModel();
+                DefaultTableModel tablemodel = (DefaultTableModel) tblPoliceOfficers.getModel();
                 tablemodel.setRowCount(0);
                 for (Employee employee : employeeList) {
                     if (employee != null) {
@@ -462,8 +443,8 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                         row[1] = aCase.getAccused().getName();
                         row[2] = aCase.getStartDate().toString();
                         row[3] = aCase.getYearsOfImprisonment() + "";
-                        row[4] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
-                        row[5] = aCase.isImprisoned().toString();
+                        row[4] = aCase.isImprisoned()==true?"Yes":"No";
+                        row[5] = aCase.getTransportedToPrisonBy() != null ? aCase.getTransportedToPrisonBy().getUserAccount().getUsername() : "-";
                         row[6] = aCase.getStatus();
                     model.addRow(row);
                 }

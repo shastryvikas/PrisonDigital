@@ -100,7 +100,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         } else {
             btnApproval.setEnabled(false);
         }
-        
+
     }
 
     /**
@@ -402,8 +402,9 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         HospitalContract selectedContract = (HospitalContract) contractListTable.getModel().getValueAt(viewselectedRowIndex, 0);
 
         selectedContract.setStatus("Approved");
-        
+
         populateContractListTable(contractList);
+        JOptionPane.showMessageDialog(this, "The contract has been apporved");
 
     }//GEN-LAST:event_btnApprovalActionPerformed
 
@@ -451,11 +452,11 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
             Object[] row = new Object[8];
             row[0] = hc;
             row[1] = hc.getGeneralDocs();
-            row[2] = hc.getGeneralDocsApproval();
+            row[2] = hc.getGeneralDocsApproval() == true ? "Yes" : "No";
             row[3] = hc.getPatientCareTech();
-            row[4] = hc.getPatientCareTechApproval();
+            row[4] = hc.getPatientCareTechApproval() == true ? "Yes" : "No";
             row[5] = hc.getPsychologists();
-            row[6] = hc.getPsychologistsApproval();
+            row[6] = hc.getPsychologistsApproval() == true ? "Yes" : "No";
             row[7] = hc.getStatus();
 
             model.addRow(row);

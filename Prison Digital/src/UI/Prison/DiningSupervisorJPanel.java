@@ -32,7 +32,7 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
     UserAccount user;
     Prison prison;
     
-    public DiningSupervisorJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
+    public DiningSupervisorJPanel(JPanel container, UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
@@ -45,20 +45,20 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
     }
     
     private void populateTable() {
-
+        
         DefaultTableModel tablemodel = (DefaultTableModel) CateringServicesJTable.getModel();
         tablemodel.setRowCount(0);
         
         for (FoodCateringService c : system.getCateringServices()) {
             Object[] row = new Object[2];
             row[0] = c;
-            row[1] = c.getLocation().distanceTo(user.getEnterprise().getLocation());
-
+            row[1] = c.getLocation();
+            
             tablemodel.addRow(row);
         }
         
         CateringContract contract = prison.getManagement().getCateringContract();
-        if(contract == null){
+        if (contract == null) {
             endButton.setEnabled(false);
             btnPlaceRequest.setEnabled(true);
             status.setText("");
@@ -73,9 +73,8 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
             loc.setText(contract.getFoodCateringService().getLocation().toString());
             name.setText(contract.getFoodCateringService().getName());
         }
-
+        
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,6 +122,8 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
 
         lblPrisonerCount.setText("Prisoner Count:");
 
+        txtPrisonerCount.setEnabled(false);
+
         btnPlaceRequest.setText("Request Contract");
         btnPlaceRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,15 +135,20 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Caterer's name:");
 
-        name.setText("jTextField1");
+        name.setEnabled(false);
 
         jLabel3.setText("Caterer's Location:");
 
-        loc.setText("jTextField2");
+        loc.setEnabled(false);
+        loc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Status of contract:");
 
-        status.setText("jTextField3");
+        status.setEnabled(false);
         status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusActionPerformed(evt);
@@ -158,7 +164,7 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Prisoner Count:");
 
-        prisonerCount.setText("jTextField4");
+        prisonerCount.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -251,14 +257,14 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
         
         int prisonerCount = Integer.parseInt(txtPrisonerCount.getText().toString());
         
-        if(prisonerCount > 0){
+        if (prisonerCount > 0) {
             int selectedRow = CateringServicesJTable.getSelectedRow();
             if (selectedRow >= 0) {
                 int selectionButton = JOptionPane.YES_NO_OPTION;
                 int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm order?", "Warning", selectionButton);
                 if (selectionResult == JOptionPane.YES_OPTION) {
                     FoodCateringService f = (FoodCateringService) CateringServicesJTable.getValueAt(selectedRow, 0);
-                        
+                    
                     CateringContract contract = new CateringContract();
                     contract.setFoodCateringService(f);
                     contract.setPrison(prison);
@@ -267,7 +273,7 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
                     
                     prison.getManagement().setCateringContract(contract);
                     f.getManagement().getFoodOrders().add(contract);
-
+                    
                     populateTable();
                 }
             } else {
@@ -285,15 +291,20 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm Termination?", "Warning", selectionButton);
-            if (selectionResult == JOptionPane.YES_OPTION) {
-                CateringContract c = prison.getManagement().getCateringContract();
-                prison.getManagement().setCateringContract(null);
-                c.getFoodCateringService().getManagement().getFoodOrders().remove(c);
-                populateTable();
-            }
+        int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm Termination?", "Warning", selectionButton);
+        if (selectionResult == JOptionPane.YES_OPTION) {
+            CateringContract c = prison.getManagement().getCateringContract();
+            prison.getManagement().setCateringContract(null);
+            c.getFoodCateringService().getManagement().getFoodOrders().remove(c);
+            populateTable();
+            JOptionPane.showMessageDialog(this, "Contract ended");
+        }
         
     }//GEN-LAST:event_endButtonActionPerformed
+
+    private void locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_locActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
