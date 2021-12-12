@@ -12,6 +12,7 @@ import Model.CriminalJusticeSystem.CriminalJusticeSystem;
 import Model.Person;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
+import Model.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,6 +38,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
     UserAccount account;
     CriminalJusticeSystem criminalJusticeSystem;
     Court currentCourt;
+    WorkRequest prisonWorkreq, policeWorkreq;
 
     /**
      * Creates new form JudgeLandingPage
@@ -84,16 +86,17 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         txtPersonName.setText(selectedCase.getAccused().getName());
         txtImprisonmentStartDate.setText(selectedCase.getStartDate().toString());
         txtYearsOfImprisonment.setText(selectedCase.getYearsOfImprisonment() + "");
-        if(selectedCase.getPrison() == null)
+        if (selectedCase.getPrison() == null) {
             jTextField2.setText("Not Assigned");
-        else
+        } else {
             jTextField2.setText(selectedCase.getPrison().getName());
-        
-        if(selectedCase.getProcessingPoliceDepartment() == null)
+        }
+
+        if (selectedCase.getProcessingPoliceDepartment() == null) {
             jTextField3.setText("Not Assigned");
-        else
+        } else {
             jTextField3.setText(selectedCase.getProcessingPoliceDepartment().getName());
-            
+        }
 
     }
 
@@ -300,6 +303,15 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             try {
                 Case newCase;
                 newCase = new Case(txtCaseVerdict.getText(), person, false, new SimpleDateFormat("MM-dd-YYYY").parse(txtImprisonmentStartDate.getText()), Integer.parseInt(txtYearsOfImprisonment.getText()), currentCourt);
+
+                WorkRequest prisonWorkreq = new WorkRequest();
+                prisonWorkreq.setSender(account);
+                prisonWorkreq.setStatus("New Case");
+
+                WorkRequest policeWorkreq = new WorkRequest();
+                policeWorkreq.setSender(account);
+                policeWorkreq.setStatus("New Case");
+                
                 currentCourt.getCaseDirectory().addCase(newCase);
             } catch (ParseException ex) {
                 Logger.getLogger(JudgeLandingPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -315,7 +327,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
 
     private void btnProvideJudgementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvideJudgementActionPerformed
         // TODO add your handling code here:
-        JudgementPage judgementPage = new JudgementPage(container, selectedCase, criminalJusticeSystem, system);
+        JudgementPage judgementPage = new JudgementPage(container, selectedCase, account, criminalJusticeSystem, prisonWorkreq, policeWorkreq, system);
         container.add("judgementPage", judgementPage);
         layout.next(container);
 
@@ -389,19 +401,20 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 CaseDirectory listOfCases = court.getCaseDirectory();
                 DefaultTableModel tablemodel = (DefaultTableModel) tblCases.getModel();
                 tablemodel.setRowCount(0);
-                if(listOfCases != null)
-                for (Case tempCase : listOfCases.getListOfCases()) {
+                if (listOfCases != null) {
+                    for (Case tempCase : listOfCases.getListOfCases()) {
 
-                    if (tempCase != null) {
-                        Object[] row = new Object[7];
-                        row[0] = tempCase;
-                        row[1] = tempCase.getAccused().getName();
-                        row[2] = tempCase.getVerdict();
-                        row[3] = tempCase.getStartDate().toString();
-                        row[4] = tempCase.getYearsOfImprisonment() + "";
-                        row[5] = tempCase.isImprisoned()==true?"Yes":"No";
-                        row[6] = tempCase.getStatus();
-                        tablemodel.addRow(row);
+                        if (tempCase != null) {
+                            Object[] row = new Object[7];
+                            row[0] = tempCase;
+                            row[1] = tempCase.getAccused().getName();
+                            row[2] = tempCase.getVerdict();
+                            row[3] = tempCase.getStartDate().toString();
+                            row[4] = tempCase.getYearsOfImprisonment() + "";
+                            row[5] = tempCase.isImprisoned() == true ? "Yes" : "No";
+                            row[6] = tempCase.getStatus();
+                            tablemodel.addRow(row);
+                        }
                     }
                 }
             }

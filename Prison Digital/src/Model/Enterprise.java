@@ -6,6 +6,7 @@
 package Model;
 
 import Model.Employee.EmployeeDirectory;
+import Model.WorkQueue.WorkQueue;
 
 /**
  *
@@ -16,6 +17,15 @@ public abstract class Enterprise {
     String name;
     Location location;
     Boolean status;
+    WorkQueue workqueue;
+
+    public WorkQueue getWorkqueue() {
+        return workqueue;
+    }
+
+    public void setWorkqueue(WorkQueue workqueue) {
+        this.workqueue = workqueue;
+    }
 
     public Boolean getStatus() {
         return status;

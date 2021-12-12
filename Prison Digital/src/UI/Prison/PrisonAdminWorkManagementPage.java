@@ -11,9 +11,13 @@ import Model.Prison.Prison;
 import Model.Prison.Unit;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -349,7 +353,13 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm imprisonment?", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 Case c = (Case) caseTable.getValueAt(selectedRow, 0);
-                
+                ArrayList<WorkRequest> listOfWorkRequests = c.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+                for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                    if (listOfWorkRequest.getReceiver().equals(user) && listOfWorkRequest.getStatus().equals("Prison Assigned")) {
+                        listOfWorkRequest.setStatus("Prisoner imprisoned");
+                        listOfWorkRequest.setResolveDate(new Date());
+                    }
+                }
                 if (!prison.getInfrastructure().getCellsEmpty().isEmpty()) {
                     Unit u = prison.getInfrastructure().getCellsEmpty().get(0);
                     c.setCell(u);

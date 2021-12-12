@@ -11,9 +11,11 @@ import Model.CriminalJusticeSystem.Court;
 import Model.CriminalJusticeSystem.CriminalJusticeSystem;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
+import Model.WorkQueue.WorkRequest;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -161,6 +163,13 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
     private void btnPrisonerTransportCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrisonerTransportCompletedActionPerformed
         // TODO add your handling code here:
         if (selectedCase != null) {
+            ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
+            for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
+                if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getStatus().equals("Police Assigned")) {
+                    listOfWorkRequest.setStatus("Prisoner transported");
+                    listOfWorkRequest.setResolveDate(new Date());
+                }
+            }
             selectedCase.setStatus("Transport Success");
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();

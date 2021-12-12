@@ -9,13 +9,14 @@ import Model.Employee.Employee;
 import Model.Person;
 import Model.Prison.Prison;
 import Model.Prison.Unit;
+import Model.WorkQueue.WorkRequest;
 import java.util.Date;
 
 /**
  *
  * @author vikasshastry
  */
-public class Case {
+public class Case extends WorkRequest{
 
     private String verdict;
     private Person accused;

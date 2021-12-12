@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import Model.CriminalJusticeSystem.Police;
 import Model.Prison.Prison;
+import Model.UserAccountManagement.UserAccount;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
@@ -33,6 +36,8 @@ public class JudgementPage extends javax.swing.JPanel {
     ArrayList<Prison> listOfPrisons;
     Police selectedPoliceDepartment;
     Prison selectedPrison;
+    UserAccount account;
+    WorkRequest prisonWorkreq, policeWorkreq;
 
     /**
      * Creates new form JudgementPage
@@ -42,7 +47,7 @@ public class JudgementPage extends javax.swing.JPanel {
      * @param criminalJusticeSystem
      * @param system
      */
-    public JudgementPage(JPanel container, Case currentCase, CriminalJusticeSystem criminalJusticeSystem, PrisonEcosystem system) {
+    public JudgementPage(JPanel container, Case currentCase, UserAccount account, CriminalJusticeSystem criminalJusticeSystem, WorkRequest prisonWorkreq, WorkRequest policeWorkreq, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
@@ -51,8 +56,8 @@ public class JudgementPage extends javax.swing.JPanel {
         this.criminalJusticeSystem = criminalJusticeSystem;
         listOfPrisons = system.getPrisons();
         listOfPoliceDepartments = this.criminalJusticeSystem.getListOfPolice();
+        this.prisonWorkreq = prisonWorkreq;
         initializeTables();
-
         prisontbl.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -235,6 +240,12 @@ public class JudgementPage extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedPrison != null) {
             currentCase.setPrison(selectedPrison);
+            if (prisonWorkreq.getStatus().equals("New Case")) {
+                prisonWorkreq.setReceiver(selectedPrison.getManagement().getAdmin().getUserAccount());
+                prisonWorkreq.setStatus("Prison Assigned");
+                account.getEnterprise().getWorkqueue().getWorkRequestList().add(prisonWorkreq);
+            }
+
             if (currentCase.getProcessingPoliceDepartment() == null) {
                 currentCase.setStatus("Prison Assigned");
                 selectedPrison.getManagement().getCaseDirectory().getListOfCases().add(currentCase);
@@ -252,6 +263,11 @@ public class JudgementPage extends javax.swing.JPanel {
         if (selectedPoliceDepartment != null) {
             currentCase.setProcessingPoliceDepartment(selectedPoliceDepartment);
             if (currentCase.getPrison() == null) {
+                if (prisonWorkreq.getStatus().equals("Prison Assigned")) {
+                    policeWorkreq.setReceiver(selectedPoliceDepartment.getPoliceAdmin().getUserAccount());
+                    prisonWorkreq.setStatus("Police Assigned");
+                    account.getEnterprise().getWorkqueue().getWorkRequestList().add(prisonWorkreq);
+                }
                 currentCase.setStatus("Police Assigned");
             } else {
                 currentCase.setStatus("Prison and Police Assigned");
