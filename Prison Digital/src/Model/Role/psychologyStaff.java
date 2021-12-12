@@ -15,11 +15,11 @@ import javax.swing.JPanel;
  *
  * @author vikasshastry
  */
-public class Doctor extends Role{
+public class psychologyStaff extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new HospitalStaffLogin(userProcessContainer, business);
+        return new HospitalStaffLogin(userProcessContainer, account, business);
     }
     
 }

@@ -21,7 +21,6 @@ public class Person {
         this.name = name;
     }
 
-
     public String getName() {
         return name;
     }
@@ -45,5 +44,5 @@ public class Person {
     public void setAddress(Location address) {
         this.address = address;
     }
-    
+
 }

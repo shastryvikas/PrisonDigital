@@ -5,9 +5,17 @@
  */
 package UI.Prison;
 
+import Model.CriminalJusticeSystem.Case;
+import Model.Employee.Employee;
+import Model.Hospital.Hospital;
+import Model.Prison.HospitalContract;
+import Model.Prison.Prison;
 import Model.PrisonEcosystem;
+import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,12 +29,54 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     JPanel container;
     CardLayout layout;
     PrisonEcosystem system;
+    UserAccount user;
+    Prison prison;
+    
 
-    public InfirmarySupervisorJPanel(JPanel container, PrisonEcosystem system) {
+    public InfirmarySupervisorJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = layout = (CardLayout) container.getLayout();
         this.system = system;
+        this.user = user;
+        this.prison = (Prison) user.getEnterprise();
+
+        populateTable();
+        
+        
+    }
+    
+    private void populateTable() {
+
+        DefaultTableModel tablemodel = (DefaultTableModel) HospitalJTable.getModel();
+        tablemodel.setRowCount(0);
+       
+        for (Hospital c : system.getHospitals()) {
+            Object[] row = new Object[4];
+            row[0] = c;
+            row[1] = c.getLocation().toString();
+            tablemodel.addRow(row);
+        }
+        
+        HospitalContract contract = prison.getManagement().getHospitalContract();
+        if(contract == null){
+            endButton.setEnabled(false);
+            btnPlaceRequest.setEnabled(true);
+            status.setText("");
+            gp.setText("");
+            psy.setText("");
+            pc.setText("");
+            name.setText("");
+        } else {
+            endButton.setEnabled(true);
+            btnPlaceRequest.setEnabled(false);
+            status.setText(contract.getStatus());
+            gp.setText(contract.getGeneralDocs() + "");
+            psy.setText(contract.getPsychologists() + "");
+            pc.setText(contract.getPatientCareTech() + "");
+            name.setText(contract.getHospital().getName());
+        }
+
     }
 
     /**
@@ -44,37 +94,39 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         txtPsychologistReq = new javax.swing.JTextField();
         btnPlaceRequest = new javax.swing.JButton();
         DiningSupervisorjLabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        PlacedOrderJTable = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         HospitalJTable = new javax.swing.JTable();
         lblTechnician = new javax.swing.JLabel();
         txtTechnician = new javax.swing.JTextField();
-        btnLogout = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        name = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        pc = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        psy = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        gp = new javax.swing.JTextField();
+        endButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        status = new javax.swing.JTextField();
 
         lblGenPhysicianReq.setText("General Physician Requirement:");
 
         lblPsychologistReq.setText("Psychologist Requirement:");
 
-        btnPlaceRequest.setText("Place Request");
+        btnPlaceRequest.setText("Request Contract");
+        btnPlaceRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaceRequestActionPerformed(evt);
+            }
+        });
 
         DiningSupervisorjLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         DiningSupervisorjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DiningSupervisorjLabel.setText("Infirmary Supervisor Work Area");
         DiningSupervisorjLabel.setOpaque(true);
-
-        PlacedOrderJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Hospital Name", "Technicians", "Physicians", "Psychologists"
-            }
-        ));
-        jScrollPane2.setViewportView(PlacedOrderJTable);
 
         HospitalJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,88 +143,216 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
 
         lblTechnician.setText("Patient Care Technician Requirement");
 
-        btnLogout.setText("Logout");
+        jLabel1.setText("Current Contract:");
+
+        jLabel2.setText("Hospital Name:");
+
+        name.setText("jTextField1");
+
+        jLabel3.setText("Patient Care Technitians allotted:");
+
+        pc.setText("jTextField2");
+
+        jLabel4.setText("Psychologists allotted:");
+
+        psy.setText("jTextField3");
+
+        jLabel5.setText("General Physicians allotted:");
+
+        gp.setText("jTextField4");
+
+        endButton.setText("End Contract");
+        endButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("New Contract:");
+
+        jLabel7.setText("Contract Status:");
+
+        status.setText("jTextField5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblGenPhysicianReq)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtGeneralPhysicianReq, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTechnician)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTechnician, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblPsychologistReq)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPsychologistReq, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPlaceRequest))
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(gp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                            .addComponent(pc, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(psy)
+                            .addComponent(status, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(81, 81, 81)
+                        .addComponent(endButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPsychologistReq)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTechnician)
+                                    .addComponent(lblGenPhysicianReq))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtGeneralPhysicianReq, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPsychologistReq, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTechnician, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(224, 241, Short.MAX_VALUE)
+                                .addComponent(btnPlaceRequest)
+                                .addGap(13, 13, 13))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnLogout))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1)
-                        .addComponent(DiningSupervisorjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
+                    .addComponent(DiningSupervisorjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(282, 282, 282)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTechnician)
-                    .addComponent(txtTechnician, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPsychologistReq)
-                    .addComponent(txtPsychologistReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(pc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(psy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(gp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGenPhysicianReq)
-                    .addComponent(txtGeneralPhysicianReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlaceRequest))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnLogout))
+                    .addComponent(lblTechnician)
+                    .addComponent(txtTechnician, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPlaceRequest))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGenPhysicianReq)
+                            .addComponent(txtGeneralPhysicianReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPsychologistReq)
+                            .addComponent(txtPsychologistReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(26, 26, 26))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(8, 8, 8)
                     .addComponent(DiningSupervisorjLabel)
-                    .addGap(18, 18, 18)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(350, Short.MAX_VALUE)))
+                    .addContainerGap(567, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPlaceRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceRequestActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = HospitalJTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            int selectionButton = JOptionPane.YES_NO_OPTION;
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm request?", "Warning", selectionButton);
+            if (selectionResult == JOptionPane.YES_OPTION) {
+                Hospital e = (Hospital) HospitalJTable.getValueAt(selectedRow, 0);
+
+                HospitalContract c = new HospitalContract();
+                c.setHospital(e);
+                c.setGeneralDocs(Integer.parseInt(txtGeneralPhysicianReq.getText().toString()));
+                c.setPatientCareTech(Integer.parseInt(txtTechnician.getText().toString()));
+                c.setPrison(prison);
+                c.setPsychologists(Integer.parseInt(txtPsychologistReq.getText().toString()));
+                c.setStatus("Requested Approval");
+                
+                prison.getManagement().setHospitalContract(c);
+                e.getManagement().getContract().add(c);
+                
+                populateTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
+        }
+        
+    }//GEN-LAST:event_btnPlaceRequestActionPerformed
+
+    private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
+        // TODO add your handling code here:
+        
+        int selectionButton = JOptionPane.YES_NO_OPTION;
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm Termination?", "Warning", selectionButton);
+            if (selectionResult == JOptionPane.YES_OPTION) {
+                HospitalContract c = prison.getManagement().getHospitalContract();
+                prison.getManagement().setHospitalContract(null);
+                c.getHospital().getManagement().getContract().remove(c);
+                populateTable();
+            }
+        
+    }//GEN-LAST:event_endButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DiningSupervisorjLabel;
     private javax.swing.JTable HospitalJTable;
-    private javax.swing.JTable PlacedOrderJTable;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPlaceRequest;
+    private javax.swing.JButton endButton;
+    private javax.swing.JTextField gp;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblGenPhysicianReq;
     private javax.swing.JLabel lblPsychologistReq;
     private javax.swing.JLabel lblTechnician;
+    private javax.swing.JTextField name;
+    private javax.swing.JTextField pc;
+    private javax.swing.JTextField psy;
+    private javax.swing.JTextField status;
     private javax.swing.JTextField txtGeneralPhysicianReq;
     private javax.swing.JTextField txtPsychologistReq;
     private javax.swing.JTextField txtTechnician;
     // End of variables declaration//GEN-END:variables
+
+    
 }

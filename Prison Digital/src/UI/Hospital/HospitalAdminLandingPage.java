@@ -5,8 +5,20 @@
  */
 package UI.Hospital;
 
+import Model.Employee.Employee;
+import Model.Hospital.Hospital;
+import Model.Prison.HospitalContract;
 import Model.PrisonEcosystem;
+import Model.Role.PatientCareTechStaff;
+import Model.Role.generalStaff;
+import Model.Role.psychologyStaff;
+import Model.UserAccountManagement.UserAccount;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,15 +28,79 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
 
     JPanel container;
     PrisonEcosystem system;
+    Hospital hospital;
+    String currDesignation;
+    UserAccount account;
+    ArrayList<HospitalContract> contractList;
 
     /**
      * Creates new form InfirmaryAdminLandingPage
+     *
      * @param container
      */
-    public HospitalAdminLandingPage(JPanel container, PrisonEcosystem system) {
+    public HospitalAdminLandingPage(JPanel container, UserAccount account, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         this.system = system;
+        this.account = account;
+        hospital = (Hospital) account.getEnterprise();
+
+        this.contractList = hospital.getManagement().getContract();
+
+        //Disable Approal Button.
+        btnApproval.setEnabled(false);
+
+        /*
+        //Designation drop down list.
+        ArrayList<String> designationDownList = new ArrayList<String>();
+        
+        designationDownList.add("Patient Care Technician");
+        designationDownList.add("General Physician");
+        designationDownList.add("Psychologist");
+        
+        for(String x : designationDownList){
+            jComboBox1.addItem(x);
+        }
+         */
+        populateContractListTable(contractList);
+
+        contractListTable.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+        });
+
+    }
+
+    private void initializeFields() {
+        int viewselectedRowIndex = contractListTable.getSelectedRow();
+        HospitalContract selectedContract = (HospitalContract) contractListTable.getModel().getValueAt(viewselectedRowIndex, 0);
+
+        //Approval Button Enable
+        if (selectedContract.getGeneralDocsApproval() && selectedContract.getPatientCareTechApproval() && selectedContract.getPsychologistsApproval()) {
+            btnApproval.setEnabled(true);
+        } else {
+            btnApproval.setEnabled(false);
+        }
+        
     }
 
     /**
@@ -39,58 +115,29 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         manageStaffPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblInfirmaryStaff = new javax.swing.JTable();
         lblInfirmaryStaffName = new javax.swing.JLabel();
         txtInfirmaryStaffName = new javax.swing.JTextField();
-        lblInfirmaryStaffDesignation = new javax.swing.JLabel();
         lblInfirmaryStaffUsername = new javax.swing.JLabel();
         txtInfirmaryStaffUsername = new javax.swing.JTextField();
         lblInfirmaryStaffPassword = new javax.swing.JLabel();
         txtInfirmaryStaffPassword = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        lblInfirmaryStaffSalary = new javax.swing.JLabel();
-        txtInfirmarySalary = new javax.swing.JTextField();
-        lblInfirmaryStaffYearsOfExperience = new javax.swing.JLabel();
-        txtInfirmaryStaffYearsOfExperience = new javax.swing.JTextField();
-        drpdwnDesignation = new javax.swing.JComboBox<>();
-        manageOrders = new javax.swing.JPanel();
+        btnGeneralPhy = new javax.swing.JButton();
+        btnPatientCarTec = new javax.swing.JButton();
+        btnPsychologist = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
+        lblDesignation = new javax.swing.JLabel();
+        txtDesignation = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblInfirmaryOrders = new javax.swing.JTable();
-        btnChangeStatus = new javax.swing.JButton();
-        btnAssignHeadPsychologist = new javax.swing.JButton();
-        btnAssignHeadGeneralPhysician = new javax.swing.JButton();
-        btnAssignHeadPatientCareTechnician = new javax.swing.JButton();
-        drpdwnAssignHeadPsychologist = new javax.swing.JComboBox<>();
-        drpdwnStatus = new javax.swing.JComboBox<>();
-        drpdwnAssignHeadPatientCareTechnician = new javax.swing.JComboBox<>();
-        drpdwnAssignHeadGeneralPhysician = new javax.swing.JComboBox<>();
+        contractListTable = new javax.swing.JTable();
+        btnApproval = new javax.swing.JButton();
 
-        tblInfirmaryStaff.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
 
-            },
-            new String [] {
-                "Name", "Username", "Password", "Designation", "Salary", "Years of Experience"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tblInfirmaryStaff);
+        manageStaffPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         lblInfirmaryStaffName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblInfirmaryStaffName.setText("Name");
-
-        lblInfirmaryStaffDesignation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblInfirmaryStaffDesignation.setText("Designation");
 
         lblInfirmaryStaffUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblInfirmaryStaffUsername.setText(" Username");
@@ -98,242 +145,149 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         lblInfirmaryStaffPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblInfirmaryStaffPassword.setText(" Password");
 
-        btnAdd.setBackground(new java.awt.Color(244, 208, 129));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setText("Add");
-        btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnGeneralPhy.setBackground(new java.awt.Color(244, 208, 129));
+        btnGeneralPhy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGeneralPhy.setText("General Physician");
+        btnGeneralPhy.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnGeneralPhy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnGeneralPhyActionPerformed(evt);
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(244, 208, 129));
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnPatientCarTec.setBackground(new java.awt.Color(244, 208, 129));
+        btnPatientCarTec.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPatientCarTec.setText("Patient Care Technician");
+        btnPatientCarTec.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnPatientCarTec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnPatientCarTecActionPerformed(evt);
             }
         });
 
-        btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setText("Update");
-        btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnPsychologist.setBackground(new java.awt.Color(244, 208, 129));
+        btnPsychologist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPsychologist.setText("Psychologist");
+        btnPsychologist.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnPsychologist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnPsychologistActionPerformed(evt);
             }
         });
 
-        lblInfirmaryStaffSalary.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblInfirmaryStaffSalary.setText("Salary");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Infirmary Admin Work Area");
+        jLabel1.setOpaque(true);
 
-        lblInfirmaryStaffYearsOfExperience.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblInfirmaryStaffYearsOfExperience.setText("Years Of Experience");
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        drpdwnDesignation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblDesignation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDesignation.setText("Designation");
+
+        contractListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Prison", "General Physician", "General Physician Approval", "Patient Care", "Patient Care Approval", "Psychologist", "Psychologist Approval", "Contract Status"
+            }
+        ));
+        jScrollPane3.setViewportView(contractListTable);
+
+        btnApproval.setText("Approve");
+        btnApproval.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApprovalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manageStaffPanelLayout = new javax.swing.GroupLayout(manageStaffPanel);
         manageStaffPanel.setLayout(manageStaffPanelLayout);
         manageStaffPanelLayout.setHorizontalGroup(
             manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblInfirmaryStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtInfirmaryStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
                         .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(lblInfirmaryStaffSalary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblInfirmaryStaffDesignation)))
-                        .addGap(12, 12, 12)
+                            .addComponent(lblDesignation)
+                            .addComponent(lblInfirmaryStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(drpdwnDesignation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtInfirmarySalary, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(148, 148, 148)
-                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                        .addComponent(lblInfirmaryStaffYearsOfExperience, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(37, 37, 37)
-                        .addComponent(txtInfirmaryStaffYearsOfExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                                .addComponent(lblInfirmaryStaffPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtInfirmaryStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDesignation, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
+                                .addComponent(lblInfirmaryStaffPassword)
+                                .addGap(21, 21, 21)
                                 .addComponent(txtInfirmaryStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
                                 .addComponent(lblInfirmaryStaffUsername)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtInfirmaryStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(198, 198, 198))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtInfirmaryStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(83, 83, 83))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageStaffPanelLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(btnGeneralPhy, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPatientCarTec, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPsychologist, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 29, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(240, 240, 240))
-            .addGroup(manageStaffPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnApproval)))
+                .addContainerGap())
         );
         manageStaffPanelLayout.setVerticalGroup(
             manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addGap(37, 37, 37)
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblInfirmaryStaffName)
                     .addComponent(txtInfirmaryStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInfirmaryStaffUsername)
-                    .addComponent(txtInfirmaryStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtInfirmaryStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInfirmaryStaffUsername))
+                .addGap(33, 33, 33)
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(drpdwnDesignation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInfirmaryStaffDesignation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblInfirmaryStaffPassword)
-                    .addComponent(txtInfirmaryStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblInfirmaryStaffSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInfirmarySalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInfirmaryStaffYearsOfExperience)
-                    .addComponent(txtInfirmaryStaffYearsOfExperience, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
-        );
-
-        tblInfirmaryOrders.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Institution Name", "Contract duration", "Types of personel required", "No. Of Patients", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(tblInfirmaryOrders);
-
-        btnChangeStatus.setBackground(new java.awt.Color(244, 208, 129));
-        btnChangeStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnChangeStatus.setText("Change Status");
-        btnChangeStatus.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnChangeStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeStatusActionPerformed(evt);
-            }
-        });
-
-        btnAssignHeadPsychologist.setBackground(new java.awt.Color(244, 208, 129));
-        btnAssignHeadPsychologist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAssignHeadPsychologist.setText("Assign head Psychologist");
-        btnAssignHeadPsychologist.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAssignHeadPsychologist.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignHeadPsychologistActionPerformed(evt);
-            }
-        });
-
-        btnAssignHeadGeneralPhysician.setBackground(new java.awt.Color(244, 208, 129));
-        btnAssignHeadGeneralPhysician.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAssignHeadGeneralPhysician.setText("Assign head General Physician");
-        btnAssignHeadGeneralPhysician.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAssignHeadGeneralPhysician.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignHeadGeneralPhysicianActionPerformed(evt);
-            }
-        });
-
-        btnAssignHeadPatientCareTechnician.setBackground(new java.awt.Color(244, 208, 129));
-        btnAssignHeadPatientCareTechnician.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAssignHeadPatientCareTechnician.setText("Assign head Patient care technician");
-        btnAssignHeadPatientCareTechnician.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAssignHeadPatientCareTechnician.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignHeadPatientCareTechnicianActionPerformed(evt);
-            }
-        });
-
-        drpdwnAssignHeadPsychologist.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        drpdwnAssignHeadPatientCareTechnician.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        drpdwnAssignHeadGeneralPhysician.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout manageOrdersLayout = new javax.swing.GroupLayout(manageOrders);
-        manageOrders.setLayout(manageOrdersLayout);
-        manageOrdersLayout.setHorizontalGroup(
-            manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageOrdersLayout.createSequentialGroup()
+                    .addComponent(txtInfirmaryStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDesignation)
+                    .addComponent(txtDesignation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGeneralPhy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPatientCarTec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPsychologist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageStaffPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSave)))
                 .addGap(65, 65, 65)
-                .addGroup(manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAssignHeadGeneralPhysician, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnChangeStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAssignHeadPsychologist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAssignHeadPatientCareTechnician, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(drpdwnStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnAssignHeadPsychologist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnAssignHeadPatientCareTechnician, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnAssignHeadGeneralPhysician, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
-            .addGroup(manageOrdersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3)
-                .addContainerGap())
-        );
-        manageOrdersLayout.setVerticalGroup(
-            manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageOrdersLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(drpdwnAssignHeadGeneralPhysician, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssignHeadGeneralPhysician, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssignHeadPsychologist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnAssignHeadPsychologist, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(manageOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssignHeadPatientCareTechnician, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnAssignHeadPatientCareTechnician, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(btnApproval)
+                .addGap(211, 211, 211))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -341,18 +295,14 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(manageOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manageStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE))
-                .addGap(0, 171, Short.MAX_VALUE))
+                .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(manageOrders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 598, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -361,77 +311,155 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnGeneralPhyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralPhyActionPerformed
         // TODO add your handling code here:
+        currDesignation = "General Physician";
 
-    }//GEN-LAST:event_btnAddActionPerformed
+        if (hospital.getPatientCare().getGeneralStaff() == null || hospital.getPatientCare().getGeneralStaff().getName().isEmpty() || hospital.getPatientCare().getGeneralStaff().getName() == null) {
+            JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
+            return;
+        }
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getGeneralStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getGeneralStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getGeneralStaff().getUserAccount().getUsername());
+        txtDesignation.setText(currDesignation);
+        txtDesignation.setEnabled(false);
+    }//GEN-LAST:event_btnGeneralPhyActionPerformed
+
+    private void btnPatientCarTecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientCarTecActionPerformed
         // TODO add your handling code here:
+        currDesignation = "Patient Care Technician";
 
-    }//GEN-LAST:event_btnDeleteActionPerformed
+        if (hospital.getPatientCare().getPhysiotherapyStaff() == null || hospital.getPatientCare().getPhysiotherapyStaff().getName().isEmpty() || hospital.getPatientCare().getPhysiotherapyStaff().getName() == null) {
+            JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
+            return;
+        }
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPhysiotherapyStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPhysiotherapyStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPhysiotherapyStaff().getUserAccount().getUsername());
+        txtDesignation.setText(currDesignation);
+        txtDesignation.setEnabled(false);
+    }//GEN-LAST:event_btnPatientCarTecActionPerformed
+
+    private void btnPsychologistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPsychologistActionPerformed
         // TODO add your handling code here:
+        currDesignation = "Psychologist";
 
-    }//GEN-LAST:event_btnUpdateActionPerformed
+        if (hospital.getPatientCare().getPsychologyStaff() == null || hospital.getPatientCare().getPsychologyStaff().getName().isEmpty() || hospital.getPatientCare().getPsychologyStaff().getName() == null) {
+            JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
+            return;
+        }
 
-    private void btnAssignHeadGeneralPhysicianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignHeadGeneralPhysicianActionPerformed
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPsychologyStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPsychologyStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPsychologyStaff().getUserAccount().getUsername());
+        txtDesignation.setText(currDesignation);
+        txtDesignation.setEnabled(false);
+
+    }//GEN-LAST:event_btnPsychologistActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAssignHeadGeneralPhysicianActionPerformed
+        if (checkInputFields(txtInfirmaryStaffName) && checkInputFields(txtInfirmaryStaffUsername) && checkInputFields(txtInfirmaryStaffPassword)) {
+//            if (checkIfCatererNameIsUnique()) {
+            Employee newEmployee;
 
-    private void btnAssignHeadPsychologistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignHeadPsychologistActionPerformed
+            if (txtDesignation.getText().equals("General Physician")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new generalStaff());
+                hospital.getPatientCare().setGeneralStaff(newEmployee);
+            } else if (txtDesignation.getText().equals("Patient Care Technician")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new PatientCareTechStaff());
+                hospital.getPatientCare().setPhysiotherapyStaff(newEmployee);
+            } else if (txtDesignation.getText().equals("Psychologist")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new psychologyStaff());
+                hospital.getPatientCare().setPsychologyStaff(newEmployee);
+            }
+
+            //initializeStaffTable();
+            JOptionPane.showMessageDialog(this, txtDesignation.getText() + " Head Appointed");
+            resetFields();
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
+//            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Employee");
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnApprovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAssignHeadPsychologistActionPerformed
+        int viewselectedRowIndex = contractListTable.getSelectedRow();
+        HospitalContract selectedContract = (HospitalContract) contractListTable.getModel().getValueAt(viewselectedRowIndex, 0);
 
-    private void btnChangeStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnChangeStatusActionPerformed
+        selectedContract.setStatus("Approved");
+        
+        populateContractListTable(contractList);
 
-    private void btnAssignHeadPatientCareTechnicianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignHeadPatientCareTechnicianActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAssignHeadPatientCareTechnicianActionPerformed
+    }//GEN-LAST:event_btnApprovalActionPerformed
 
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnAssignHeadGeneralPhysician;
-    private javax.swing.JButton btnAssignHeadPatientCareTechnician;
-    private javax.swing.JButton btnAssignHeadPsychologist;
-    private javax.swing.JButton btnChangeStatus;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> drpdwnAssignHeadGeneralPhysician;
-    private javax.swing.JComboBox<String> drpdwnAssignHeadPatientCareTechnician;
-    private javax.swing.JComboBox<String> drpdwnAssignHeadPsychologist;
-    private javax.swing.JComboBox<String> drpdwnDesignation;
-    private javax.swing.JComboBox<String> drpdwnStatus;
+    private javax.swing.JButton btnApproval;
+    private javax.swing.JButton btnGeneralPhy;
+    private javax.swing.JButton btnPatientCarTec;
+    private javax.swing.JButton btnPsychologist;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JTable contractListTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblInfirmaryStaffDesignation;
+    private javax.swing.JLabel lblDesignation;
     private javax.swing.JLabel lblInfirmaryStaffName;
     private javax.swing.JLabel lblInfirmaryStaffPassword;
-    private javax.swing.JLabel lblInfirmaryStaffSalary;
     private javax.swing.JLabel lblInfirmaryStaffUsername;
-    private javax.swing.JLabel lblInfirmaryStaffYearsOfExperience;
-    private javax.swing.JPanel manageOrders;
     private javax.swing.JPanel manageStaffPanel;
-    private javax.swing.JTable tblInfirmaryOrders;
-    private javax.swing.JTable tblInfirmaryStaff;
-    private javax.swing.JTextField txtInfirmarySalary;
+    private javax.swing.JTextField txtDesignation;
     private javax.swing.JTextField txtInfirmaryStaffName;
     private javax.swing.JTextField txtInfirmaryStaffPassword;
     private javax.swing.JTextField txtInfirmaryStaffUsername;
-    private javax.swing.JTextField txtInfirmaryStaffYearsOfExperience;
     // End of variables declaration//GEN-END:variables
+
+    private void resetFields() {
+
+        txtInfirmaryStaffName.setText("");
+        txtInfirmaryStaffPassword.setText("");
+        txtInfirmaryStaffUsername.setText("");
+        txtDesignation.setText("");
+    }
+
+    private void populateContractListTable(ArrayList<HospitalContract> contractList) {
+        DefaultTableModel model = (DefaultTableModel) contractListTable.getModel();
+        //delete empty records
+        model.setRowCount(0);
+
+        for (HospitalContract hc : contractList) {
+
+            Object[] row = new Object[8];
+            row[0] = hc;
+            row[1] = hc.getGeneralDocs();
+            row[2] = hc.getGeneralDocsApproval();
+            row[3] = hc.getPatientCareTech();
+            row[4] = hc.getPatientCareTechApproval();
+            row[5] = hc.getPsychologists();
+            row[6] = hc.getPsychologistsApproval();
+            row[7] = hc.getStatus();
+
+            model.addRow(row);
+        }
+    }
+
 }

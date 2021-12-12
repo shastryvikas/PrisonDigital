@@ -73,7 +73,19 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblCourtName" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblJudgeName" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtJudgeName" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="txtCourtName" min="-2" pref="131" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -90,22 +102,7 @@
                                               <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace pref="67" max="32767" attributes="0"/>
-                                                      <Component id="lblCourtLocation" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="0" pref="49" max="32767" attributes="0"/>
-                                                      <Component id="lblCourtName" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="txtCourtName" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtJudicialSystemAdminLocation" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="lblJudgeUsername" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="lblJudgePassword" alignment="0" max="32767" attributes="0"/>
@@ -127,35 +124,32 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="481" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="327" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblCourtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCourtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtJudgeName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblJudgeName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="275" max="-2" attributes="0"/>
                               <EmptySpace pref="31" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblCourtName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtCourtName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblCourtLocation" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                          <Component id="txtJudicialSystemAdminLocation" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblJudgeUsername" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtJudgeUsername" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblJudgePassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtJudgePassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblJudgeUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtJudgeUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblJudgePassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtJudgePassword" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -181,11 +175,35 @@
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="0">
-                            <Column editable="false" title="Name" type="java.lang.Object"/>
+                            <Column editable="false" title="Court name" type="java.lang.Object"/>
+                            <Column editable="false" title="Judge name" type="java.lang.Object"/>
                             <Column editable="false" title="Username" type="java.lang.Object"/>
                             <Column editable="false" title="Password" type="java.lang.Object"/>
-                            <Column editable="false" title="Location" type="java.lang.Object"/>
                           </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
                         </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -201,14 +219,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCourtName">
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblCourtLocation">
-                  <Properties>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="text" type="java.lang.String" value="Location"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtJudicialSystemAdminLocation">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblJudgeUsername">
                   <Properties>
@@ -277,6 +287,14 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JTextField" name="txtJudgeName">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblJudgeName">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="text" type="java.lang.String" value="Judge Name"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="PoliceDepartmentManagementPanel">
@@ -285,33 +303,34 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                   <Component id="btnPoliceDepartmentAdd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                                   <Component id="btnPoliceDepartmentUpdate" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                                   <Component id="btnPoliceDepartmentDelete" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="lblPoliceDepartmentLocation" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lblPoliceDepartmentName" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lblPoliceDepartmentAdminName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPoliceDepartmentName" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="txtPoliceDepartmentName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtPoliceDepartmentAdminLocation" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                      <Component id="txtPoliceDepartmentAdminName" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lblPoliceDepartmentAdminUsername" alignment="0" max="32767" attributes="0"/>
                                       <Component id="lblPoliceDepartmentAdminPassword" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtJudicialSystemAdminUsername1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtPolcieDepartmentAdminUsername" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtPoliceDepartmentAdminPassword" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -339,14 +358,14 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblPoliceDepartmentLocation" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Component id="txtPoliceDepartmentAdminLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPoliceDepartmentAdminName" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="txtPoliceDepartmentAdminName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblPoliceDepartmentAdminUsername" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtJudicialSystemAdminUsername1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPolcieDepartmentAdminUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -385,11 +404,35 @@
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="0">
-                            <Column editable="false" title="Name" type="java.lang.Object"/>
+                            <Column editable="false" title="Department name" type="java.lang.Object"/>
+                            <Column editable="false" title="Admin name" type="java.lang.Object"/>
                             <Column editable="false" title="Username" type="java.lang.Object"/>
                             <Column editable="false" title="Password" type="java.lang.Object"/>
-                            <Column editable="false" title="Location" type="java.lang.Object"/>
                           </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
                         </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -401,18 +444,18 @@
                 <Component class="javax.swing.JLabel" name="lblPoliceDepartmentName">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="text" type="java.lang.String" value="Name"/>
+                    <Property name="text" type="java.lang.String" value="Department Name"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtPoliceDepartmentName">
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPoliceDepartmentLocation">
+                <Component class="javax.swing.JLabel" name="lblPoliceDepartmentAdminName">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="text" type="java.lang.String" value="Location"/>
+                    <Property name="text" type="java.lang.String" value="Admin name"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPoliceDepartmentAdminLocation">
+                <Component class="javax.swing.JTextField" name="txtPoliceDepartmentAdminName">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPoliceDepartmentAdminUsername">
                   <Properties>
@@ -420,7 +463,7 @@
                     <Property name="text" type="java.lang.String" value="Admin Username"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtJudicialSystemAdminUsername1">
+                <Component class="javax.swing.JTextField" name="txtPolcieDepartmentAdminUsername">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPoliceDepartmentAdminPassword">
                   <Properties>
