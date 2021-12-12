@@ -36,4 +36,5 @@ public class Management extends Organization{
     public void setAdmin(Employee admin) {
         this.admin = admin;
     }
+    
 }

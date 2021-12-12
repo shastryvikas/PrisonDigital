@@ -353,4 +353,6 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtPsychologistReq;
     private javax.swing.JTextField txtTechnician;
     // End of variables declaration//GEN-END:variables
+
+    
 }
