@@ -39,11 +39,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnAdd" pref="131" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="drpdwnStatus" max="32767" attributes="0"/>
-                              <Component id="txtHospitalName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtHospitalLocation" alignment="0" pref="131" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="drpdwnStatus" max="32767" attributes="0"/>
+                          <Component id="txtHospitalName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtHospitalLocation" alignment="0" pref="131" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -101,10 +99,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtHospitalAdminName" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblHospitalStatus" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="drpdwnStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="drpdwnStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHospitalStatus" min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="lblHospitalAdminName" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>

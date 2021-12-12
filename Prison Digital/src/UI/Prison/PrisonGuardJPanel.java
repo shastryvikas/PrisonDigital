@@ -5,11 +5,13 @@
  */
 package UI.Prison;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Prison.Attendance;
 import Model.Prison.Prison;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -170,7 +172,9 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         a.setTotal(Integer.parseInt(total.getText()));
         prison.getManagement().getAttendanceRecords().add(a);
         populateTable();
-        resetFields();  
+        resetFields();
+        JOptionPane.showMessageDialog(this, "Attendance has been marked successfully");
+        DB4OUtil.storeSystem(system);
     }//GEN-LAST:event_btnSubmitAttendanceActionPerformed
 
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed

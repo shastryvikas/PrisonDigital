@@ -5,6 +5,7 @@
  */
 package UI.Catering;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.FoodCateringService.FoodCateringService;
 import Model.Prison.CateringContract;
 import Model.PrisonEcosystem;
@@ -167,6 +168,7 @@ public class DeliveryJPanel extends javax.swing.JPanel {
             jButton1.setEnabled(false);
             populateTable();
             JOptionPane.showMessageDialog(this, "Contract approved");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a contract from the table to approve");
         }

@@ -9,6 +9,7 @@ import Model.CriminalJusticeSystem.Case;
 import Model.CriminalJusticeSystem.CaseDirectory;
 import Model.CriminalJusticeSystem.Court;
 import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Person;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
@@ -350,19 +351,21 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblImprisonmentStartDate)
-                    .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblPoliceWorkrequestFeedback)
-                        .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblImprisonmentStartDate)
+                        .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblYearsOfImprisonment)
-                    .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblPrisonWorkrequestFeedback)
-                        .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblYearsOfImprisonment)
+                        .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,6 +404,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             initializeTable();
             resetFields();
             JOptionPane.showMessageDialog(this, "New Case has been added");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new case");
         }
@@ -436,6 +440,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(this, "Case details updated successfully");
                         initializeTable();
                         resetFields();
+                        DB4OUtil.storeSystem(system);
                     }
                 }
             } else {
@@ -467,6 +472,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             txtPrisonWorkrequestFeedback.setVisible(false);
             txtPoliceWorkrequestFeedback.setVisible(false);
             btnProvideFeedback.setVisible(false);
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Feedback fields can't be empty");
         }

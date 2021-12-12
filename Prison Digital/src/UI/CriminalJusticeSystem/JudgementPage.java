@@ -12,6 +12,7 @@ import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import Model.CriminalJusticeSystem.Police;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Prison.Prison;
 import Model.UserAccountManagement.UserAccount;
 import Model.WorkQueue.WorkQueue;
@@ -255,6 +256,7 @@ public class JudgementPage extends javax.swing.JPanel {
                 currentCase.setStatus("Prison and Police Assigned");
             }
             JOptionPane.showMessageDialog(this, "Case updated");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a prison from the table to assign to the case");
         }
@@ -275,6 +277,7 @@ public class JudgementPage extends javax.swing.JPanel {
                 currentCase.setStatus("Prison and Police Assigned");
             }
             JOptionPane.showMessageDialog(this, "Case updated");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a police department from the table to assign to the case");
         }

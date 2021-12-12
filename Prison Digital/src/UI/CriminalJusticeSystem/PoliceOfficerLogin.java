@@ -9,6 +9,7 @@ import Model.CriminalJusticeSystem.Case;
 import Model.CriminalJusticeSystem.CaseDirectory;
 import Model.CriminalJusticeSystem.Court;
 import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.DB4OUtil.DB4OUtil;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
 import Model.WorkQueue.WorkRequest;
@@ -211,6 +212,7 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
             selectedCase.setStatus("Transport Success");
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }
@@ -222,6 +224,7 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
             selectedCase.setStatus("Accepted for transport");
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }
@@ -233,6 +236,7 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
             selectedCase.setStatus("Transport in progress");
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }

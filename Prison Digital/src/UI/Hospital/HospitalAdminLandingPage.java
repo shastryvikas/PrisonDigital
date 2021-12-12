@@ -5,6 +5,7 @@
  */
 package UI.Hospital;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Hospital.Hospital;
 import Model.Prison.HospitalContract;
@@ -388,6 +389,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
             //initializeStaffTable();
             JOptionPane.showMessageDialog(this, txtDesignation.getText() + " Head Appointed");
             resetFields();
+            DB4OUtil.storeSystem(system);
 //            } else {
 //                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
 //            }
@@ -405,7 +407,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
 
         populateContractListTable(contractList);
         JOptionPane.showMessageDialog(this, "The contract has been apporved");
-
+        DB4OUtil.storeSystem(system);
     }//GEN-LAST:event_btnApprovalActionPerformed
 
     public boolean checkInputFields(javax.swing.JTextField txtField) {

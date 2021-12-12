@@ -5,6 +5,7 @@
  */
 package UI.Catering;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Employee.EmployeeDirectory;
 import Model.FoodCateringService.FoodCateringService;
@@ -484,6 +485,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
             initializeStaffTable();
             resetFields();
             JOptionPane.showMessageDialog(this, "New Employee has been added");
+            DB4OUtil.storeSystem(system);
 //            } else {
 //                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
 //            }
@@ -503,6 +505,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
                         employee.getUserAccount().setUsername(txtUserName.getText());
                         employee.setRole(drpdwnDesignation.getSelectedIndex() == 0 ? new Chef() : new DeliveryMan());
                         JOptionPane.showMessageDialog(this, "Staff details updated successfully");
+                        DB4OUtil.storeSystem(system);
                         initializeStaffTable();
                         resetFields();
                     }
@@ -525,6 +528,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
             }
             system.getUserAccountDirectory().deleteUserAccount(selectedStaff.getUserAccount());
             JOptionPane.showMessageDialog(this, "Staff details deleted successfully");
+            DB4OUtil.storeSystem(system);
             initializeStaffTable();
             resetFields();
 
@@ -549,6 +553,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
 
         populateContractTable();
         JOptionPane.showMessageDialog(this, "Delivery Man Assigned");
+        DB4OUtil.storeSystem(system);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -564,6 +569,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
 
         populateContractTable();
         JOptionPane.showMessageDialog(this, "Chef Assigned");
+        DB4OUtil.storeSystem(system);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -574,6 +580,7 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
             a.setStatus("Approved and Active");
             populateContractTable();
             JOptionPane.showMessageDialog(this, "Contract approved");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a contract to approve");
         }

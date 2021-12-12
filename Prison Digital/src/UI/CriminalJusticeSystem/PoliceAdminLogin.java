@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import Model.CriminalJusticeSystem.Police;
+import Model.DB4OUtil.DB4OUtil;
 import Model.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -328,6 +329,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
             initializeStaffTable();
             resetFields();
             JOptionPane.showMessageDialog(this, "New Police officer has been added");
+            DB4OUtil.storeSystem(system);
 //            } else {
 //                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
 //            }
@@ -356,6 +358,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(this, "Officer details updated successfully");
                         initializeStaffTable();
                         resetFields();
+                        DB4OUtil.storeSystem(system);
                     }
                 }
             } else {
@@ -374,7 +377,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Officer details deleted successfully");
             initializeStaffTable();
             resetFields();
-
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a officer to delete from the table");
         }
@@ -400,6 +403,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                         }
                         JOptionPane.showMessageDialog(this, "Assigned the case to the selected police officer");
                         initializeCaseTable();
+                        DB4OUtil.storeSystem(system);
                         break;
                     }
                 }

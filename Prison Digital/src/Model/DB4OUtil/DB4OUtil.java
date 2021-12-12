@@ -32,7 +32,7 @@ public class DB4OUtil {
         }
     }
 
-    private ObjectContainer createConnection() {
+    private static ObjectContainer createConnection() {
         try {
 
             EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
@@ -54,7 +54,7 @@ public class DB4OUtil {
         return null;
     }
 
-    public synchronized void storeSystem(PrisonEcosystem system) {
+    public synchronized static void storeSystem(PrisonEcosystem system) {
         ObjectContainer conn = createConnection();
         conn.store(system);
         conn.commit();

@@ -113,21 +113,25 @@
                   <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblImprisonmentStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtImprisonmentStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="lblPoliceWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPoliceWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblImprisonmentStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtImprisonmentStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblYearsOfImprisonment" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtYearsOfImprisonment" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="lblPrisonWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPrisonWorkrequestFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblYearsOfImprisonment" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtYearsOfImprisonment" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>

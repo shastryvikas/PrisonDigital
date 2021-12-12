@@ -6,6 +6,7 @@
 package UI.Prison;
 
 import Model.CriminalJusticeSystem.Case;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Hospital.Hospital;
 import Model.Prison.HospitalContract;
@@ -305,6 +306,8 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
                 
                 populateTable();
                 resetFields();
+                DB4OUtil.storeSystem(system);
+                JOptionPane.showMessageDialog(null, "Contract requested");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
@@ -322,6 +325,8 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
             prison.getManagement().setHospitalContract(null);
             c.getHospital().getManagement().getContract().remove(c);
             populateTable();
+            DB4OUtil.storeSystem(system);
+            JOptionPane.showMessageDialog(this, "Contract has been ended");
         }
         
     }//GEN-LAST:event_endButtonActionPerformed

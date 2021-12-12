@@ -6,6 +6,7 @@
 package UI.SysAdmin;
 
 import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Location;
 import Model.PrisonEcosystem;
@@ -274,6 +275,7 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
                 initializeTable();
                 resetFields();
                 JOptionPane.showMessageDialog(this, "New Criminal Justice System(CJS) has been added");
+                DB4OUtil.storeSystem(system);
             } else {
                 JOptionPane.showMessageDialog(this, "CJS name already exists, try a different name");
             }
@@ -299,6 +301,7 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
                         initializeTable();
                         resetFields();
                         JOptionPane.showMessageDialog(this, "Criminal Justice System details updated successfully");
+                        DB4OUtil.storeSystem(system);
                         break;
                     }
                 }

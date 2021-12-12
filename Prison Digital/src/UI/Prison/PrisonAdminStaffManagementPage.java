@@ -5,6 +5,7 @@
  */
 package UI.Prison;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Prison.Prison;
 import Model.PrisonEcosystem;
@@ -267,6 +268,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             Employee staff = new Employee(system, name, username, password, user.getEnterprise(), new PrisonStaff());
             prison.getManagement().setGuardAdmin(staff);
             JOptionPane.showMessageDialog(null, "Guard Added");
+            DB4OUtil.storeSystem(system);
         } else if (des.getSelectedItem().toString().equals("Infirmary Supervisor")) {
             if (prison.getManagement().getInfirmaryAdmin() != null) {
                 JOptionPane.showMessageDialog(null, "Infirmary Supervisor Already Exists");
@@ -275,6 +277,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             Employee staff = new Employee(system, name, username, password, user.getEnterprise(), new InfirmaryAdmin());
             prison.getManagement().setInfirmaryAdmin(staff);
             JOptionPane.showMessageDialog(null, "Infirmary Supervisor Added");
+            DB4OUtil.storeSystem(system);
         } else if (des.getSelectedItem().toString().equals("Dining Supervisor")) {
             if (prison.getManagement().getDiningAdmin() != null) {
                 JOptionPane.showMessageDialog(null, "Dining Supervisor Already Exists");
@@ -283,6 +286,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
             Employee staff = new Employee(system, name, username, password, user.getEnterprise(), new DiningAdmin());
             prison.getManagement().setDiningAdmin(staff);
             JOptionPane.showMessageDialog(null, "Dining Supervisor Added");
+            DB4OUtil.storeSystem(system);
         };
         
         populateTable();
@@ -312,6 +316,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
                 
                 populateTable();
                 resetFields();
+                DB4OUtil.storeSystem(system);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
@@ -375,6 +380,7 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
 //                };
                 populateTable();
                 resetFields();
+                DB4OUtil.storeSystem(system);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to delete the account");

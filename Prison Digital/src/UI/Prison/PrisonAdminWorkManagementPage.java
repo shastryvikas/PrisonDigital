@@ -6,6 +6,7 @@
 package UI.Prison;
 
 import Model.CriminalJusticeSystem.Case;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Prison.Prison;
 import Model.Prison.Unit;
@@ -423,6 +424,7 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                         }
                         populateTable();
                         JOptionPane.showMessageDialog(null, "Prisoner has been locked up in the cell");
+                        DB4OUtil.storeSystem(system);
                     } else {
                         JOptionPane.showMessageDialog(null, "Prisoner not yet transported to prison");
                     }
@@ -465,6 +467,7 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
                 prison.getInfrastructure().getCellsOccupied().remove(u);
                 populateTable();
                 JOptionPane.showMessageDialog(null, "Prisoner has been released");
+                DB4OUtil.storeSystem(system);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to process the case");
@@ -477,6 +480,7 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         if (!prison.getInfrastructure().getCellsEmpty().isEmpty()) {
             prison.getInfrastructure().getCellsEmpty().remove(0);
             populateTable();
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(null, "There are no more cells to remove");
         }
@@ -488,6 +492,7 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
 
         prison.getInfrastructure().getCellsEmpty().add(new Unit());
         populateTable();
+        DB4OUtil.storeSystem(system);
 
     }//GEN-LAST:event_jButton5ActionPerformed
 

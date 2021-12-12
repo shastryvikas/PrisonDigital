@@ -5,6 +5,7 @@
  */
 package UI.SysAdmin;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.FoodCateringService.FoodCateringService;
 import Model.Location;
@@ -265,6 +266,7 @@ public class ManageCaterers extends javax.swing.JPanel {
                 initializeTable();
                 resetFields();
                 JOptionPane.showMessageDialog(this, "New Caterer has been added");
+                DB4OUtil.storeSystem(system);
             } else {
                 JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
             }
@@ -290,6 +292,7 @@ public class ManageCaterers extends javax.swing.JPanel {
                         initializeTable();
                         resetFields();
                         JOptionPane.showMessageDialog(this, "Caterer details updated successfully");
+                        DB4OUtil.storeSystem(system);
                         break;
                     }
                 }

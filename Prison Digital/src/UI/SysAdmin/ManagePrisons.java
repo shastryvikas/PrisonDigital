@@ -5,6 +5,7 @@
  */
 package UI.SysAdmin;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.Location;
 import Model.Prison.Prison;
@@ -23,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Thejas
  */
 public class ManagePrisons extends javax.swing.JPanel {
-
+    
     JPanel container;
     PrisonEcosystem system;
     Prison selectedPrison;
@@ -43,24 +44,24 @@ public class ManagePrisons extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
-
+            
             @Override
             public void mousePressed(MouseEvent e) {
                 initializeFields();
             }
-
+            
             @Override
             public void mouseReleased(MouseEvent e) {
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent e) {
             }
-
+            
             @Override
             public void mouseExited(MouseEvent e) {
             }
-
+            
             private void initializeFields() {
                 selectedPrison = (Prison) tblPrisons.getModel().getValueAt(tblPrisons.getSelectedRow(), 0);
                 txtPrisonName.setText(selectedPrison.getName());
@@ -267,6 +268,7 @@ public class ManagePrisons extends javax.swing.JPanel {
                 initializeTable();
                 resetFields();
                 JOptionPane.showMessageDialog(this, "New Prison has been added");
+                DB4OUtil.storeSystem(system);
             } else {
                 JOptionPane.showMessageDialog(this, "Prison name already exists, try a different name");
             }
@@ -292,6 +294,7 @@ public class ManagePrisons extends javax.swing.JPanel {
                         initializeTable();
                         resetFields();
                         JOptionPane.showMessageDialog(this, "Prison details updated successfully");
+                        DB4OUtil.storeSystem(system);
                         break;
                     }
                 }
@@ -308,11 +311,11 @@ public class ManagePrisons extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
-
+    
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
-
+    
     public boolean checkInputFields(javax.swing.JTextField txtField) {
         return txtField.getText() != null && !txtField.getText().isEmpty();
     }
@@ -355,7 +358,7 @@ public class ManagePrisons extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void resetFields() {
         txtPrisonLocation.setText("");
         txtPrisonAdminUsername.setText("");
@@ -364,7 +367,7 @@ public class ManagePrisons extends javax.swing.JPanel {
         txtPrisonAdminName.setText("");
         drpdwnStatus.setSelectedIndex(0);
     }
-
+    
     private boolean checkIfPrisonNameIsUnique() {
         if (checkInputFields(txtPrisonName)) {
             for (Prison prison : system.getPrisons()) {

@@ -10,6 +10,7 @@ import Model.CriminalJusticeSystem.CriminalJusticeSystem;
 import Model.Employee.Employee;
 import Model.PrisonEcosystem;
 import Model.CriminalJusticeSystem.Police;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Role.Judge;
 import Model.Role.PoliceAdmin;
 import Model.UserAccountManagement.UserAccount;
@@ -483,6 +484,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             initializeCourtTable();
             resetCourtFields();
             JOptionPane.showMessageDialog(this, "New Court has been added");
+            DB4OUtil.storeSystem(system);
 //            } else {
 //                JOptionPane.showMessageDialog(this, "Prison name already exists, try a different name");
 //            }
@@ -506,6 +508,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             initializeCourtTable();
             resetCourtFields();
             JOptionPane.showMessageDialog(this, "Court and Judge details deleted successfully");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a court to delete from the table");
         }
@@ -524,6 +527,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
                         initializeCourtTable();
                         resetCourtFields();
                         JOptionPane.showMessageDialog(this, "Court and judge details updated successfully");
+                        DB4OUtil.storeSystem(system);
                         break;
                     }
                 }
@@ -549,6 +553,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             inititalizePoliceDepartmentTable();
             resetPolcieDepartmentFields();
             JOptionPane.showMessageDialog(this, "New Police department has been added");
+            DB4OUtil.storeSystem(system);
 //            } else {
 //                JOptionPane.showMessageDialog(this, "Prison name already exists, try a different name");
 //            }
@@ -565,6 +570,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             inititalizePoliceDepartmentTable();
             resetPolcieDepartmentFields();
             JOptionPane.showMessageDialog(this, "Police department details deleted successfully");
+            DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a police department to delete from the table");
         }
@@ -584,6 +590,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
                         inititalizePoliceDepartmentTable();
                         resetPolcieDepartmentFields();
                         JOptionPane.showMessageDialog(this, "Polcie department and polcie admin details updated successfully");
+                        DB4OUtil.storeSystem(system);
                         break;
                     }
                 }

@@ -5,6 +5,7 @@
  */
 package UI.Hospital;
 
+import Model.DB4OUtil.DB4OUtil;
 import Model.Hospital.Hospital;
 import Model.Prison.HospitalContract;
 import Model.PrisonEcosystem;
@@ -175,6 +176,7 @@ public class HospitalStaffLogin extends javax.swing.JPanel {
 
         populateContractListTable(contractList);
         JOptionPane.showMessageDialog(this, "Contract has been approved");
+        DB4OUtil.storeSystem(system);
     }//GEN-LAST:event_btnSaveActionPerformed
 
 

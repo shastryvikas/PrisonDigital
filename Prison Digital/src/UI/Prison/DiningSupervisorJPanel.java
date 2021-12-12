@@ -6,6 +6,7 @@
 package UI.Prison;
 
 import Model.CriminalJusticeSystem.Case;
+import Model.DB4OUtil.DB4OUtil;
 import Model.Employee.Employee;
 import Model.FoodCateringService.FoodCateringService;
 import Model.Prison.CateringContract;
@@ -275,6 +276,8 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
                     f.getManagement().getFoodOrders().add(contract);
                     
                     populateTable();
+                    DB4OUtil.storeSystem(system);
+                    JOptionPane.showMessageDialog(this, "Contract requested");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Please select a row to delete the account");
@@ -298,6 +301,7 @@ public class DiningSupervisorJPanel extends javax.swing.JPanel {
             c.getFoodCateringService().getManagement().getFoodOrders().remove(c);
             populateTable();
             JOptionPane.showMessageDialog(this, "Contract ended");
+            DB4OUtil.storeSystem(system);
         }
         
     }//GEN-LAST:event_endButtonActionPerformed
