@@ -30,6 +30,8 @@ public class Court extends Organization{
     }
 
     public CaseDirectory getCaseDirectory() {
+        if(caseDirectory == null)
+            caseDirectory = new CaseDirectory();
         return caseDirectory;
     }
 

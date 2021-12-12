@@ -682,9 +682,9 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     }
 
     private void resetPolcieDepartmentFields() {
-    txtPoliceDepartmentName.setText("");
-    txtPoliceDepartmentAdminPassword.setText("");
-    txtPoliceDepartmentAdminName.setText("");
-    txtPolcieDepartmentAdminUsername.setText("");
+        txtPoliceDepartmentName.setText("");
+        txtPoliceDepartmentAdminPassword.setText("");
+        txtPoliceDepartmentAdminName.setText("");
+        txtPolcieDepartmentAdminUsername.setText("");
     }
 }

@@ -7,6 +7,7 @@ package Model.Role;
 
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
+import UI.CriminalJusticeSystem.PoliceOfficerLogin;
 import javax.swing.JPanel;
 
 /**
@@ -17,7 +18,7 @@ public class Police extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      return new  PoliceOfficerLogin(userProcessContainer, account, business);//To change body of generated methods, choose Tools | Templates.
     }
     
 }

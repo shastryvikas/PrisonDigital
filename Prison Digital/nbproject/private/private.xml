@@ -3,7 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/udayindukuri/Downloads/PrisonDigital/Prison%20Digital/src/UI/MainJFrame.java</file>
+=======
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/Case.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/JudgeLandingPage.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/Court.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/CriminalJusticeSystem.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/Police.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/PoliceOfficerLogin.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/PoliceAdminLogin.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/CriminalJusticeSystem/JudgementPage.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/Employee/Employee.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/Model/CriminalJusticeSystem/CaseDirectory.java</file>
+            <file>file:/C:/Users/theja/Documents/Prison%20Digital%20-%20Dev/PrisonDigital/Prison%20Digital/src/UI/Catering/CateringAdminJPanel.java</file>
+>>>>>>> f1b6adb22031919eb2f64a9481b0ff43785a19ab
         </group>
     </open-files>
 </project-private>

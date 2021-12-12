@@ -5,8 +5,18 @@
  */
 package UI.CriminalJusticeSystem;
 
+import Model.CriminalJusticeSystem.Case;
+import Model.CriminalJusticeSystem.CriminalJusticeSystem;
+import Model.PrisonEcosystem;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import Model.CriminalJusticeSystem.Police;
+import Model.Prison.Prison;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,14 +26,87 @@ public class JudgementPage extends javax.swing.JPanel {
 
     JPanel container;
     CardLayout layout;
+    PrisonEcosystem system;
+    Case currentCase;
+    CriminalJusticeSystem criminalJusticeSystem;
+    ArrayList<Police> listOfPoliceDepartments;
+    ArrayList<Prison> listOfPrisons;
+    Police selectedPoliceDepartment;
+    Prison selectedPrison;
+
     /**
      * Creates new form JudgementPage
+     *
      * @param container
+     * @param currentCase
+     * @param criminalJusticeSystem
+     * @param system
      */
-    public JudgementPage(JPanel container) {
+    public JudgementPage(JPanel container, Case currentCase, CriminalJusticeSystem criminalJusticeSystem, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
+        this.system = system;
+        this.currentCase = currentCase;
+        this.criminalJusticeSystem = criminalJusticeSystem;
+        listOfPrisons = system.getPrisons();
+        listOfPoliceDepartments = this.criminalJusticeSystem.getListOfPolice();
+        initializeTables();
+
+        prisontbl.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializeFields() {
+                selectedPrison = (Prison) prisontbl.getModel().getValueAt(prisontbl.getSelectedRow(), 0);
+            }
+        });
+
+        policetbl.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initializeFields();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            private void initializeFields() {
+                selectedPoliceDepartment = (Police) policetbl.getModel().getValueAt(policetbl.getSelectedRow(), 0);
+                
+            }
+        });
     }
 
     /**
@@ -35,34 +118,13 @@ public class JudgementPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblCaseJudgement = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaCaseJudgement = new javax.swing.JTextArea();
-        lblIprisonmentType = new javax.swing.JLabel();
-        drpdwnImprisonmentType = new javax.swing.JComboBox<>();
-        lblAssignPolicePersonel = new javax.swing.JLabel();
-        drpdwnPolicePersonel = new javax.swing.JComboBox<>();
-        lblAssignToPrison = new javax.swing.JLabel();
-        drpdwnAssignToPrison = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
-
-        lblCaseJudgement.setText("Case Judgement: ");
-
-        txtAreaCaseJudgement.setColumns(20);
-        txtAreaCaseJudgement.setRows(5);
-        jScrollPane1.setViewportView(txtAreaCaseJudgement);
-
-        lblIprisonmentType.setText("Imprisonment Type:");
-
-        drpdwnImprisonmentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblAssignPolicePersonel.setText("Assign Police personel");
-
-        drpdwnPolicePersonel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblAssignToPrison.setText("Assign to prison");
-
-        drpdwnAssignToPrison.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jScrollPane3 = new javax.swing.JScrollPane();
+        prisontbl = new javax.swing.JTable();
+        btnAssignPrison = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        policetbl = new javax.swing.JTable();
+        btnAssignPolicecDepartment = new javax.swing.JButton();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -71,49 +133,92 @@ public class JudgementPage extends javax.swing.JPanel {
             }
         });
 
+        prisontbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Department name", "Admin name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(prisontbl);
+
+        btnAssignPrison.setText("Assign prisons");
+        btnAssignPrison.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignPrisonActionPerformed(evt);
+            }
+        });
+
+        policetbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Department name", "Admin name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(policetbl);
+
+        btnAssignPolicecDepartment.setText("Assign Police Department");
+        btnAssignPolicecDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignPolicecDepartmentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAssignToPrison, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblIprisonmentType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCaseJudgement, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblAssignPolicePersonel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(drpdwnPolicePersonel, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnImprisonmentType, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnAssignToPrison, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addComponent(btnAssignPolicecDepartment)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane3))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(316, 316, 316)
+                .addComponent(btnAssignPrison, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCaseJudgement))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIprisonmentType)
-                    .addComponent(drpdwnImprisonmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(drpdwnPolicePersonel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAssignPolicePersonel))
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(drpdwnAssignToPrison, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAssignToPrison))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAssignPrison, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAssignPolicecDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack)
                 .addContainerGap())
         );
@@ -123,20 +228,72 @@ public class JudgementPage extends javax.swing.JPanel {
         // TODO add your handling code here:
         container.remove(this);
         layout.previous(container);
-        
+
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAssignPrisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignPrisonActionPerformed
+        // TODO add your handling code here:
+        if (selectedPrison != null) {
+            currentCase.setPrison(selectedPrison);
+            if(currentCase.getProcessingPoliceDepartment() == null)
+                currentCase.setStatus("Prison Assigned");
+            else
+                currentCase.setStatus("Prison and Police Assigned");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a prison from the table to assign to the case");
+        }
+    }//GEN-LAST:event_btnAssignPrisonActionPerformed
+
+    private void btnAssignPolicecDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignPolicecDepartmentActionPerformed
+        // TODO add your handling code here:
+        if (selectedPoliceDepartment != null) {
+            currentCase.setProcessingPoliceDepartment(selectedPoliceDepartment);
+            if(currentCase.getPrison() == null)
+                currentCase.setStatus("Police Assigned");
+            else
+                currentCase.setStatus("Prison and Police Assigned");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a police department from the table to assign to the case");
+        }
+    }//GEN-LAST:event_btnAssignPolicecDepartmentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssignPolicecDepartment;
+    private javax.swing.JButton btnAssignPrison;
     private javax.swing.JButton btnBack;
-    private javax.swing.JComboBox<String> drpdwnAssignToPrison;
-    private javax.swing.JComboBox<String> drpdwnImprisonmentType;
-    private javax.swing.JComboBox<String> drpdwnPolicePersonel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblAssignPolicePersonel;
-    private javax.swing.JLabel lblAssignToPrison;
-    private javax.swing.JLabel lblCaseJudgement;
-    private javax.swing.JLabel lblIprisonmentType;
-    private javax.swing.JTextArea txtAreaCaseJudgement;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable policetbl;
+    private javax.swing.JTable prisontbl;
     // End of variables declaration//GEN-END:variables
+
+    private void initializeTables() {
+        DefaultTableModel tablemodel = (DefaultTableModel) policetbl.getModel();
+        tablemodel.setRowCount(0);
+        if (!listOfPoliceDepartments.isEmpty()) {
+            for (Police police : listOfPoliceDepartments) {
+                if (police != null) {
+                    Object[] row = new Object[2];
+                    row[0] = police;
+                    row[1] = police.getPoliceAdmin().getName();
+                    tablemodel.addRow(row);
+                }
+            }
+        }
+        
+        
+        DefaultTableModel prisonTableModel = (DefaultTableModel) prisontbl.getModel();
+        prisonTableModel.setRowCount(0);
+        if (!listOfPrisons.isEmpty()) {
+            for (Prison prison : listOfPrisons) {
+                if (prison != null) {
+                    Object[] row = new Object[2];
+                    row[0] = prison;
+                    row[1] = prison.getManagement().getAdmin().getName();
+                    prisonTableModel.addRow(row);
+                }
+            }
+        }
+    }
 }
