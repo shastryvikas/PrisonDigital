@@ -19,6 +19,33 @@ public class HospitalContract {
     int psychologists;
     int generalDocs;
     String status;
+    Boolean patientCareTechApproval = false;
+    Boolean psychologistsApproval = false;
+    Boolean generalDocsApproval = false;
+
+    public Boolean getPatientCareTechApproval() {
+        return patientCareTechApproval;
+    }
+
+    public void setPatientCareTechApproval(Boolean patientCareTechApproval) {
+        this.patientCareTechApproval = patientCareTechApproval;
+    }
+
+    public Boolean getPsychologistsApproval() {
+        return psychologistsApproval;
+    }
+
+    public void setPsychologistsApproval(Boolean psychologistsApproval) {
+        this.psychologistsApproval = psychologistsApproval;
+    }
+
+    public Boolean getGeneralDocsApproval() {
+        return generalDocsApproval;
+    }
+
+    public void setGeneralDocsApproval(Boolean generalDocsApproval) {
+        this.generalDocsApproval = generalDocsApproval;
+    }
 
     public Hospital getHospital() {
         return hospital;
@@ -68,6 +95,9 @@ public class HospitalContract {
         this.status = status;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.getPrison().getName();
+    }
     
 }

@@ -5,9 +5,15 @@
  */
 package UI.Catering;
 
+import Model.FoodCateringService.FoodCateringService;
+import Model.Prison.CateringContract;
 import Model.PrisonEcosystem;
+import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,12 +28,69 @@ public class ChefJPanel extends javax.swing.JPanel {
     JPanel container;
     CardLayout layout;
     PrisonEcosystem system;
+    FoodCateringService cateringService;
+    UserAccount user;
     
-    public ChefJPanel(JPanel container, PrisonEcosystem system) {
+    public ChefJPanel(JPanel container,UserAccount user, PrisonEcosystem system) {
         initComponents();
         this.container = container;
         layout = (CardLayout) container.getLayout();
         this.system = system;
+        cateringService = (FoodCateringService) user.getEnterprise();
+        this.user = user;
+        
+        populateTable();
+        PrisonStaffJTable1.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+                updateDetails(a);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+
+    }
+    
+    private void updateDetails(CateringContract contract){
+        if(contract.getChefApproval()){
+            jButton1.setEnabled(false);
+        } else {
+            jButton1.setEnabled(true);
+        }
+    }
+    
+    private void populateTable(){
+        
+        DefaultTableModel tablemodel = (DefaultTableModel) PrisonStaffJTable1.getModel();
+        tablemodel.setRowCount(0);
+        for (CateringContract c : cateringService.getManagement().getFoodOrders()) {
+                if (c != null & c.getChef().getUserAccount().getUsername().equals(user.getUsername())) {
+                    Object[] row = new Object[5];
+                    row[0] = c;
+                    row[1] = c.getPrisonerCount() + "";
+                    row[2] = c.getChef().getName();
+                    row[3] = c.getChefApproval().toString();
+                    row[4] = c.getStatus();
+                    
+                    tablemodel.addRow(row);
+                }
+            }
     }
 
     /**
@@ -42,20 +105,17 @@ public class ChefJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         PrisonStaffJTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        lblChangeOrderStatus = new javax.swing.JLabel();
-        jComboOrderStatus = new javax.swing.JComboBox<>();
-        btnLogout = new javax.swing.JButton();
-        btnSubmit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         PrisonStaffJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Prisoner Count", "Contract Duration", "Chef", "Delivery Agent", "Order Status"
+                "Prison", "Prisoner Count", "Chef", "Chef Approval", "Order Status"
             }
         ));
         jScrollPane2.setViewportView(PrisonStaffJTable1);
@@ -65,29 +125,17 @@ public class ChefJPanel extends javax.swing.JPanel {
         jLabel1.setText("Chef Work Area");
         jLabel1.setOpaque(true);
 
-        lblChangeOrderStatus.setText("Change Order Status");
-
-        jComboOrderStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnLogout.setText("Logout");
-
-        btnSubmit.setText("Submit");
+        jButton1.setText("Approve");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSubmit)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblChangeOrderStatus)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +143,7 @@ public class ChefJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogout)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,27 +152,28 @@ public class ChefJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblChangeOrderStatus)
-                    .addComponent(jComboOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSubmit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addContainerGap())
+                .addComponent(jButton1)
+                .addContainerGap(311, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        CateringContract a = (CateringContract) PrisonStaffJTable1.getModel().getValueAt(PrisonStaffJTable1.getSelectedRow(), 0);
+        a.setChefApproval(Boolean.TRUE);
+        jButton1.setEnabled(false);
+        populateTable();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PrisonStaffJTable1;
-    private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnSubmit;
-    private javax.swing.JComboBox<String> jComboOrderStatus;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblChangeOrderStatus;
     // End of variables declaration//GEN-END:variables
 }

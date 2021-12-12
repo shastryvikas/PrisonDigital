@@ -137,6 +137,11 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         jScrollPane1.setViewportView(caseTable);
 
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Prisoner Name:");
 
@@ -400,6 +405,14 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         populateTable();
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        container.remove(this);
+        cardLayoutPointer.previous(container);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

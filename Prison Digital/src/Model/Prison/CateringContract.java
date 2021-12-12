@@ -20,6 +20,24 @@ public class CateringContract {
     String status;
     Employee chef;
     Employee deliveryMan;
+    Boolean chefApproval = false;
+    Boolean deliveryManApproval = false;
+
+    public Boolean getChefApproval() {
+        return chefApproval;
+    }
+
+    public void setChefApproval(Boolean chefApproval) {
+        this.chefApproval = chefApproval;
+    }
+
+    public Boolean getDeliveryManApproval() {
+        return deliveryManApproval;
+    }
+
+    public void setDeliveryManApproval(Boolean deliveryManApproval) {
+        this.deliveryManApproval = deliveryManApproval;
+    }
 
     public FoodCateringService getFoodCateringService() {
         return foodCateringService;
@@ -67,6 +85,11 @@ public class CateringContract {
 
     public void setDeliveryMan(Employee deliveryMan) {
         this.deliveryMan = deliveryMan;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getPrison().getName();
     }
     
     

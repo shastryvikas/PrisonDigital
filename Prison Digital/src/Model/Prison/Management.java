@@ -19,14 +19,24 @@ public class Management extends Organization{
     Employee admin;
     Employee DiningAdmin;
     Employee InfirmaryAdmin;
-    EmployeeDirectory staff;
+    Employee GuardAdmin;
     ArrayList<Prisoner> prisoners;
     CaseDirectory caseDirectory;
     HospitalContract hospitalContract;
     CateringContract cateringContract;
     ArrayList<Attendance> attendanceRecords;
 
+    public Employee getGuardAdmin() {
+        return GuardAdmin;
+    }
+
+    public void setGuardAdmin(Employee GuardAdmin) {
+        this.GuardAdmin = GuardAdmin;
+    }
+
     public ArrayList<Attendance> getAttendanceRecords() {
+        if(attendanceRecords == null)
+            attendanceRecords = new ArrayList<Attendance>();
         return attendanceRecords;
     }
 
@@ -51,6 +61,8 @@ public class Management extends Organization{
     }
 
     public CaseDirectory getCaseDirectory() {
+        if(caseDirectory == null)
+            caseDirectory = new CaseDirectory();
         return caseDirectory;
     }
 
@@ -80,16 +92,6 @@ public class Management extends Organization{
 
     public void setInfirmaryAdmin(Employee InfirmaryAdmin) {
         this.InfirmaryAdmin = InfirmaryAdmin;
-    }
-
-    public EmployeeDirectory getStaff() {
-        if(staff == null)
-            staff = new EmployeeDirectory();
-        return staff;
-    }
-
-    public void setStaff(EmployeeDirectory staff) {
-        this.staff = staff;
     }
 
     public ArrayList<Prisoner> getPrisoners() {

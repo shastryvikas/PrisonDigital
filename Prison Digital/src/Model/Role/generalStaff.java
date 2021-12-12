@@ -19,7 +19,7 @@ public class generalStaff extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, PrisonEcosystem business) {
-        return new HospitalStaffLogin(userProcessContainer, business);
+        return new HospitalStaffLogin(userProcessContainer,account, business);
     }
     
 }

@@ -27,6 +27,7 @@ public class Case {
     private Employee transportedToPrisonBy;
     private Prison prison;
     private Unit cell;
+    private static int count = 2361;
 
     public Unit getCell() {
         return cell;
