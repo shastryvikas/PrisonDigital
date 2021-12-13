@@ -8,7 +8,11 @@ package UI;
 import Model.DB4OUtil.DB4OUtil;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
+import UI.SysAdmin.BackgroundImage;
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,10 +28,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private PrisonEcosystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
-    public MainJFrame() {
+    public MainJFrame() throws IOException {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         //this.setSize(1680, 1050);
+        
+        CardLayout cardLayout = (CardLayout) container.getLayout();
+            container.add("Background", new BackgroundImage());
+            cardLayout.next(container);
     }
 
     /**
@@ -206,6 +214,15 @@ public class MainJFrame extends javax.swing.JFrame {
         crdLyt.next(container);
         dB4OUtil.storeSystem(system);
         
+        
+        CardLayout cardLayout = (CardLayout) container.getLayout();
+        try {
+            container.add("Background", new BackgroundImage());
+        } catch (IOException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            cardLayout.next(container);
+        
     }//GEN-LAST:event_jLabel5MouseClicked
                                            
 
@@ -240,7 +257,11 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                try {
+                    new MainJFrame().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
