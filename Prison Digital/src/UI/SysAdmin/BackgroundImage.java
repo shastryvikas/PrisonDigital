@@ -24,7 +24,7 @@ public class BackgroundImage extends javax.swing.JPanel {
     public BackgroundImage() throws IOException {
         initComponents();
         
-        BufferedImage wPic = ImageIO.read(new File("src/backgroundAED.jpeg"));
+        BufferedImage wPic = ImageIO.read(new File("src/backgroundAED.png"));
         jLabel1.setIcon(new ImageIcon(new ImageIcon(wPic).getImage().getScaledInstance(1150, 700, Image.SCALE_DEFAULT)));
         
     }
