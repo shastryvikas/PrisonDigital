@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Thejas
  */
 public class PoliceOfficerLogin extends javax.swing.JPanel {
-    
+
     JPanel container;
     UserAccount account;
     PrisonEcosystem system;
@@ -48,30 +48,30 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         this.account = account;
         this.system = system;
         initializeTable();
-        txtFeedback.setVisible(false);
-        lblFeedback.setVisible(false);
+        txtFeedback.setEnabled(false);
+        lblFeedback.setEnabled(false);
         tblPrisonersToBeTransported.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
-            
+
             @Override
             public void mousePressed(MouseEvent e) {
                 initializeFields();
             }
-            
+
             @Override
             public void mouseReleased(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseEntered(MouseEvent e) {
             }
-            
+
             @Override
             public void mouseExited(MouseEvent e) {
             }
-            
+
             private void initializeFields() {
                 selectedCase = (Case) tblPrisonersToBeTransported.getModel().getValueAt(tblPrisonersToBeTransported.getSelectedRow(), 0);
                 ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
@@ -81,22 +81,22 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
                             && listOfWorkRequest.getStatus().contains("Police work req")) {
                         workreq = listOfWorkRequest;
                         if (workreq.getStatus().equals("Police work req, Prisoner imprisoned") && workreq.getMessage() != null && !workreq.getMessage().isEmpty()) {
-                            lblFeedback.setVisible(true);
+                            lblFeedback.setEnabled(true);
                             txtFeedback.setText(workreq.getMessage());
-                            txtFeedback.setVisible(true);
+                            txtFeedback.setEnabled(true);
                             break;
                         } else {
-                            txtFeedback.setVisible(false);
-                            lblFeedback.setVisible(false);
+                            txtFeedback.setEnabled(false);
+                            lblFeedback.setEnabled(false);
                         }
                     } else {
-                        txtFeedback.setVisible(false);
-                        lblFeedback.setVisible(false);
+                        txtFeedback.setEnabled(false);
+                        lblFeedback.setEnabled(false);
                     }
                 }
             }
         });
-        
+
     }
 
     /**
@@ -113,8 +113,12 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         btnTransportInProgress = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPrisonersToBeTransported = new javax.swing.JTable();
-        txtFeedback = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         lblFeedback = new javax.swing.JLabel();
+        txtFeedback = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         btnPrisonerTransportCompleted.setText("Prisoner Transport Completed");
         btnPrisonerTransportCompleted.addActionListener(new java.awt.event.ActionListener() {
@@ -155,47 +159,78 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblPrisonersToBeTransported);
 
-        txtFeedback.setEnabled(false);
+        jLabel7.setBackground(new java.awt.Color(71, 120, 197));
+        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("   Police Officer");
+        jLabel7.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setOpaque(true);
+        jLabel7.setPreferredSize(new java.awt.Dimension(231, 25));
 
-        lblFeedback.setText("Feedback");
+        jPanel2.setBackground(new java.awt.Color(84, 127, 206));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        lblFeedback.setText("Feedback:");
+
+        txtFeedback.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBeginTransport)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTransportInProgress))
-                            .addComponent(lblFeedback))
-                        .addGap(18, 18, 18)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPrisonerTransportCompleted)
-                            .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBeginTransport, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTransportInProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFeedback)
+                                .addGap(34, 34, 34)
+                                .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrisonerTransportCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBeginTransport)
-                    .addComponent(btnTransportInProgress)
-                    .addComponent(btnPrisonerTransportCompleted))
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFeedback))
-                .addContainerGap(118, Short.MAX_VALUE))
+                    .addComponent(lblFeedback)
+                    .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnPrisonerTransportCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTransportInProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBeginTransport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,6 +282,8 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
     private javax.swing.JButton btnBeginTransport;
     private javax.swing.JButton btnPrisonerTransportCompleted;
     private javax.swing.JButton btnTransportInProgress;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFeedback;
     private javax.swing.JTable tblPrisonersToBeTransported;

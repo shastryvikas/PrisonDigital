@@ -61,6 +61,7 @@ public class JudgementPage extends javax.swing.JPanel {
         this.prisonWorkreq = prisonWorkreq;
         this.policeWorkreq = policeWorkreq;
         initializeTables();
+
         prisontbl.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -133,14 +134,22 @@ public class JudgementPage extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         policetbl = new javax.swing.JTable();
         btnAssignPolicecDepartment = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBack.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 640, 100, 40));
 
+        prisontbl.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         prisontbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -159,13 +168,18 @@ public class JudgementPage extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(prisontbl);
 
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 530, 470));
+
+        btnAssignPrison.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         btnAssignPrison.setText("Assign prison");
         btnAssignPrison.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssignPrisonActionPerformed(evt);
             }
         });
+        add(btnAssignPrison, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 530, 40));
 
+        policetbl.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         policetbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -184,52 +198,41 @@ public class JudgementPage extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(policetbl);
 
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 530, 470));
+
+        btnAssignPolicecDepartment.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         btnAssignPolicecDepartment.setText("Assign Police Department");
         btnAssignPolicecDepartment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssignPolicecDepartmentActionPerformed(evt);
             }
         });
+        add(btnAssignPolicecDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 580, 530, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(btnAssignPolicecDepartment)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4)
-                            .addComponent(jScrollPane3))
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(316, 316, 316)
-                .addComponent(btnAssignPrison, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jLabel7.setBackground(new java.awt.Color(71, 120, 197));
+        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("   Court Administrator");
+        jLabel7.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setOpaque(true);
+        jLabel7.setPreferredSize(new java.awt.Dimension(231, 25));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 1090, 60));
+
+        jPanel1.setBackground(new java.awt.Color(84, 127, 206));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAssignPrison, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAssignPolicecDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBack)
-                .addContainerGap())
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -288,6 +291,8 @@ public class JudgementPage extends javax.swing.JPanel {
     private javax.swing.JButton btnAssignPolicecDepartment;
     private javax.swing.JButton btnAssignPrison;
     private javax.swing.JButton btnBack;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable policetbl;

@@ -82,24 +82,28 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblJudicialSytemAdmin = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         lblJudicialSystemName = new javax.swing.JLabel();
         txtJudicialSystemName = new javax.swing.JTextField();
         lblJudicialSystemLocation = new javax.swing.JLabel();
         txtJudicialSystemLocation = new javax.swing.JTextField();
-        lblJudicialSystemAdminUsername = new javax.swing.JLabel();
-        txtJudicialSystemAdminUsername = new javax.swing.JTextField();
-        lblJudicialSystemAdminPassword = new javax.swing.JLabel();
-        txtJudicialSystemAdminPassword = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        lblJudicialSystemStatus = new javax.swing.JLabel();
         drpdwnStatus = new javax.swing.JComboBox<>();
+        lblJudicialSystemStatus = new javax.swing.JLabel();
+        lblJudicialSystemAdminUsername = new javax.swing.JLabel();
+        lblJudicialSystemAdminPassword = new javax.swing.JLabel();
         lblJudicialSystemAdminName = new javax.swing.JLabel();
+        txtJudicialSystemAdminUsername = new javax.swing.JTextField();
+        txtJudicialSystemAdminPassword = new javax.swing.JTextField();
         txtJudicialSystemAdminName = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        addBtn1 = new javax.swing.JLabel();
+        updateBtn1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblJudicialSytemAdmin.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         tblJudicialSytemAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -118,151 +122,149 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblJudicialSytemAdmin);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 960, 260));
+
+        jPanel1.setBackground(new java.awt.Color(242, 248, 255));
+
+        lblJudicialSystemName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         lblJudicialSystemName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblJudicialSystemName.setText("Judicial System Name");
 
+        txtJudicialSystemName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblJudicialSystemLocation.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         lblJudicialSystemLocation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblJudicialSystemLocation.setText("Location");
 
-        lblJudicialSystemAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblJudicialSystemAdminUsername.setText("Admin Username");
+        txtJudicialSystemLocation.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
 
-        lblJudicialSystemAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblJudicialSystemAdminPassword.setText("Admin Password");
+        drpdwnStatus.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Service", "Out of Service" }));
 
-        btnAdd.setBackground(new java.awt.Color(244, 208, 129));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
-        btnAdd.setText("Add");
-        btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
-        btnUpdate.setText("Update");
-        btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnBack.setBackground(new java.awt.Color(244, 208, 129));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(0, 0, 0));
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
+        lblJudicialSystemStatus.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         lblJudicialSystemStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblJudicialSystemStatus.setText("Status");
 
-        drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Service", "Out of Service" }));
+        lblJudicialSystemAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblJudicialSystemAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblJudicialSystemAdminUsername.setText("Admin Username");
 
-        lblJudicialSystemAdminName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblJudicialSystemAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblJudicialSystemAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblJudicialSystemAdminPassword.setText("Admin Password");
+
+        lblJudicialSystemAdminName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblJudicialSystemAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblJudicialSystemAdminName.setText("Admin Name");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 703, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblJudicialSystemLocation)
-                            .addComponent(lblJudicialSystemStatus)))
-                    .addComponent(lblJudicialSystemName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtJudicialSystemName)
-                    .addComponent(txtJudicialSystemLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                    .addComponent(drpdwnStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(lblJudicialSystemAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtJudicialSystemAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblJudicialSystemAdminUsername, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblJudicialSystemAdminPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtJudicialSystemAdminUsername)
-                                    .addComponent(txtJudicialSystemAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(125, 125, 125))
+        txtJudicialSystemAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtJudicialSystemAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtJudicialSystemAdminName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblJudicialSystemName, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJudicialSystemLocation)
+                    .addComponent(lblJudicialSystemStatus))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtJudicialSystemName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtJudicialSystemLocation, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(drpdwnStatus, javax.swing.GroupLayout.Alignment.TRAILING, 0, 196, Short.MAX_VALUE))
+                .addGap(108, 108, 108)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblJudicialSystemAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJudicialSystemAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJudicialSystemAdminUsername))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtJudicialSystemAdminPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(txtJudicialSystemAdminUsername, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtJudicialSystemAdminName, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(lblJudicialSystemAdminUsername)
+                                .addComponent(txtJudicialSystemAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(lblJudicialSystemAdminPassword)
+                                .addComponent(txtJudicialSystemAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(txtJudicialSystemAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(94, 94, 94)
+                            .addComponent(lblJudicialSystemAdminName)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(lblJudicialSystemName)
                             .addComponent(txtJudicialSystemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(lblJudicialSystemLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtJudicialSystemLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblJudicialSystemAdminUsername)
-                            .addComponent(txtJudicialSystemAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblJudicialSystemAdminPassword)
-                            .addComponent(txtJudicialSystemAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblJudicialSystemAdminName)
-                            .addComponent(txtJudicialSystemAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblJudicialSystemStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(txtJudicialSystemLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblJudicialSystemStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 1000, 220));
+
+        jPanel2.setBackground(new java.awt.Color(235, 242, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addBtn1.setBackground(new java.awt.Color(120, 168, 255));
+        addBtn1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        addBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addBtn1.setText("Add");
+        addBtn1.setOpaque(true);
+        addBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtn1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(addBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 50));
+
+        updateBtn1.setBackground(new java.awt.Color(120, 168, 255));
+        updateBtn1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        updateBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateBtn1.setText("Update");
+        updateBtn1.setMaximumSize(new java.awt.Dimension(47, 17));
+        updateBtn1.setMinimumSize(new java.awt.Dimension(47, 17));
+        updateBtn1.setOpaque(true);
+        updateBtn1.setPreferredSize(new java.awt.Dimension(47, 17));
+        updateBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateBtn1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(updateBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 50));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 1000, 50));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void addBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtn1MouseClicked
         // TODO add your handling code here:
+
         if (checkInputFields(txtJudicialSystemLocation) && checkInputFields(txtJudicialSystemAdminName) && checkInputFields(txtJudicialSystemName) && checkInputFields(txtJudicialSystemAdminPassword) && checkInputFields(txtJudicialSystemAdminUsername)) {
 //            if (system.getPrisons().checkIfUsernameIsUnique(txtJudicialSystemAdminName.getText())) {
 //String[] locationData =  txtJudicialSystemLocation.getText().split(", ");
@@ -282,17 +284,19 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new CJS");
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+        
+    }//GEN-LAST:event_addBtn1MouseClicked
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void updateBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtn1MouseClicked
         // TODO add your handling code here:
+
         if (checkInputFields(txtJudicialSystemLocation) && checkInputFields(txtJudicialSystemAdminName) && checkInputFields(txtJudicialSystemName) && checkInputFields(txtJudicialSystemAdminPassword) && checkInputFields(txtJudicialSystemAdminUsername)) {
             if (selectedJudicialSystem != null) {
                 for (CriminalJusticeSystem cjs : system.getCriminalJusticeSystems()) {
                     if (selectedJudicialSystem.getName().equals(cjs.getName())) {
-//                        String[] locationData =  txtJudicialSystemLocation.getText().split(", ");
+                        //                        String[] locationData =  txtJudicialSystemLocation.getText().split(", ");
                         cjs.setName(txtJudicialSystemName.getText());
-//                         cjs.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+                        //                         cjs.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
                         cjs.setLocation(new Location(42.338767, -71.087863));
                         cjs.getAdmin().getUserAccount().setUsername(txtJudicialSystemAdminUsername.getText());
                         cjs.getAdmin().getUserAccount().setPassword(txtJudicialSystemAdminPassword.getText());
@@ -309,7 +313,7 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Please select a criminal justice system to update from the table");
             }
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_updateBtn1MouseClicked
     private void initializeTable() {
         ArrayList<CriminalJusticeSystem> cjsDetials = system.getCriminalJusticeSystems();
         DefaultTableModel tablemodel = (DefaultTableModel) tblJudicialSytemAdmin.getModel();
@@ -347,19 +351,12 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
         txtJudicialSystemAdminName.setText("");
         drpdwnStatus.setSelectedIndex(0);
     }
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
-    }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel addBtn1;
     private javax.swing.JComboBox<String> drpdwnStatus;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJudicialSystemAdminName;
     private javax.swing.JLabel lblJudicialSystemAdminPassword;
@@ -373,6 +370,7 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
     private javax.swing.JTextField txtJudicialSystemAdminUsername;
     private javax.swing.JTextField txtJudicialSystemLocation;
     private javax.swing.JTextField txtJudicialSystemName;
+    private javax.swing.JLabel updateBtn1;
     // End of variables declaration//GEN-END:variables
 
     private boolean checkIfCJSNameIsUnique() {

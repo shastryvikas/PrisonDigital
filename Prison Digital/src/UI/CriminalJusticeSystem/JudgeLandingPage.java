@@ -57,11 +57,11 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         this.account = account;
 
         initializeTable();
-        lblPrisonWorkrequestFeedback.setVisible(false);
-        lblPoliceWorkrequestFeedback.setVisible(false);
-        txtPrisonWorkrequestFeedback.setVisible(false);
-        txtPoliceWorkrequestFeedback.setVisible(false);
-        btnProvideFeedback.setVisible(false);
+        lblPrisonWorkrequestFeedback.setEnabled(false);
+        lblPoliceWorkrequestFeedback.setEnabled(false);
+        txtPrisonWorkrequestFeedback.setEnabled(false);
+        txtPoliceWorkrequestFeedback.setEnabled(false);
+        btnProvideFeedback.setEnabled(false);
         tblCases.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -85,18 +85,15 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
 
         });
-        lblPrisonWorkrequestFeedback.setVisible(false);
-        lblPoliceWorkrequestFeedback.setVisible(false);
-        txtPrisonWorkrequestFeedback.setVisible(false);
-        txtPoliceWorkrequestFeedback.setVisible(false);
-        btnProvideFeedback.setVisible(false);
+        lblPrisonWorkrequestFeedback.setEnabled(false);
+        lblPoliceWorkrequestFeedback.setEnabled(false);
+        txtPrisonWorkrequestFeedback.setEnabled(false);
+        txtPoliceWorkrequestFeedback.setEnabled(false);
+        btnProvideFeedback.setEnabled(false);
     }
 
     private void initializeFields() {
         selectedCase = (Case) tblCases.getModel().getValueAt(tblCases.getSelectedRow(), 0);
-//         ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
-//         listOfWorkRequests.removeAll(listOfWorkRequests);
-//         currentCourt.getCaseDirectory().getListOfCases().removeAll(currentCourt.getCaseDirectory().getListOfCases());
         txtCaseVerdict.setText(selectedCase.getVerdict());
         txtPersonName.setText(selectedCase.getAccused().getName());
         txtImprisonmentStartDate.setText(selectedCase.getStartDate().toString());
@@ -127,17 +124,17 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 }
             }
             if (selectedCase.isImprisoned() && null != prisonWorkreq && (prisonWorkreq.getMessage() == null || prisonWorkreq.getMessage().isEmpty()) && null != policeWorkreq && (policeWorkreq.getMessage() == null || policeWorkreq.getMessage().isEmpty())) {
-                lblPrisonWorkrequestFeedback.setVisible(true);
-                lblPoliceWorkrequestFeedback.setVisible(true);
-                txtPrisonWorkrequestFeedback.setVisible(true);
-                txtPoliceWorkrequestFeedback.setVisible(true);
-                btnProvideFeedback.setVisible(true);
+                lblPrisonWorkrequestFeedback.setEnabled(true);
+                lblPoliceWorkrequestFeedback.setEnabled(true);
+                txtPrisonWorkrequestFeedback.setEnabled(true);
+                txtPoliceWorkrequestFeedback.setEnabled(true);
+                btnProvideFeedback.setEnabled(true);
             } else {
-                lblPrisonWorkrequestFeedback.setVisible(false);
-                lblPoliceWorkrequestFeedback.setVisible(false);
-                txtPrisonWorkrequestFeedback.setVisible(false);
-                txtPoliceWorkrequestFeedback.setVisible(false);
-                btnProvideFeedback.setVisible(false);
+                lblPrisonWorkrequestFeedback.setEnabled(false);
+                lblPoliceWorkrequestFeedback.setEnabled(false);
+                txtPrisonWorkrequestFeedback.setEnabled(false);
+                txtPoliceWorkrequestFeedback.setEnabled(false);
+                btnProvideFeedback.setEnabled(false);
             }
         }
     }
@@ -153,28 +150,38 @@ public class JudgeLandingPage extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCases = new javax.swing.JTable();
-        txtPersonName = new javax.swing.JTextField();
+        btnRefresh = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         lblPersonName = new javax.swing.JLabel();
+        txtPersonName = new javax.swing.JTextField();
         lblCaseVerdict = new javax.swing.JLabel();
-        btnCreateCase = new javax.swing.JButton();
-        btnProvideJudgement = new javax.swing.JButton();
-        btnUpdateCase = new javax.swing.JButton();
+        txtCaseVerdict = new javax.swing.JTextField();
         lblImprisonmentStartDate = new javax.swing.JLabel();
         txtImprisonmentStartDate = new javax.swing.JTextField();
         lblYearsOfImprisonment = new javax.swing.JLabel();
         txtYearsOfImprisonment = new javax.swing.JTextField();
-        txtCaseVerdict = new javax.swing.JTextField();
+        btnCreateCase = new javax.swing.JButton();
+        btnUpdateCase = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        btnRefresh = new javax.swing.JButton();
-        lblPoliceWorkrequestFeedback = new javax.swing.JLabel();
-        txtPoliceWorkrequestFeedback = new javax.swing.JTextField();
+        btnProvideJudgement = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
         lblPrisonWorkrequestFeedback = new javax.swing.JLabel();
+        lblPoliceWorkrequestFeedback = new javax.swing.JLabel();
         txtPrisonWorkrequestFeedback = new javax.swing.JTextField();
+        txtPoliceWorkrequestFeedback = new javax.swing.JTextField();
         btnProvideFeedback = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblCases.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         tblCases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -193,14 +200,75 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCases);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1110, 230));
+
+        btnRefresh.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnRefresh.setText("Refresh Table");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 320, -1, -1));
+
+        jLabel7.setBackground(new java.awt.Color(71, 120, 197));
+        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("   Court Administrator");
+        jLabel7.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setOpaque(true);
+        jLabel7.setPreferredSize(new java.awt.Dimension(231, 25));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 1090, 60));
+
+        jPanel1.setBackground(new java.awt.Color(84, 127, 206));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
+
+        jPanel2.setBackground(new java.awt.Color(242, 248, 255));
+
+        lblPersonName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         lblPersonName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPersonName.setText("Person Name");
 
+        txtPersonName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblCaseVerdict.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         lblCaseVerdict.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCaseVerdict.setText("Case verdict");
 
+        txtCaseVerdict.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        txtCaseVerdict.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCaseVerdictActionPerformed(evt);
+            }
+        });
+
+        lblImprisonmentStartDate.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        lblImprisonmentStartDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblImprisonmentStartDate.setText("Imprisonment start date");
+
+        txtImprisonmentStartDate.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblYearsOfImprisonment.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        lblYearsOfImprisonment.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblYearsOfImprisonment.setText("Years of Imprisonment");
+
+        txtYearsOfImprisonment.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
         btnCreateCase.setBackground(new java.awt.Color(244, 208, 129));
-        btnCreateCase.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCreateCase.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         btnCreateCase.setText("Create new Case");
         btnCreateCase.setPreferredSize(new java.awt.Dimension(85, 30));
         btnCreateCase.addActionListener(new java.awt.event.ActionListener() {
@@ -209,18 +277,8 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
         });
 
-        btnProvideJudgement.setBackground(new java.awt.Color(244, 208, 129));
-        btnProvideJudgement.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnProvideJudgement.setText("Assign prison and police");
-        btnProvideJudgement.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnProvideJudgement.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProvideJudgementActionPerformed(evt);
-            }
-        });
-
         btnUpdateCase.setBackground(new java.awt.Color(244, 208, 129));
-        btnUpdateCase.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdateCase.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         btnUpdateCase.setText("Update Case");
         btnUpdateCase.setPreferredSize(new java.awt.Dimension(85, 30));
         btnUpdateCase.addActionListener(new java.awt.event.ActionListener() {
@@ -229,153 +287,182 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
         });
 
-        lblImprisonmentStartDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblImprisonmentStartDate.setText("Imprisonment start date");
+        jLabel16.setBackground(new java.awt.Color(120, 168, 255));
+        jLabel16.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("   Manage Cases");
+        jLabel16.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel16.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel16.setOpaque(true);
+        jLabel16.setPreferredSize(new java.awt.Dimension(231, 25));
 
-        lblYearsOfImprisonment.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblYearsOfImprisonment.setText("Years of Imprisonment");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPersonName)
+                            .addComponent(lblCaseVerdict)
+                            .addComponent(lblImprisonmentStartDate)
+                            .addComponent(lblYearsOfImprisonment))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPersonName)
+                            .addComponent(txtCaseVerdict)
+                            .addComponent(txtImprisonmentStartDate)
+                            .addComponent(txtYearsOfImprisonment)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateCase, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                .addGap(57, 57, 57))
+            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblPersonName)
+                    .addComponent(txtPersonName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblCaseVerdict)
+                    .addComponent(txtCaseVerdict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblImprisonmentStartDate)
+                    .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblYearsOfImprisonment)
+                    .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
+        );
 
-        txtCaseVerdict.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCaseVerdictActionPerformed(evt);
-            }
-        });
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 510, 320));
 
+        jPanel3.setBackground(new java.awt.Color(242, 248, 255));
+
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jLabel1.setText("Prison Assigned:");
 
+        jTextField2.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jTextField2.setEnabled(false);
 
+        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jLabel2.setText("Police Department Assigned:");
 
+        jTextField3.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jTextField3.setEnabled(false);
 
-        btnRefresh.setText("Refresh Table");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+        btnProvideJudgement.setBackground(new java.awt.Color(244, 208, 129));
+        btnProvideJudgement.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnProvideJudgement.setText("Assign prison and police");
+        btnProvideJudgement.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnProvideJudgement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
+                btnProvideJudgementActionPerformed(evt);
             }
         });
 
-        lblPoliceWorkrequestFeedback.setText("Police workrequest feedback");
+        jLabel15.setBackground(new java.awt.Color(120, 168, 255));
+        jLabel15.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("   Process Case");
+        jLabel15.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel15.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel15.setOpaque(true);
+        jLabel15.setPreferredSize(new java.awt.Dimension(231, 25));
 
-        lblPrisonWorkrequestFeedback.setText("Prison workrequest feedback");
+        lblPrisonWorkrequestFeedback.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblPrisonWorkrequestFeedback.setText("Feedback for Prison:");
 
-        btnProvideFeedback.setBackground(new java.awt.Color(244, 208, 129));
-        btnProvideFeedback.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPoliceWorkrequestFeedback.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        lblPoliceWorkrequestFeedback.setText("Feedback for Police:");
+
+        txtPrisonWorkrequestFeedback.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtPoliceWorkrequestFeedback.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        btnProvideFeedback.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         btnProvideFeedback.setText("Provide Feedback");
-        btnProvideFeedback.setPreferredSize(new java.awt.Dimension(85, 30));
         btnProvideFeedback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProvideFeedbackActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCaseVerdict)
-                                    .addComponent(lblPersonName))
-                                .addGap(67, 67, 67)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtPersonName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCaseVerdict, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(120, 120, 120)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnProvideFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                    .addComponent(jTextField2)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblImprisonmentStartDate)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(112, 112, 112)
-                                        .addComponent(lblPrisonWorkrequestFeedback)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(112, 112, 112)
-                                        .addComponent(lblPoliceWorkrequestFeedback)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblYearsOfImprisonment)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdateCase, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(btnProvideFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(357, 357, 357)
-                .addComponent(btnRefresh)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(106, 106, 106)
+                                    .addComponent(jTextField2))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(lblPrisonWorkrequestFeedback)
+                            .addGap(32, 32, 32)
+                            .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(lblPoliceWorkrequestFeedback)
+                            .addGap(32, 32, 32)
+                            .addComponent(txtPoliceWorkrequestFeedback))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPersonName)
-                    .addComponent(txtPersonName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCaseVerdict)
-                    .addComponent(txtCaseVerdict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblPoliceWorkrequestFeedback)
-                        .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblImprisonmentStartDate)
-                        .addComponent(txtImprisonmentStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblPrisonWorkrequestFeedback)
-                        .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblYearsOfImprisonment)
-                        .addComponent(txtYearsOfImprisonment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProvideJudgement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProvideFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(btnRefresh)
-                .addGap(100, 100, 100))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProvideJudgement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProvideFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrisonWorkrequestFeedback)
+                    .addComponent(txtPrisonWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPoliceWorkrequestFeedback)
+                    .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 570, 320));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCaseActionPerformed
@@ -467,17 +554,16 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             prisonWorkreq.setMessage(txtPrisonWorkrequestFeedback.getText());
             policeWorkreq.setMessage(txtPoliceWorkrequestFeedback.getText());
             JOptionPane.showMessageDialog(this, "Feedback updated successfully");
-            lblPrisonWorkrequestFeedback.setVisible(false);
-            lblPoliceWorkrequestFeedback.setVisible(false);
-            txtPrisonWorkrequestFeedback.setVisible(false);
-            txtPoliceWorkrequestFeedback.setVisible(false);
-            btnProvideFeedback.setVisible(false);
+            lblPrisonWorkrequestFeedback.setEnabled(false);
+            lblPoliceWorkrequestFeedback.setEnabled(false);
+            txtPrisonWorkrequestFeedback.setEnabled(false);
+            txtPoliceWorkrequestFeedback.setEnabled(false);
+            btnProvideFeedback.setEnabled(false);
             DB4OUtil.storeSystem(system);
         } else {
             JOptionPane.showMessageDialog(this, "Feedback fields can't be empty");
         }
     }//GEN-LAST:event_btnProvideFeedbackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateCase;
@@ -486,7 +572,13 @@ public class JudgeLandingPage extends javax.swing.JPanel {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateCase;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -513,20 +605,19 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 CaseDirectory listOfCases = court.getCaseDirectory();
                 DefaultTableModel tablemodel = (DefaultTableModel) tblCases.getModel();
                 tablemodel.setRowCount(0);
-                if (listOfCases != null) {
-                    for (Case tempCase : listOfCases.getListOfCases()) {
+                if(listOfCases != null)
+                for (Case tempCase : listOfCases.getListOfCases()) {
 
-                        if (tempCase != null) {
-                            Object[] row = new Object[7];
-                            row[0] = tempCase;
-                            row[1] = tempCase.getAccused().getName();
-                            row[2] = tempCase.getVerdict();
-                            row[3] = tempCase.getStartDate().toString();
-                            row[4] = tempCase.getYearsOfImprisonment() + "";
-                            row[5] = tempCase.isImprisoned() == true ? "Yes" : "No";
-                            row[6] = tempCase.getStatus();
-                            tablemodel.addRow(row);
-                        }
+                    if (tempCase != null) {
+                        Object[] row = new Object[7];
+                        row[0] = tempCase;
+                        row[1] = tempCase.getAccused().getName();
+                        row[2] = tempCase.getVerdict();
+                        row[3] = tempCase.getStartDate().toString();
+                        row[4] = tempCase.getYearsOfImprisonment() + "";
+                        row[5] = tempCase.isImprisoned()==true?"Yes":"No";
+                        row[6] = tempCase.getStatus();
+                        tablemodel.addRow(row);
                     }
                 }
             }

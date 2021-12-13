@@ -85,22 +85,27 @@ public class ManageHospitals extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHospitals = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         lblHospitalName = new javax.swing.JLabel();
-        txtHospitalName = new javax.swing.JTextField();
         lblHospitalLocation = new javax.swing.JLabel();
+        lblHospitalStatus = new javax.swing.JLabel();
+        txtHospitalName = new javax.swing.JTextField();
         txtHospitalLocation = new javax.swing.JTextField();
-        lblHospitalAdminUsername = new javax.swing.JLabel();
+        drpdwnStatus = new javax.swing.JComboBox<>();
         txtHospitalAdminUsername = new javax.swing.JTextField();
         lblHospitalAdminPassword = new javax.swing.JLabel();
-        txtHospitalAdminPassword = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        lblHospitalStatus = new javax.swing.JLabel();
-        drpdwnStatus = new javax.swing.JComboBox<>();
         lblHospitalAdminName = new javax.swing.JLabel();
         txtHospitalAdminName = new javax.swing.JTextField();
+        lblHospitalAdminUsername = new javax.swing.JLabel();
+        txtHospitalAdminPassword = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        addBtn1 = new javax.swing.JLabel();
+        updateBtn1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblHospitals.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         tblHospitals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -119,161 +124,137 @@ public class ManageHospitals extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblHospitals);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 960, 270));
+
+        jPanel1.setBackground(new java.awt.Color(242, 248, 255));
+
+        lblHospitalName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         lblHospitalName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblHospitalName.setText("Name");
 
+        lblHospitalLocation.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         lblHospitalLocation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblHospitalLocation.setText("Location");
 
-        lblHospitalAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblHospitalAdminUsername.setText("Admin Username");
-
-        lblHospitalAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblHospitalAdminPassword.setText("Admin Password");
-
-        btnAdd.setBackground(new java.awt.Color(244, 208, 129));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
-        btnAdd.setText("Add");
-        btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
-        btnUpdate.setText("Update");
-        btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnBack.setBackground(new java.awt.Color(244, 208, 129));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(0, 0, 0));
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
+        lblHospitalStatus.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         lblHospitalStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblHospitalStatus.setText("Status");
 
+        txtHospitalName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtHospitalLocation.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        drpdwnStatus.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Service", "Out of Service" }));
 
-        lblHospitalAdminName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtHospitalAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblHospitalAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblHospitalAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblHospitalAdminPassword.setText("Admin Password");
+
+        lblHospitalAdminName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblHospitalAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblHospitalAdminName.setText("Admin Name");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 703, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblHospitalLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHospitalStatus))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(drpdwnStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtHospitalName)
-                            .addComponent(txtHospitalLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                        .addGap(152, 152, 152)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblHospitalAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblHospitalAdminPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(lblHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtHospitalAdminUsername)
-                                .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(125, 125, 125))))
+        txtHospitalAdminName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblHospitalAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblHospitalAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblHospitalAdminUsername.setText("Admin Username");
+
+        txtHospitalAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHospitalLocation)
+                    .addComponent(lblHospitalStatus))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtHospitalName)
+                    .addComponent(txtHospitalLocation)
+                    .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHospitalAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHospitalAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblHospitalName)
-                            .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblHospitalLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHospitalLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblHospitalAdminUsername)
-                            .addComponent(txtHospitalAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblHospitalAdminPassword)
-                            .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHospitalName)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblHospitalAdminUsername)
+                        .addComponent(txtHospitalAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(txtHospitalLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHospitalLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblHospitalAdminPassword)
+                        .addComponent(txtHospitalAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblHospitalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHospitalAdminName))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblHospitalAdminName)
+                        .addComponent(txtHospitalAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43))
         );
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
-            if (checkIfHospitalNameIsUnique()) {
-//                String[] locationData = txtHospitalLocation.getText().split(", ");
-//Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), (drpdwnStatus.getSelectedIndex()==0));
-                Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(42.338767, -71.087863), true);
-                Employee hospitalAdmin = new Employee(system,txtHospitalAdminName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), newHospital, new HospitalAdmin());
-                newHospital.getManagement().setHospitalAdmin(hospitalAdmin);
-                system.getHospitals().add(newHospital);
-                initializeTable();
-                resetFields();
-                JOptionPane.showMessageDialog(this, "New Hospital has been added");
-                DB4OUtil.storeSystem(system);
-            } else {
-                JOptionPane.showMessageDialog(this, "Hospital name already exists, try a different name");
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 1000, 210));
+
+        jPanel2.setBackground(new java.awt.Color(235, 242, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addBtn1.setBackground(new java.awt.Color(120, 168, 255));
+        addBtn1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        addBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addBtn1.setText("Add");
+        addBtn1.setOpaque(true);
+        addBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtn1MouseClicked(evt);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Hospital");
-        }
+        });
+        jPanel2.add(addBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 50));
 
-    }//GEN-LAST:event_btnAddActionPerformed
+        updateBtn1.setBackground(new java.awt.Color(120, 168, 255));
+        updateBtn1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        updateBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateBtn1.setText("Update");
+        updateBtn1.setMaximumSize(new java.awt.Dimension(47, 17));
+        updateBtn1.setMinimumSize(new java.awt.Dimension(47, 17));
+        updateBtn1.setOpaque(true);
+        updateBtn1.setPreferredSize(new java.awt.Dimension(47, 17));
+        updateBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateBtn1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(updateBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 50));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 1000, 50));
+    }// </editor-fold>//GEN-END:initComponents
     private void initializeTable() {
         ArrayList<Hospital> hospitalDetails = system.getHospitals();
         DefaultTableModel tablemodel = (DefaultTableModel) tblHospitals.getModel();
@@ -302,15 +283,32 @@ public class ManageHospitals extends javax.swing.JPanel {
         txtHospitalAdminName.setText("");
         drpdwnStatus.setSelectedIndex(0);
     }
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void addBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtn1MouseClicked
         // TODO add your handling code here:
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
-    }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
+            if (checkIfHospitalNameIsUnique()) {
+//                String[] locationData = txtHospitalLocation.getText().split(", ");
+//Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), (drpdwnStatus.getSelectedIndex()==0));
+                Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(42.338767, -71.087863), true);
+                Employee hospitalAdmin = new Employee(system,txtHospitalAdminName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), newHospital, new HospitalAdmin());
+                newHospital.getManagement().setHospitalAdmin(hospitalAdmin);
+                system.getHospitals().add(newHospital);
+                initializeTable();
+                resetFields();
+                JOptionPane.showMessageDialog(this, "New Hospital has been added");
+            } else {
+                JOptionPane.showMessageDialog(this, "Hospital name already exists, try a different name");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Hospital");
+        }
+
+    }//GEN-LAST:event_addBtn1MouseClicked
+
+    private void updateBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtn1MouseClicked
         // TODO add your handling code here:
+
         if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
             if (selectedHospital != null) {
                 for (Hospital hospital : system.getHospitals()) {
@@ -334,7 +332,7 @@ public class ManageHospitals extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Please select a hospital to update from the table");
             }
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_updateBtn1MouseClicked
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
@@ -344,10 +342,10 @@ public class ManageHospitals extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel addBtn1;
     private javax.swing.JComboBox<String> drpdwnStatus;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblHospitalAdminName;
     private javax.swing.JLabel lblHospitalAdminPassword;
@@ -361,6 +359,7 @@ public class ManageHospitals extends javax.swing.JPanel {
     private javax.swing.JTextField txtHospitalAdminUsername;
     private javax.swing.JTextField txtHospitalLocation;
     private javax.swing.JTextField txtHospitalName;
+    private javax.swing.JLabel updateBtn1;
     // End of variables declaration//GEN-END:variables
 
     private boolean checkIfHospitalNameIsUnique() {

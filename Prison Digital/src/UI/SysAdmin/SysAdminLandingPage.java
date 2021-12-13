@@ -36,115 +36,240 @@ public class SysAdminLandingPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnManagePrisons = new javax.swing.JButton();
-        btnManageAdmin = new javax.swing.JButton();
-        btnManageHospitals = new javax.swing.JButton();
-        btnManageJudicialSystems = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnPrison = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnCaterer = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btnHospital = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btnJudicial = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        container2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
-        btnManagePrisons.setBackground(new java.awt.Color(244, 208, 129));
-        btnManagePrisons.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnManagePrisons.setForeground(new java.awt.Color(0, 0, 0));
-        btnManagePrisons.setText("Manage Prisons");
-        btnManagePrisons.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManagePrisonsActionPerformed(evt);
+        setMaximumSize(new java.awt.Dimension(1150, 700));
+        setMinimumSize(new java.awt.Dimension(1150, 700));
+        setPreferredSize(new java.awt.Dimension(1150, 700));
+        setSize(new java.awt.Dimension(1150, 700));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(71, 120, 197));
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("   System Admin Tools");
+        jLabel1.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel1.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel1.setOpaque(true);
+        jLabel1.setPreferredSize(new java.awt.Dimension(231, 25));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 1090, 60));
+
+        btnPrison.setBackground(new java.awt.Color(120, 168, 255));
+        btnPrison.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPrisonMouseClicked(evt);
             }
         });
 
-        btnManageAdmin.setBackground(new java.awt.Color(244, 208, 129));
-        btnManageAdmin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnManageAdmin.setForeground(new java.awt.Color(0, 0, 0));
-        btnManageAdmin.setText("Manage Caterers");
-        btnManageAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageAdminActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Prisons");
 
-        btnManageHospitals.setBackground(new java.awt.Color(244, 208, 129));
-        btnManageHospitals.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnManageHospitals.setForeground(new java.awt.Color(0, 0, 0));
-        btnManageHospitals.setText("Manage Hospitals");
-        btnManageHospitals.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageHospitalsActionPerformed(evt);
-            }
-        });
-
-        btnManageJudicialSystems.setBackground(new java.awt.Color(244, 208, 129));
-        btnManageJudicialSystems.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnManageJudicialSystems.setForeground(new java.awt.Color(0, 0, 0));
-        btnManageJudicialSystems.setText("Manage Judicial Systems");
-        btnManageJudicialSystems.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageJudicialSystemsActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageJudicialSystems, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManagePrisons, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(240, 240, 240))
+        javax.swing.GroupLayout btnPrisonLayout = new javax.swing.GroupLayout(btnPrison);
+        btnPrison.setLayout(btnPrisonLayout);
+        btnPrisonLayout.setHorizontalGroup(
+            btnPrisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnPrisonLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(btnManagePrisons, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(btnManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(btnManageHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(btnManageJudicialSystems, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+        btnPrisonLayout.setVerticalGroup(
+            btnPrisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPrisonLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(29, 29, 29))
         );
+
+        add(btnPrison, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 150, 80));
+
+        btnCaterer.setBackground(new java.awt.Color(84, 127, 206));
+        btnCaterer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCatererMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Caterers");
+
+        javax.swing.GroupLayout btnCatererLayout = new javax.swing.GroupLayout(btnCaterer);
+        btnCaterer.setLayout(btnCatererLayout);
+        btnCatererLayout.setHorizontalGroup(
+            btnCatererLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCatererLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel3)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        btnCatererLayout.setVerticalGroup(
+            btnCatererLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCatererLayout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(46, 46, 46))
+        );
+
+        add(btnCaterer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 150, 120));
+
+        btnHospital.setBackground(new java.awt.Color(76, 124, 197));
+        btnHospital.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHospitalMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Hospitals");
+
+        javax.swing.GroupLayout btnHospitalLayout = new javax.swing.GroupLayout(btnHospital);
+        btnHospital.setLayout(btnHospitalLayout);
+        btnHospitalLayout.setHorizontalGroup(
+            btnHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnHospitalLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel4)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        btnHospitalLayout.setVerticalGroup(
+            btnHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnHospitalLayout.createSequentialGroup()
+                .addContainerGap(82, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(79, 79, 79))
+        );
+
+        add(btnHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 150, 180));
+
+        btnJudicial.setBackground(new java.awt.Color(71, 120, 197));
+        btnJudicial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnJudicialMouseClicked(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Judicial");
+
+        jLabel6.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText(" Systems ");
+
+        javax.swing.GroupLayout btnJudicialLayout = new javax.swing.GroupLayout(btnJudicial);
+        btnJudicial.setLayout(btnJudicialLayout);
+        btnJudicialLayout.setHorizontalGroup(
+            btnJudicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnJudicialLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(btnJudicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        btnJudicialLayout.setVerticalGroup(
+            btnJudicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnJudicialLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+
+        add(btnJudicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 150, 260));
+
+        container2.setBackground(new java.awt.Color(255, 255, 255));
+        container2.setMaximumSize(new java.awt.Dimension(1000, 675));
+        container2.setMinimumSize(new java.awt.Dimension(1000, 675));
+        container2.setPreferredSize(new java.awt.Dimension(1000, 675));
+        container2.setLayout(new java.awt.CardLayout());
+        add(container2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 1000, 640));
+
+        jPanel1.setBackground(new java.awt.Color(84, 127, 206));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManagePrisonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagePrisonsActionPerformed
-        ManagePrisons managePrisons = new ManagePrisons(this.container, system);
-        container.add("Manage Prison", managePrisons);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.next(container);
-    }//GEN-LAST:event_btnManagePrisonsActionPerformed
-
-    private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdminActionPerformed
-        ManageCaterers manageCaterers = new ManageCaterers(container, system);
-        container.add("Manage Caterers", manageCaterers);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.next(container);
-    }//GEN-LAST:event_btnManageAdminActionPerformed
-
-    private void btnManageHospitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageHospitalsActionPerformed
+    private void btnPrisonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrisonMouseClicked
         // TODO add your handling code here:
-        ManageHospitals manageHospitals = new ManageHospitals(container, system);
-        container.add("Manage Hospitals", manageHospitals);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.next(container);
-    }//GEN-LAST:event_btnManageHospitalsActionPerformed
+        
+        ManagePrisons managePrisons = new ManagePrisons(container2, system);
+        container2.add("Manage Prison", managePrisons);
+        CardLayout layout = (CardLayout) container2.getLayout();
+        layout.next(container2);
+        
+    }//GEN-LAST:event_btnPrisonMouseClicked
 
-    private void btnManageJudicialSystemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageJudicialSystemsActionPerformed
+    private void btnCatererMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCatererMouseClicked
         // TODO add your handling code here:
-        ManageJudicialSystem manageJudicialSystem = new ManageJudicialSystem(container, system);
-        container.add("Manage Judicial System", manageJudicialSystem);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.next(container);
-    }//GEN-LAST:event_btnManageJudicialSystemsActionPerformed
+        
+        ManageCaterers manageCaterers = new ManageCaterers(container2, system);
+        container2.add("Manage Caterers", manageCaterers);
+        CardLayout layout = (CardLayout) container2.getLayout();
+        layout.next(container2);
+        
+    }//GEN-LAST:event_btnCatererMouseClicked
+
+    private void btnHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHospitalMouseClicked
+        // TODO add your handling code here:
+        
+        ManageHospitals manageHospitals = new ManageHospitals(container2, system);
+        container2.add("Manage Hospitals", manageHospitals);
+        CardLayout layout = (CardLayout) container2.getLayout();
+        layout.next(container2);
+        
+    }//GEN-LAST:event_btnHospitalMouseClicked
+
+    private void btnJudicialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJudicialMouseClicked
+        // TODO add your handling code here:
+        
+        ManageJudicialSystem manageJudicialSystem = new ManageJudicialSystem(container2, system);
+        container2.add("Manage Judicial System", manageJudicialSystem);
+        CardLayout layout = (CardLayout) container2.getLayout();
+        layout.next(container2);
+        
+    }//GEN-LAST:event_btnJudicialMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManageAdmin;
-    private javax.swing.JButton btnManageHospitals;
-    private javax.swing.JButton btnManageJudicialSystems;
-    private javax.swing.JButton btnManagePrisons;
+    private javax.swing.JPanel btnCaterer;
+    private javax.swing.JPanel btnHospital;
+    private javax.swing.JPanel btnJudicial;
+    private javax.swing.JPanel btnPrison;
+    private javax.swing.JPanel container2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
 }

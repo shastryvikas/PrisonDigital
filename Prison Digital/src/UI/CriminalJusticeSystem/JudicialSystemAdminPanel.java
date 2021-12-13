@@ -125,42 +125,67 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        CourtManagementPanel = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCourts = new javax.swing.JTable();
-        lblCourtName = new javax.swing.JLabel();
-        txtCourtName = new javax.swing.JTextField();
-        lblJudgeUsername = new javax.swing.JLabel();
-        txtJudgeUsername = new javax.swing.JTextField();
-        lblJudgePassword = new javax.swing.JLabel();
-        txtJudgePassword = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        txtJudgeName = new javax.swing.JTextField();
-        lblJudgeName = new javax.swing.JLabel();
-        PoliceDepartmentManagementPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPoliceDepartments = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        lblCourtName = new javax.swing.JLabel();
+        txtCourtName = new javax.swing.JTextField();
+        txtJudgeName = new javax.swing.JTextField();
+        lblJudgeName = new javax.swing.JLabel();
+        lblJudgeUsername = new javax.swing.JLabel();
+        txtJudgeUsername = new javax.swing.JTextField();
+        txtJudgePassword = new javax.swing.JTextField();
+        lblJudgePassword = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnPoliceDepartmentAdd = new javax.swing.JButton();
+        btnPoliceDepartmentUpdate = new javax.swing.JButton();
+        btnPoliceDepartmentDelete = new javax.swing.JButton();
         lblPoliceDepartmentName = new javax.swing.JLabel();
-        txtPoliceDepartmentName = new javax.swing.JTextField();
         lblPoliceDepartmentAdminName = new javax.swing.JLabel();
+        txtPoliceDepartmentName = new javax.swing.JTextField();
         txtPoliceDepartmentAdminName = new javax.swing.JTextField();
         lblPoliceDepartmentAdminUsername = new javax.swing.JLabel();
         txtPolcieDepartmentAdminUsername = new javax.swing.JTextField();
-        lblPoliceDepartmentAdminPassword = new javax.swing.JLabel();
         txtPoliceDepartmentAdminPassword = new javax.swing.JTextField();
-        btnPoliceDepartmentAdd = new javax.swing.JButton();
-        btnPoliceDepartmentDelete = new javax.swing.JButton();
-        btnPoliceDepartmentUpdate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        lblPoliceDepartmentAdminPassword = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 1000));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(798, 1000));
+        jLabel7.setBackground(new java.awt.Color(71, 120, 197));
+        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("   Criminal Justice System Administrator");
+        jLabel7.setMaximumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setMinimumSize(new java.awt.Dimension(231, 25));
+        jLabel7.setOpaque(true);
+        jLabel7.setPreferredSize(new java.awt.Dimension(231, 25));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 1090, 60));
 
+        jPanel2.setBackground(new java.awt.Color(84, 127, 206));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
+
+        tblCourts.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         tblCourts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -179,120 +204,9 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblCourts);
 
-        lblCourtName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblCourtName.setText("Court Name");
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1110, 190));
 
-        lblJudgeUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblJudgeUsername.setText("Judge Username");
-
-        lblJudgePassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblJudgePassword.setText("Judge Password");
-
-        btnAdd.setBackground(new java.awt.Color(244, 208, 129));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setText("Add");
-        btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setBackground(new java.awt.Color(244, 208, 129));
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setText("Update");
-        btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        lblJudgeName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblJudgeName.setText("Judge Name");
-
-        javax.swing.GroupLayout CourtManagementPanelLayout = new javax.swing.GroupLayout(CourtManagementPanel);
-        CourtManagementPanel.setLayout(CourtManagementPanelLayout);
-        CourtManagementPanelLayout.setHorizontalGroup(
-            CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCourtName)
-                    .addComponent(lblJudgeName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtJudgeName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCourtName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                    .addGap(5, 5, 5)
-                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CourtManagementPanelLayout.createSequentialGroup()
-                            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(150, 150, 150)
-                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                                    .addGap(0, 414, Short.MAX_VALUE)
-                                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblJudgeUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblJudgePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtJudgeUsername)
-                                        .addComponent(txtJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(119, 119, 119)))
-                    .addGap(5, 5, 5)))
-        );
-        CourtManagementPanelLayout.setVerticalGroup(
-            CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CourtManagementPanelLayout.createSequentialGroup()
-                .addContainerGap(327, Short.MAX_VALUE)
-                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCourtName)
-                    .addComponent(txtCourtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtJudgeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblJudgeName))
-                .addGap(98, 98, 98))
-            .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(CourtManagementPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblJudgeUsername)
-                        .addComponent(txtJudgeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblJudgePassword)
-                        .addComponent(txtJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(69, 69, 69)
-                    .addGroup(CourtManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap()))
-        );
-
+        tblPoliceDepartments.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         tblPoliceDepartments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -311,20 +225,128 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblPoliceDepartments);
 
-        lblPoliceDepartmentName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPoliceDepartmentName.setText("Department Name");
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 1110, 190));
 
-        lblPoliceDepartmentAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPoliceDepartmentAdminName.setText("Admin name");
+        jPanel1.setBackground(new java.awt.Color(242, 248, 255));
 
-        lblPoliceDepartmentAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblPoliceDepartmentAdminUsername.setText("Admin Username");
+        lblCourtName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblCourtName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCourtName.setText("Court Name");
 
-        lblPoliceDepartmentAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblPoliceDepartmentAdminPassword.setText("Admin Password");
+        txtCourtName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtJudgeName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblJudgeName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblJudgeName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblJudgeName.setText("Judge Name");
+
+        lblJudgeUsername.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblJudgeUsername.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblJudgeUsername.setText("Judge Username");
+
+        txtJudgeUsername.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtJudgePassword.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblJudgePassword.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblJudgePassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblJudgePassword.setText("Judge Password");
+
+        btnDelete.setBackground(new java.awt.Color(244, 208, 129));
+        btnDelete.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
+        btnUpdate.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnAdd.setBackground(new java.awt.Color(244, 208, 129));
+        btnAdd.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblJudgeName)
+                    .addComponent(lblCourtName))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCourtName)
+                    .addComponent(txtJudgeName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblJudgeUsername)
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtJudgeUsername)
+                    .addComponent(txtJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblCourtName)
+                            .addComponent(txtCourtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblJudgeUsername)
+                            .addComponent(txtJudgeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblJudgeName)
+                            .addComponent(txtJudgeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblJudgePassword)
+                            .addComponent(txtJudgePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 1110, 90));
+
+        jPanel3.setBackground(new java.awt.Color(242, 248, 255));
 
         btnPoliceDepartmentAdd.setBackground(new java.awt.Color(244, 208, 129));
-        btnPoliceDepartmentAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPoliceDepartmentAdd.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         btnPoliceDepartmentAdd.setText("Add");
         btnPoliceDepartmentAdd.setPreferredSize(new java.awt.Dimension(85, 30));
         btnPoliceDepartmentAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -333,18 +355,8 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             }
         });
 
-        btnPoliceDepartmentDelete.setBackground(new java.awt.Color(244, 208, 129));
-        btnPoliceDepartmentDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPoliceDepartmentDelete.setText("Delete");
-        btnPoliceDepartmentDelete.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnPoliceDepartmentDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPoliceDepartmentDeleteActionPerformed(evt);
-            }
-        });
-
         btnPoliceDepartmentUpdate.setBackground(new java.awt.Color(244, 208, 129));
-        btnPoliceDepartmentUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPoliceDepartmentUpdate.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         btnPoliceDepartmentUpdate.setText("Update");
         btnPoliceDepartmentUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
         btnPoliceDepartmentUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -353,121 +365,96 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout PoliceDepartmentManagementPanelLayout = new javax.swing.GroupLayout(PoliceDepartmentManagementPanel);
-        PoliceDepartmentManagementPanel.setLayout(PoliceDepartmentManagementPanelLayout);
-        PoliceDepartmentManagementPanelLayout.setHorizontalGroup(
-            PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(btnPoliceDepartmentAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150)
-                        .addComponent(btnPoliceDepartmentUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(197, 197, 197)
-                        .addComponent(btnPoliceDepartmentDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPoliceDepartmentAdminName)
-                            .addComponent(lblPoliceDepartmentName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPoliceDepartmentName)
-                            .addComponent(txtPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(109, 109, 109)
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPoliceDepartmentAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPolcieDepartmentAdminUsername)
-                            .addComponent(txtPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                    .addGap(5, 5, 5)
-                    .addComponent(jScrollPane3)
-                    .addGap(5, 5, 5)))
-        );
-        PoliceDepartmentManagementPanelLayout.setVerticalGroup(
-            PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPoliceDepartmentName)
-                            .addComponent(txtPoliceDepartmentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPoliceDepartmentAdminUsername)
-                            .addComponent(txtPolcieDepartmentAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPoliceDepartmentAdminPassword)
-                            .addComponent(txtPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(66, 66, 66)
-                .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPoliceDepartmentAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPoliceDepartmentUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPoliceDepartmentDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PoliceDepartmentManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PoliceDepartmentManagementPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(278, Short.MAX_VALUE)))
-        );
-
-        btnBack.setBackground(new java.awt.Color(244, 208, 129));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        btnPoliceDepartmentDelete.setBackground(new java.awt.Color(244, 208, 129));
+        btnPoliceDepartmentDelete.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        btnPoliceDepartmentDelete.setText("Delete");
+        btnPoliceDepartmentDelete.setPreferredSize(new java.awt.Dimension(85, 30));
+        btnPoliceDepartmentDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnPoliceDepartmentDeleteActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CourtManagementPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(PoliceDepartmentManagementPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(CourtManagementPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        lblPoliceDepartmentName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblPoliceDepartmentName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPoliceDepartmentName.setText("Department Name");
+
+        lblPoliceDepartmentAdminName.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblPoliceDepartmentAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPoliceDepartmentAdminName.setText("Admin name");
+
+        txtPoliceDepartmentName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtPoliceDepartmentAdminName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblPoliceDepartmentAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblPoliceDepartmentAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPoliceDepartmentAdminUsername.setText("Admin Username");
+
+        txtPolcieDepartmentAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtPoliceDepartmentAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblPoliceDepartmentAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        lblPoliceDepartmentAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPoliceDepartmentAdminPassword.setText("Admin Password");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPoliceDepartmentName)
+                    .addComponent(lblPoliceDepartmentAdminName))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPoliceDepartmentName)
+                    .addComponent(txtPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(PoliceDepartmentManagementPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPoliceDepartmentAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPoliceDepartmentAdminPassword))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPolcieDepartmentAdminUsername)
+                    .addComponent(txtPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPoliceDepartmentAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPoliceDepartmentUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPoliceDepartmentDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblPoliceDepartmentName)
+                            .addComponent(txtPoliceDepartmentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPoliceDepartmentAdminUsername)
+                            .addComponent(txtPolcieDepartmentAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPoliceDepartmentAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPoliceDepartmentAdminPassword)
+                            .addComponent(txtPoliceDepartmentAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPoliceDepartmentAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPoliceDepartmentUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPoliceDepartmentDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jPanel1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
-        );
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 1110, 100));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -603,26 +590,18 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnPoliceDepartmentUpdateActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
-    }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel CourtManagementPanel;
-    private javax.swing.JPanel PoliceDepartmentManagementPanel;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnPoliceDepartmentAdd;
     private javax.swing.JButton btnPoliceDepartmentDelete;
     private javax.swing.JButton btnPoliceDepartmentUpdate;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCourtName;

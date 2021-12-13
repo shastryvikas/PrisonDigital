@@ -84,22 +84,27 @@ public class ManageCaterers extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCaterers = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        addBtn1 = new javax.swing.JLabel();
+        updateBtn1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         lblCatererName = new javax.swing.JLabel();
         txtCatererName = new javax.swing.JTextField();
         lblCatererLocation = new javax.swing.JLabel();
         txtCatererLocation = new javax.swing.JTextField();
-        lblCatererAdminUsername = new javax.swing.JLabel();
-        txtCatererAdminUsername = new javax.swing.JTextField();
-        lblCatererAdminPassword = new javax.swing.JLabel();
-        txtCatererAdminPassword = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        lblCatererAdminName = new javax.swing.JLabel();
-        txtCatererAdminName = new javax.swing.JTextField();
         lblCatererLocation1 = new javax.swing.JLabel();
         drpdwnStatus = new javax.swing.JComboBox<>();
+        lblCatererAdminUsername = new javax.swing.JLabel();
+        lblCatererAdminPassword = new javax.swing.JLabel();
+        lblCatererAdminName = new javax.swing.JLabel();
+        txtCatererAdminUsername = new javax.swing.JTextField();
+        txtCatererAdminPassword = new javax.swing.JTextField();
+        txtCatererAdminName = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblCaterers.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         tblCaterers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -118,145 +123,140 @@ public class ManageCaterers extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCaterers);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 960, 275));
+
+        jPanel2.setBackground(new java.awt.Color(235, 242, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addBtn1.setBackground(new java.awt.Color(120, 168, 255));
+        addBtn1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        addBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addBtn1.setText("Add");
+        addBtn1.setOpaque(true);
+        addBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtn1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(addBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 50));
+
+        updateBtn1.setBackground(new java.awt.Color(120, 168, 255));
+        updateBtn1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        updateBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateBtn1.setText("Update");
+        updateBtn1.setMaximumSize(new java.awt.Dimension(47, 17));
+        updateBtn1.setMinimumSize(new java.awt.Dimension(47, 17));
+        updateBtn1.setOpaque(true);
+        updateBtn1.setPreferredSize(new java.awt.Dimension(47, 17));
+        updateBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateBtn1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(updateBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 50));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 1000, 50));
+
+        jPanel1.setBackground(new java.awt.Color(242, 248, 255));
+
+        lblCatererName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         lblCatererName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCatererName.setText("Caterer Name");
 
+        txtCatererName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        lblCatererLocation.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         lblCatererLocation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCatererLocation.setText("Location");
 
-        lblCatererAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblCatererAdminUsername.setText("Admin Username");
+        txtCatererLocation.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
 
-        lblCatererAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblCatererAdminPassword.setText("Admin Password");
-
-        btnAdd.setBackground(new java.awt.Color(244, 208, 129));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
-        btnAdd.setText("Add");
-        btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setBackground(new java.awt.Color(244, 208, 129));
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
-        btnUpdate.setText("Update");
-        btnUpdate.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnBack.setBackground(new java.awt.Color(244, 208, 129));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(0, 0, 0));
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(85, 30));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
-        lblCatererAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblCatererAdminName.setText("Admin Name");
-
+        lblCatererLocation1.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         lblCatererLocation1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCatererLocation1.setText("Status");
 
+        drpdwnStatus.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         drpdwnStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Service", "Out of service" }));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 703, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCatererName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCatererLocation1)
-                                    .addComponent(lblCatererLocation))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCatererName)
-                            .addComponent(txtCatererLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(drpdwnStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(158, 158, 158)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCatererAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCatererAdminPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCatererAdminName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCatererAdminName)
-                                .addComponent(txtCatererAdminUsername)
-                                .addComponent(txtCatererAdminPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)))
-                        .addGap(125, 125, 125))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCatererName)
-                            .addComponent(txtCatererName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCatererLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCatererLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCatererAdminUsername)
-                            .addComponent(txtCatererAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCatererAdminPassword)
-                            .addComponent(txtCatererAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        lblCatererAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        lblCatererAdminUsername.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCatererAdminUsername.setText("Admin Username");
+
+        lblCatererAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        lblCatererAdminPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCatererAdminPassword.setText("Admin Password");
+
+        lblCatererAdminName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        lblCatererAdminName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCatererAdminName.setText("Admin Name");
+
+        txtCatererAdminUsername.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtCatererAdminPassword.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        txtCatererAdminName.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCatererName)
+                    .addComponent(lblCatererLocation)
+                    .addComponent(lblCatererLocation1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCatererName)
+                    .addComponent(txtCatererLocation)
+                    .addComponent(drpdwnStatus, 0, 200, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCatererAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCatererAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCatererAdminUsername))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCatererAdminName, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(txtCatererAdminPassword)
+                    .addComponent(txtCatererAdminUsername))
+                .addGap(89, 89, 89))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblCatererName)
+                    .addComponent(txtCatererName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCatererAdminUsername)
+                    .addComponent(txtCatererAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblCatererLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCatererLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCatererAdminPassword)
+                    .addComponent(txtCatererAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblCatererAdminName)
                         .addComponent(txtCatererAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblCatererLocation1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(drpdwnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCatererLocation1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1000, 210));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void addBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtn1MouseClicked
         // TODO add your handling code here:
+
         if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
             if (checkIfCatererNameIsUnique()) {
                 FoodCateringService newCaterer = new FoodCateringService(txtCatererName.getText(), new Location(42.338767, -71.087863), true);
@@ -273,10 +273,11 @@ public class ManageCaterers extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Caterer");
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_addBtn1MouseClicked
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void updateBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtn1MouseClicked
         // TODO add your handling code here:
+
         if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
             if (selectedCateringService != null) {
                 for (FoodCateringService cateringService : system.getCateringServices()) {
@@ -300,14 +301,7 @@ public class ManageCaterers extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Please select a caterer to update from the table");
             }
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_updateBtn1MouseClicked
 
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
@@ -347,10 +341,10 @@ public class ManageCaterers extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel addBtn1;
     private javax.swing.JComboBox<String> drpdwnStatus;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCatererAdminName;
     private javax.swing.JLabel lblCatererAdminPassword;
@@ -364,6 +358,7 @@ public class ManageCaterers extends javax.swing.JPanel {
     private javax.swing.JTextField txtCatererAdminUsername;
     private javax.swing.JTextField txtCatererLocation;
     private javax.swing.JTextField txtCatererName;
+    private javax.swing.JLabel updateBtn1;
     // End of variables declaration//GEN-END:variables
 
     private boolean checkIfCatererNameIsUnique() {
