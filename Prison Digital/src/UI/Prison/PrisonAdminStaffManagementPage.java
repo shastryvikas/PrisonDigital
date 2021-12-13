@@ -261,7 +261,13 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
 
     private void btnCreate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreate1ActionPerformed
         // TODO add your handling code here:
-
+        if (checkInputFields(txtStaffName) && checkInputFields(txtUserName) && checkInputFields(txtPassword)) {
+        //Validation
+            if(!checkInputFields(txtStaffName, "^[\\p{L} .'-]+$") || !checkInputFields(txtUserName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Staff details");
+                return;
+            }
+            
         String name = txtStaffName.getText().toString();
         String username = txtUserName.getText().toString();
         String password = txtPassword.getText().toString();
@@ -297,7 +303,12 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
         
         populateTable();
         resetFields();
-
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Staff Member");
+        }
+        
+        
     }//GEN-LAST:event_btnCreate1ActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -336,6 +347,17 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
 
         int selectedRow = PrisonStaffJTable.getSelectedRow();
         if (selectedRow >= 0) {
+            if (!checkInputFields(txtStaffName) || !checkInputFields(txtUserName) || !checkInputFields(txtPassword)){
+                JOptionPane.showMessageDialog(this, "Fields cannot be empty for updating Staff Member details");
+                return;
+            }
+            
+            //Validation
+            if(!checkInputFields(txtStaffName, "^[\\p{L} .'-]+$") || !checkInputFields(txtUserName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Staff details before updating");
+                return;
+            }
+            
             int selectionButton = JOptionPane.YES_NO_OPTION;
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm update? (Note: Role cannot be changed)", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
@@ -394,6 +416,14 @@ public class PrisonAdminStaffManagementPage extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PrisonStaffJTable;

@@ -15,7 +15,7 @@ import Model.WorkQueue.WorkQueue;
 public abstract class Enterprise {
     
     String name;
-    Location location;
+    String location;
     Boolean status;
     WorkQueue workqueue = new WorkQueue();
 
@@ -43,11 +43,11 @@ public abstract class Enterprise {
         this.name = name;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
     

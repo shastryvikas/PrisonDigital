@@ -530,6 +530,10 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtStaffName) && checkInputFields(txtUserName) && checkInputFields(txtPassword)) {
+            if(!checkInputFields(txtStaffName, "^[\\p{L} .'-]+$") || !checkInputFields(txtUserName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Staff details");
+                return;
+            }
 //            if (checkIfCatererNameIsUnique()) {
             Employee newEmployee;
             if (drpdwnDesignation.getSelectedItem().equals("Chef")) {
@@ -555,6 +559,10 @@ public class CateringAdminJPanel extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtStaffName) && checkInputFields(txtUserName) && checkInputFields(txtPassword)) {
+            if(!checkInputFields(txtStaffName, "^[\\p{L} .'-]+$") || !checkInputFields(txtUserName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Staff details before updating");
+                return;
+            }
             if (selectedStaff != null) {
                 for (Employee employee : employeeList) {
                     if (selectedStaff.getName().equals(employee.getName())) {

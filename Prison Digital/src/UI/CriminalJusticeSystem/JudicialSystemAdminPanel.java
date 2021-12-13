@@ -111,7 +111,7 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
                 txtPoliceDepartmentName.setText(selectedPoliceDepartment.getName());
                 txtPoliceDepartmentAdminName.setText(selectedPoliceDepartment.getPoliceAdmin().getName());
                 txtPolcieDepartmentAdminUsername.setText(selectedPoliceDepartment.getPoliceAdmin().getUserAccount().getUsername());
-                txtPoliceDepartmentAdminPassword.setText(selectedPoliceDepartment.getPoliceAdmin().getUserAccount().getUsername());
+                txtPoliceDepartmentAdminPassword.setText(selectedPoliceDepartment.getPoliceAdmin().getUserAccount().getPassword());
             }
         });
     }
@@ -459,12 +459,20 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        if (checkInputFields(txtCourtName) && checkInputFields(txtJudgeUsername) && checkInputFields(txtJudgePassword)) {
+        if (checkInputFields(txtCourtName) && checkInputFields(txtJudgeUsername) && checkInputFields(txtJudgePassword) && checkInputFields(txtJudgeName)) {
 //            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
 
 //            if (checkIfPrisonNameIsUnique()) {
             //String[] locationData =  txtPrisonLocation.getText().split(", ");
 //Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
+            
+        //Validations
+        if(!checkInputFields(txtCourtName, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudgeUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudgePassword, "^[\\p{L} .'-]+$")
+                || !checkInputFields(txtJudgeName, "^[\\p{L} .'-]+$")){
+            JOptionPane.showMessageDialog(this, "Please enter valid Judge details");
+            return;
+        }
+
             Employee newJudge = new Employee(system, txtJudgeName.getText(), txtJudgeUsername.getText(), txtJudgePassword.getText(), criminalJusticeSystem, new Judge());
             Court newCourt = new Court(newJudge, txtCourtName.getText());
             criminalJusticeSystem.getListOfCourts().add(newCourt);
@@ -504,6 +512,11 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtCourtName) && checkInputFields(txtJudgeUsername) && checkInputFields(txtJudgePassword)) {
+            if(!checkInputFields(txtCourtName, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudgeUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudgePassword, "^[\\p{L} .'-]+$")
+                || !checkInputFields(txtJudgeName, "^[\\p{L} .'-]+$")){
+            JOptionPane.showMessageDialog(this, "Please enter valid Judge details before updating");
+            return;
+        }
             if (selectedCourt != null) {
                 for (Court court : courts) {
                     if (selectedCourt.getName().equals(court.getName())) {
@@ -529,6 +542,12 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     private void btnPoliceDepartmentAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliceDepartmentAddActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtPolcieDepartmentAdminUsername) && checkInputFields(txtPoliceDepartmentAdminName) && checkInputFields(txtPoliceDepartmentAdminPassword) && checkInputFields(txtPoliceDepartmentName)) {
+            //Validations
+            if(!checkInputFields(txtPolcieDepartmentAdminUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtPoliceDepartmentAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPoliceDepartmentAdminPassword, "^[\\p{L} .'-]+$")
+                || !checkInputFields(txtPoliceDepartmentName, "^[\\p{L} .'-]+$")){
+            JOptionPane.showMessageDialog(this, "Please enter valid Police Department details");
+            return;
+        }
 //            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
 
 //            if (checkIfPrisonNameIsUnique()) {
@@ -567,6 +586,11 @@ public class JudicialSystemAdminPanel extends javax.swing.JPanel {
     private void btnPoliceDepartmentUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliceDepartmentUpdateActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtPolcieDepartmentAdminUsername) && checkInputFields(txtPoliceDepartmentAdminName) && checkInputFields(txtPoliceDepartmentAdminPassword) && checkInputFields(txtPoliceDepartmentName)) {
+            if(!checkInputFields(txtPolcieDepartmentAdminUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtPoliceDepartmentAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPoliceDepartmentAdminPassword, "^[\\p{L} .'-]+$")
+                || !checkInputFields(txtPoliceDepartmentName, "^[\\p{L} .'-]+$")){
+            JOptionPane.showMessageDialog(this, "Please enter valid Police Department details before updating");
+            return;
+        }
             if (selectedPoliceDepartment != null) {
                 for (Police police : policeDepartments) {
                     if (selectedPoliceDepartment.getName().equals(police.getName())) {

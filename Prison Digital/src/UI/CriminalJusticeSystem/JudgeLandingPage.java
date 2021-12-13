@@ -468,6 +468,22 @@ public class JudgeLandingPage extends javax.swing.JPanel {
     private void btnCreateCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCaseActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtCaseVerdict) && checkInputFields(txtImprisonmentStartDate) && checkInputFields(txtPersonName) && checkInputFields(txtYearsOfImprisonment)) {
+            //Validate
+            if(!checkInputFields(txtPersonName, "^[\\p{L} .'-]+$") || !checkInputFields(txtCaseVerdict, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Case details");
+                return;
+            }
+            
+            if(!checkInputFields(txtYearsOfImprisonment, "[1-9][0-9]*") || Integer.parseInt(txtYearsOfImprisonment.getText()) > 100){
+                JOptionPane.showMessageDialog(this, "Please enter valid Prison Sentence Duration");
+                return;
+            }
+             //date format: dd/mm/yyyy.
+            if(!checkInputFields(txtImprisonmentStartDate, "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$")){
+                JOptionPane.showMessageDialog(this, "Please use valid date format: dd/mm/yyyy");
+                return;
+            }
+            
             Person person = new Person(txtPersonName.getText());
             try {
                 Case newCase;
@@ -513,8 +529,8 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         return txtField.getText() != null && !txtField.getText().isEmpty();
     }
 
-    public boolean checkInputFields(javax.swing.JTextArea txtField) {
-        return txtField.getText() != null && !txtField.getText().isEmpty();
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
 
     private void btnUpdateCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCaseActionPerformed

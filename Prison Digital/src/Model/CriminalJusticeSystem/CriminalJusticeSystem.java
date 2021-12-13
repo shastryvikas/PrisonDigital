@@ -21,7 +21,7 @@ public class CriminalJusticeSystem extends Enterprise {
     Employee admin;
     String name;
 
-    public CriminalJusticeSystem(String name, Location location, Boolean status) {
+    public CriminalJusticeSystem(String name, String location, Boolean status) {
         this.name = name;
         this.listOfCourts = new ArrayList<>();
         this.listOfPolice = new ArrayList<>();

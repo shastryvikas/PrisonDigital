@@ -342,26 +342,103 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
 
     private void btnGeneralPhyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralPhyActionPerformed
         // TODO add your handling code here:
+        currDesignation = "General Physician";
+
+        if (hospital.getPatientCare().getGeneralStaff() == null || hospital.getPatientCare().getGeneralStaff().getName().isEmpty() || hospital.getPatientCare().getGeneralStaff().getName() == null) {
+            JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
+            return;
+        }
+
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getGeneralStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getGeneralStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getGeneralStaff().getUserAccount().getUsername());
+        txtDesignation.setText(currDesignation);
+        txtDesignation.setEnabled(false);
     }//GEN-LAST:event_btnGeneralPhyActionPerformed
 
     private void btnPatientCarTecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientCarTecActionPerformed
         // TODO add your handling code here:
+        currDesignation = "Patient Care Technician";
+
+        if (hospital.getPatientCare().getPhysiotherapyStaff() == null || hospital.getPatientCare().getPhysiotherapyStaff().getName().isEmpty() || hospital.getPatientCare().getPhysiotherapyStaff().getName() == null) {
+            JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
+            return;
+        }
+
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPhysiotherapyStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPhysiotherapyStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPhysiotherapyStaff().getUserAccount().getUsername());
+        txtDesignation.setText(currDesignation);
+        txtDesignation.setEnabled(false);
     }//GEN-LAST:event_btnPatientCarTecActionPerformed
 
     private void btnPsychologistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPsychologistActionPerformed
         // TODO add your handling code here:
+        currDesignation = "Psychologist";
+
+        if (hospital.getPatientCare().getPsychologyStaff() == null || hospital.getPatientCare().getPsychologyStaff().getName().isEmpty() || hospital.getPatientCare().getPsychologyStaff().getName() == null) {
+            JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
+            return;
+        }
+
+        txtInfirmaryStaffName.setText(hospital.getPatientCare().getPsychologyStaff().getName());
+        txtInfirmaryStaffPassword.setText(hospital.getPatientCare().getPsychologyStaff().getUserAccount().getPassword());
+        txtInfirmaryStaffUsername.setText(hospital.getPatientCare().getPsychologyStaff().getUserAccount().getUsername());
+        txtDesignation.setText(currDesignation);
+        txtDesignation.setEnabled(false);
+
     }//GEN-LAST:event_btnPsychologistActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        if (checkInputFields(txtInfirmaryStaffName) && checkInputFields(txtInfirmaryStaffUsername) && checkInputFields(txtInfirmaryStaffPassword)) {
+            if(!checkInputFields(txtInfirmaryStaffName, "^[\\p{L} .'-]+$") || !checkInputFields(txtInfirmaryStaffUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtInfirmaryStaffPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Infirmary Staff details");
+                return;
+            }
+//            if (checkIfCatererNameIsUnique()) {
+            Employee newEmployee;
+
+            if (txtDesignation.getText().equals("General Physician")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new generalStaff());
+                hospital.getPatientCare().setGeneralStaff(newEmployee);
+            } else if (txtDesignation.getText().equals("Patient Care Technician")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new PatientCareTechStaff());
+                hospital.getPatientCare().setPhysiotherapyStaff(newEmployee);
+            } else if (txtDesignation.getText().equals("Psychologist")) {
+                newEmployee = new Employee(system, txtInfirmaryStaffName.getText(), txtInfirmaryStaffUsername.getText(), txtInfirmaryStaffPassword.getText(), hospital, new psychologyStaff());
+                hospital.getPatientCare().setPsychologyStaff(newEmployee);
+            }
+
+            //initializeStaffTable();
+            JOptionPane.showMessageDialog(this, txtDesignation.getText() + " Head Appointed");
+            resetFields();
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Caterer name already exists, try a different name");
+//            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fields cannot be empty for adding a new Employee");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnApprovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalActionPerformed
         // TODO add your handling code here:
+        int viewselectedRowIndex = contractListTable.getSelectedRow();
+        HospitalContract selectedContract = (HospitalContract) contractListTable.getModel().getValueAt(viewselectedRowIndex, 0);
+
+        selectedContract.setStatus("Approved");
+
+        populateContractListTable(contractList);
+        JOptionPane.showMessageDialog(this, "The contract has been apporved");
+
     }//GEN-LAST:event_btnApprovalActionPerformed
 
     public boolean checkInputFields(javax.swing.JTextField txtField) {
         return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
+    
+     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

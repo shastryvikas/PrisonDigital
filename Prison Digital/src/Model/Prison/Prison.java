@@ -17,7 +17,7 @@ public class Prison extends Enterprise{
     Infrastructure infrastructure;
     String name;
 
-    public Prison(String name, Location location, Boolean status) {
+    public Prison(String name, String location, Boolean status) {
         this.name = name;
         this.setLocation(location);
         this.setStatus(status);

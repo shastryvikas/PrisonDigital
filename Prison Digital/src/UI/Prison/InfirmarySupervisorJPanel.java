@@ -376,6 +376,16 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         
         int selectedRow = HospitalJTable.getSelectedRow();
         if (selectedRow >= 0) {
+            
+            if (!checkInputFields(txtGeneralPhysicianReq) || !checkInputFields(txtPsychologistReq) || !checkInputFields(txtTechnician)){
+                JOptionPane.showMessageDialog(null, "Requirement feilds cannot be empty.");
+                return;
+            }
+            if(!checkInputFields(txtGeneralPhysicianReq, "[1-9][0-9]*") || !checkInputFields(txtPsychologistReq, "[1-9][0-9]*") || !checkInputFields(txtTechnician, "[1-9][0-9]*")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Requirements");
+                return;
+            }
+            
             int selectionButton = JOptionPane.YES_NO_OPTION;
             int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm request?", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
@@ -419,6 +429,13 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_endButtonActionPerformed
 
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable HospitalJTable;

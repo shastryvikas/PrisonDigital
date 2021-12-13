@@ -287,10 +287,16 @@ public class ManageHospitals extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
-            if (checkIfHospitalNameIsUnique()) {
+              //Validations
+        if(!checkInputFields(txtHospitalName, "^[\\p{L} .'-]+$") || !checkInputFields(txtHospitalAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtHospitalAdminUsername, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtHospitalAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtHospitalLocation, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Hospital details");
+                return;
+            }
+		    if (checkIfHospitalNameIsUnique()) {
 //                String[] locationData = txtHospitalLocation.getText().split(", ");
 //Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), (drpdwnStatus.getSelectedIndex()==0));
-                Hospital newHospital = new Hospital(txtHospitalName.getText(), new Location(42.338767, -71.087863), true);
+                 Hospital newHospital = new Hospital(txtHospitalName.getText(), txtHospitalLocation.getText(), true);
                 Employee hospitalAdmin = new Employee(system,txtHospitalAdminName.getText(), txtHospitalAdminUsername.getText(), txtHospitalAdminPassword.getText(), newHospital, new HospitalAdmin());
                 newHospital.getManagement().setHospitalAdmin(hospitalAdmin);
                 system.getHospitals().add(newHospital);
@@ -311,12 +317,18 @@ public class ManageHospitals extends javax.swing.JPanel {
 
         if (checkInputFields(txtHospitalName) && checkInputFields(txtHospitalAdminName) && checkInputFields(txtHospitalAdminUsername) && checkInputFields(txtHospitalAdminPassword) && checkInputFields(txtHospitalLocation)) {
             if (selectedHospital != null) {
+                //Validations
+                if(checkInputFields(txtHospitalName, "^[\\p{L} .'-]+$") || !checkInputFields(txtHospitalAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtHospitalAdminUsername, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtHospitalAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtHospitalLocation, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Hospital details before updating");
+                return;
+            }
                 for (Hospital hospital : system.getHospitals()) {
                     if (selectedHospital.getName().equals(hospital.getName())) {
                         //String[] locationData =  txtHospitalLocation.getText().split(", ");
                         hospital.setName(txtHospitalName.getText());
                         // hospital.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-                        hospital.setLocation(new Location(42.338767, -71.087863));
+                        hospital.setLocation(txtHospitalLocation.getText());
                         hospital.getManagement().getHospitalAdmin().getUserAccount().setUsername(txtHospitalAdminUsername.getText());
                         hospital.getManagement().getHospitalAdmin().getUserAccount().setPassword(txtHospitalAdminPassword.getText());
                         hospital.getManagement().getHospitalAdmin().setName(txtHospitalAdminName.getText());

@@ -258,8 +258,14 @@ public class ManageCaterers extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
+            //Validations
+        if(!checkInputFields(txtCatererName, "^[\\p{L} .'-]+$") || !checkInputFields(txtCatererAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtCatererAdminUsername, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtCatererAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtCatererLocation, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Caterer details");
+                return;
+            }
             if (checkIfCatererNameIsUnique()) {
-                FoodCateringService newCaterer = new FoodCateringService(txtCatererName.getText(), new Location(42.338767, -71.087863), true);
+                FoodCateringService newCaterer = new FoodCateringService(txtCatererName.getText(), txtCatererLocation.getText(), true);
                 Employee CateringAdmin = new Employee(system,txtCatererAdminName.getText(), txtCatererAdminUsername.getText(), txtCatererAdminPassword.getText(), newCaterer, new FoodCateringServiceAdmin());
                 newCaterer.getManagement().setAdmin(CateringAdmin);
                 system.getCateringServices().add(newCaterer);
@@ -279,13 +285,19 @@ public class ManageCaterers extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (checkInputFields(txtCatererName) && checkInputFields(txtCatererAdminUsername) && checkInputFields(txtCatererAdminPassword) && checkInputFields(txtCatererLocation)) {
+            //Validation
+            if(!checkInputFields(txtCatererName, "^[\\p{L} .'-]+$") || !checkInputFields(txtCatererAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtCatererAdminUsername, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtCatererAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtCatererLocation, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Caterer details before updating");
+                return;
+            }
             if (selectedCateringService != null) {
                 for (FoodCateringService cateringService : system.getCateringServices()) {
                     if (selectedCateringService.getName().equals(cateringService.getName())) {
                         cateringService.setName(txtCatererName.getText());
 //                       String[] locationData =  txtCatererLocation.getText().split(", ");
 //                       cateringService.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-                        cateringService.setLocation(new Location(42.338767, -71.087863));
+                        cateringService.setLocation(txtCatererLocation.getText());
                         cateringService.getManagement().getAdmin().getUserAccount().setUsername(txtCatererAdminUsername.getText());
                         cateringService.getManagement().getAdmin().getUserAccount().setPassword(txtCatererAdminPassword.getText());
                         cateringService.getManagement().getAdmin().setName(txtCatererAdminName.getText());

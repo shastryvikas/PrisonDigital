@@ -27,7 +27,7 @@ public class FoodCateringService extends Enterprise {
         this.name = name;
     }
 
-    public FoodCateringService(String name, Location location, Boolean status) {
+    public FoodCateringService(String name, String location, Boolean status) {
         this.name = name;
         this.setLocation(location);
         this.setStatus(status);

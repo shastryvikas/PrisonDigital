@@ -328,6 +328,11 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtOfficerName) && checkInputFields(txtOfficerUsername) && checkInputFields(txtOfficerPassword)) {
+            //Validate
+            if(!checkInputFields(txtOfficerName, "^[\\p{L} .'-]+$") || !checkInputFields(txtOfficerUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtOfficerPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid details");
+                return;
+            }
 //            if (checkIfCatererNameIsUnique()) {
 
             Employee newOfficer = new Employee(system, txtOfficerName.getText(), txtOfficerUsername.getText(), txtOfficerPassword.getText(), criminalJusticeSystem, new Model.Role.Police());
@@ -355,6 +360,11 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtOfficerName) && checkInputFields(txtOfficerUsername) && checkInputFields(txtOfficerPassword)) {
+            //Validate
+            if(!checkInputFields(txtOfficerName, "^[\\p{L} .'-]+$") || !checkInputFields(txtOfficerUsername, "^[\\p{L} .'-]+$") || !checkInputFields(txtOfficerPassword, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid details before updating");
+                return;
+            }
             if (selectedStaff != null) {
                 for (Employee employee : employeeList) {
                     if (selectedStaff.getName().equals(employee.getName())) {

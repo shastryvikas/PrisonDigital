@@ -202,6 +202,22 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
 
     private void btnSubmitAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitAttendanceActionPerformed
         // TODO add your handling code here:
+        
+        if (checkInputFields(date) && checkInputFields(present) && checkInputFields(total)) {
+          
+            if(!checkInputFields(present, "[1-9][0-9]*") || !checkInputFields(total, "[1-9][0-9]*")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Attendance");
+                return;
+            }
+           //date format: dd/mm/yyyy.
+            if(!checkInputFields(date, "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$")){
+                JOptionPane.showMessageDialog(this, "Please use valid date format: dd/mm/yyyy");
+                return;
+            }
+            if(Integer.parseInt(present.getText()) > Integer.parseInt(total.getText())){
+                JOptionPane.showMessageDialog(this, "Present value cannot be greater then Total");
+                return;
+            }
 
         Attendance a = new Attendance();
         a.setDate(date.getText());
@@ -212,6 +228,10 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         resetFields();
         JOptionPane.showMessageDialog(this, "Attendance has been marked successfully");
         DB4OUtil.storeSystem(system);
+		}
+        else{
+            JOptionPane.showMessageDialog(this, "Input fields cannot be empty");
+        }
     }//GEN-LAST:event_btnSubmitAttendanceActionPerformed
 
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
@@ -223,6 +243,14 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         present.setText("");
         total.setText("");
     }
+    public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
+        return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
+    }
+
+    public boolean checkInputFields(javax.swing.JTextField txtField) {
+        return txtField.getText() != null && !txtField.getText().isEmpty();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmitAttendance;
     private javax.swing.JTextField date;

@@ -34,7 +34,7 @@ public class Hospital extends Enterprise {
         this.patientCare = patientCare;
     }
 
-    public Hospital(String name, Location location, Boolean status) {
+    public Hospital(String name, String location, Boolean status) {
         this.name = name;
         this.setLocation(location);
         this.setStatus(status);

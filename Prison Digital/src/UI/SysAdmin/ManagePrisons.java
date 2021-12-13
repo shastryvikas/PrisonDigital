@@ -268,10 +268,17 @@ public class ManagePrisons extends javax.swing.JPanel {
         if (checkInputFields(txtPrisonName) && checkInputFields(txtPrisonAdminName) && checkInputFields(txtPrisonAdminUsername) && checkInputFields(txtPrisonAdminPassword) && checkInputFields(txtPrisonLocation)) {
 //            if (system.getPrisons().checkIfUsernameIsUnique(txtPrisonName.getText())) {
 
+            //Validation
+            if(!checkInputFields(txtPrisonName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPrisonAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPrisonAdminUsername, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtPrisonAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtPrisonLocation, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Prison details");
+                return;
+            }
+
             if (checkIfPrisonNameIsUnique()) {
                 //String[] locationData =  txtPrisonLocation.getText().split(", ");
 //Prison newPrison = new Prison(txtPrisonName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-                Prison newPrison = new Prison(txtPrisonName.getText(), new Location(42.338767, -71.087863), true);
+                Prison newPrison = new Prison(txtPrisonName.getText(), txtPrisonLocation.getText(), true);
                 Employee prisonAdmin = new Employee(system, txtPrisonAdminName.getText(), txtPrisonAdminUsername.getText(), txtPrisonAdminPassword.getText(), newPrison, new PrisonAdmin());
                 newPrison.getManagement().setAdmin(prisonAdmin);
                 system.getPrisons().add(newPrison);
@@ -293,12 +300,21 @@ public class ManagePrisons extends javax.swing.JPanel {
         
         if (checkInputFields(txtPrisonName) && checkInputFields(txtPrisonAdminName) && checkInputFields(txtPrisonAdminUsername) && checkInputFields(txtPrisonAdminPassword) && checkInputFields(txtPrisonLocation)) {
             if (selectedPrison != null) {
+                
+                 //Validation
+            if(!checkInputFields(txtPrisonName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPrisonAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtPrisonAdminUsername, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtPrisonAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtPrisonLocation, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Prison details before updating");
+                return;
+            }
+                
                 for (Prison prison : system.getPrisons()) {
                     if (selectedPrison.getName().equals(prison.getName())) {
                         //String[] locationData =  txtPrisonLocation.getText().split(", ");
                         prison.setName(txtPrisonName.getText());
                         // prison.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-                        prison.setLocation(new Location(42.338767, -71.087863));
+                        //prison.setLocation(new Location(42.338767, -71.087863));
+                        prison.setLocation(txtPrisonLocation.getText());
                         prison.getManagement().getAdmin().getUserAccount().setUsername(txtPrisonAdminUsername.getText());
                         prison.getManagement().getAdmin().getUserAccount().setPassword(txtPrisonAdminPassword.getText());
                         prison.getManagement().getAdmin().setName(txtPrisonAdminName.getText());
@@ -357,7 +373,7 @@ public class ManagePrisons extends javax.swing.JPanel {
                     row[0] = prison;
                     row[1] = prison.getManagement().getAdmin().getName();
                     row[2] = prison.getManagement().getAdmin().getUserAccount().getUsername();
-                    row[3] = prison.getManagement().getAdmin().getUserAccount().getUsername();
+                    row[3] = prison.getManagement().getAdmin().getUserAccount().getPassword();
                     row[4] = String.valueOf(prison.getLocation());
                     row[5] = prison.getStatus() == true ? "In service" : "Out of service";
                     tablemodel.addRow(row);

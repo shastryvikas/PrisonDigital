@@ -269,8 +269,16 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
 //            if (system.getPrisons().checkIfUsernameIsUnique(txtJudicialSystemAdminName.getText())) {
 //String[] locationData =  txtJudicialSystemLocation.getText().split(", ");
 //CriminalJusticeSystem newCJS = new CriminalJusticeSystem(txtJudicialSystemName.getText(), new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])), drpdwnStatus.getSelectedIndex()==0);
-            if (checkIfCJSNameIsUnique()) {
-                CriminalJusticeSystem newCriminalJusticeSystem = new CriminalJusticeSystem(txtJudicialSystemName.getText(), new Location(42.338767, -71.087863), true);
+           
+        //Validations
+        if(!checkInputFields(txtJudicialSystemLocation, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudicialSystemAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudicialSystemName, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtJudicialSystemAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudicialSystemAdminUsername, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Judicial System details");
+                return;
+            }
+
+        if (checkIfCJSNameIsUnique()) {
+                CriminalJusticeSystem newCriminalJusticeSystem = new CriminalJusticeSystem(txtJudicialSystemName.getText(), txtJudicialSystemLocation.getText(), true);
                 Employee cjsAdmin = new Employee(system,txtJudicialSystemAdminName.getText(), txtJudicialSystemAdminUsername.getText(), txtJudicialSystemAdminPassword.getText(), newCriminalJusticeSystem, new CriminalJusticeSystemAdmin());
                 newCriminalJusticeSystem.setAdmin(cjsAdmin);
                 system.getCriminalJusticeSystems().add(newCriminalJusticeSystem);
@@ -292,12 +300,18 @@ public class ManageJudicialSystem extends javax.swing.JPanel {
 
         if (checkInputFields(txtJudicialSystemLocation) && checkInputFields(txtJudicialSystemAdminName) && checkInputFields(txtJudicialSystemName) && checkInputFields(txtJudicialSystemAdminPassword) && checkInputFields(txtJudicialSystemAdminUsername)) {
             if (selectedJudicialSystem != null) {
+                //Validations
+                if(!checkInputFields(txtJudicialSystemLocation, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudicialSystemAdminName, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudicialSystemName, "^[\\p{L} .'-]+$")
+                    || !checkInputFields(txtJudicialSystemAdminPassword, "^[\\p{L} .'-]+$") || !checkInputFields(txtJudicialSystemAdminUsername, "^[\\p{L} .'-]+$")){
+                JOptionPane.showMessageDialog(this, "Please enter valid Judicial System details before updating");
+                return;
+            }
                 for (CriminalJusticeSystem cjs : system.getCriminalJusticeSystems()) {
                     if (selectedJudicialSystem.getName().equals(cjs.getName())) {
                         //                        String[] locationData =  txtJudicialSystemLocation.getText().split(", ");
                         cjs.setName(txtJudicialSystemName.getText());
                         //                         cjs.setLocation(new Location(Double.parseDouble(locationData[0]), Double.parseDouble(locationData[1])));
-                        cjs.setLocation(new Location(42.338767, -71.087863));
+                        cjs.setLocation(txtJudicialSystemLocation.getText());
                         cjs.getAdmin().getUserAccount().setUsername(txtJudicialSystemAdminUsername.getText());
                         cjs.getAdmin().getUserAccount().setPassword(txtJudicialSystemAdminPassword.getText());
                         cjs.getAdmin().setName(txtJudicialSystemAdminName.getText());
