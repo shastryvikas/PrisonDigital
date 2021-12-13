@@ -550,21 +550,22 @@ public class PrisonAdminWorkManagementPage extends javax.swing.JPanel {
         DefaultTableModel tablemodel = (DefaultTableModel) caseTable.getModel();
         
         tablemodel.setRowCount(0);
-        
-        for (Case c : prison.getManagement().getCaseDirectory().getListOfCases()) {
-            Object[] row = new Object[5];
-            row[0] = c;
-            row[1] = c.getStartDate().toString();
-            row[2] = c.getYearsOfImprisonment() + "";
-            row[3] = c.isImprisoned() == true ? "Yes" : "No";
-            row[4] = c.getStatus();
-            tablemodel.addRow(row);
+        if (prison.getManagement() != null && prison.getManagement().getCaseDirectory() != null && prison.getManagement().getCaseDirectory().getListOfCases()!=null) {
+            for (Case c : prison.getManagement().getCaseDirectory().getListOfCases()) {
+                Object[] row = new Object[5];
+                row[0] = c;
+                row[1] = c.getStartDate().toString();
+                row[2] = c.getYearsOfImprisonment() + "";
+                row[3] = c.isImprisoned() == true ? "Yes" : "No";
+                row[4] = c.getStatus();
+                tablemodel.addRow(row);
+            }
+
+            jLabel15.setText((prison.getInfrastructure().getCellsEmpty().size() + prison.getInfrastructure().getCellsOccupied().size()) + "");
+            jLabel16.setText(prison.getInfrastructure().getCellsOccupied().size() + "");
+            jLabel17.setText(prison.getInfrastructure().getCellsEmpty().size() + "");
         }
-        
-        jLabel15.setText((prison.getInfrastructure().getCellsEmpty().size() + prison.getInfrastructure().getCellsOccupied().size()) + "");
-        jLabel16.setText(prison.getInfrastructure().getCellsOccupied().size() + "");
-        jLabel17.setText(prison.getInfrastructure().getCellsEmpty().size() + "");
-        
+
     }
     
     private void resetPrisonerDetails() {

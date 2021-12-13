@@ -225,18 +225,19 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFeedback)
                     .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnPrisonerTransportCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTransportInProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBeginTransport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrisonerTransportCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrisonerTransportCompletedActionPerformed
         // TODO add your handling code here:
         if (selectedCase != null) {
+           if(selectedCase.getStatus().equals("Transport in progress") ){
             ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
             for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
                 if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getStatus().equals("Police work req, Police Assigned")) {
@@ -248,6 +249,9 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();
             DB4OUtil.storeSystem(system);
+           }else{
+               JOptionPane.showMessageDialog(this, "Please change status in order");
+           }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }
@@ -256,10 +260,14 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
     private void btnBeginTransportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginTransportActionPerformed
         // TODO add your handling code here:
         if (selectedCase != null) {
+           if((selectedCase.getStatus().equals("Police Assigned") || selectedCase.getStatus().equals("Prison and Police Assigned"))){
             selectedCase.setStatus("Accepted for transport");
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();
             DB4OUtil.storeSystem(system);
+           }else{
+               JOptionPane.showMessageDialog(this, "Please change status in order");
+           }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }
@@ -268,10 +276,14 @@ public class PoliceOfficerLogin extends javax.swing.JPanel {
     private void btnTransportInProgressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransportInProgressActionPerformed
         // TODO add your handling code here:
         if (selectedCase != null) {
+            if(selectedCase.getStatus().equals("Accepted for transport")){
             selectedCase.setStatus("Transport in progress");
             JOptionPane.showMessageDialog(this, "Case status changed successfully");
             initializeTable();
             DB4OUtil.storeSystem(system);
+            }else{
+               JOptionPane.showMessageDialog(this, "Please change status in order");
+           }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a case to change the status from the table");
         }

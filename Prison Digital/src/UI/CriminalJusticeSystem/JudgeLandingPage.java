@@ -125,7 +125,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                     prisonWorkreq = listOfWorkRequest;
 
                 }
-                if (listOfWorkRequest.getReceiver() != null && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())
+                if (listOfWorkRequest.getPrisoner() != null && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())
                         && listOfWorkRequest.getStatus() != null && listOfWorkRequest.getStatus().contains("Police work req")) {
                     policeWorkreq = listOfWorkRequest;
                 }
@@ -501,24 +501,21 @@ public class JudgeLandingPage extends javax.swing.JPanel {
             }
             
             Person person = new Person(txtPersonName.getText());
-            try {
-                Case newCase;
-                newCase = new Case(txtCaseVerdict.getText(), person, false, new SimpleDateFormat("MM-dd-YYYY").parse(txtImprisonmentStartDate.getText()), Integer.parseInt(txtYearsOfImprisonment.getText()), currentCourt);
 
-                prisonWorkreq = new WorkRequest();
-                prisonWorkreq.setSender(account);
-                prisonWorkreq.setPrisoner(person);
-                prisonWorkreq.setStatus("Prisoner work req, New Case");
-                newCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList().add(prisonWorkreq);
-                policeWorkreq = new WorkRequest();
-                policeWorkreq.setSender(account);
-                policeWorkreq.setPrisoner(person);
-                policeWorkreq.setStatus("Police work req, New Case");
-                newCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList().add(policeWorkreq);
-                currentCourt.getCaseDirectory().addCase(newCase);
-            } catch (ParseException ex) {
-                Logger.getLogger(JudgeLandingPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Case newCase;
+            newCase = new Case(txtCaseVerdict.getText(), person, false, txtImprisonmentStartDate.getText(), Integer.parseInt(txtYearsOfImprisonment.getText()), currentCourt);
+
+            prisonWorkreq = new WorkRequest();
+            prisonWorkreq.setSender(account);
+            prisonWorkreq.setPrisoner(person);
+            prisonWorkreq.setStatus("Prisoner work req, New Case");
+            newCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList().add(prisonWorkreq);
+            policeWorkreq = new WorkRequest();
+            policeWorkreq.setSender(account);
+            policeWorkreq.setPrisoner(person);
+            policeWorkreq.setStatus("Police work req, New Case");
+            newCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList().add(policeWorkreq);
+            currentCourt.getCaseDirectory().addCase(newCase);
 
             initializeTable();
             resetFields();
@@ -552,6 +549,21 @@ public class JudgeLandingPage extends javax.swing.JPanel {
     private void btnUpdateCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCaseActionPerformed
         // TODO add your handling code here:
         if (checkInputFields(txtCaseVerdict) && checkInputFields(txtPersonName)) {
+            //Validate
+            if (!checkInputFields(txtPersonName, "^[\\p{L} .'-]+$") || !checkInputFields(txtCaseVerdict, "^[\\p{L} .'-]+$")) {
+                JOptionPane.showMessageDialog(this, "Please enter valid Case details before updating");
+                return;
+            }
+
+            if (!checkInputFields(txtYearsOfImprisonment, "[1-9][0-9]*") || Integer.parseInt(txtYearsOfImprisonment.getText()) > 100) {
+                JOptionPane.showMessageDialog(this, "Please enter valid Prison Sentence Duration before updating");
+                return;
+            }
+            //date format: dd/mm/yyyy.
+            if (!checkInputFields(txtImprisonmentStartDate, "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$")) {
+                JOptionPane.showMessageDialog(this, "Please use valid date format: dd/mm/yyyy");
+                return;
+            }
             if (selectedCase != null) {
                 for (Case cases : currentCourt.getCaseDirectory().getListOfCases()) {
                     if (selectedCase.getCaseNumber() == cases.getCaseNumber()) {
@@ -675,19 +687,20 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 CaseDirectory listOfCases = court.getCaseDirectory();
                 DefaultTableModel tablemodel = (DefaultTableModel) tblCases.getModel();
                 tablemodel.setRowCount(0);
-                if(listOfCases != null)
-                for (Case tempCase : listOfCases.getListOfCases()) {
+                if (listOfCases != null) {
+                    for (Case tempCase : listOfCases.getListOfCases()) {
 
-                    if (tempCase != null) {
-                        Object[] row = new Object[7];
-                        row[0] = tempCase;
-                        row[1] = tempCase.getAccused().getName();
-                        row[2] = tempCase.getVerdict();
-                        row[3] = tempCase.getStartDate().toString();
-                        row[4] = tempCase.getYearsOfImprisonment() + "";
-                        row[5] = tempCase.isImprisoned()==true?"Yes":"No";
-                        row[6] = tempCase.getStatus();
-                        tablemodel.addRow(row);
+                        if (tempCase != null) {
+                            Object[] row = new Object[7];
+                            row[0] = tempCase;
+                            row[1] = tempCase.getAccused().getName();
+                            row[2] = tempCase.getVerdict();
+                            row[3] = tempCase.getStartDate();
+                            row[4] = tempCase.getYearsOfImprisonment() + "";
+                            row[5] = tempCase.isImprisoned() == true ? "Yes" : "No";
+                            row[6] = tempCase.getStatus();
+                            tablemodel.addRow(row);
+                        }
                     }
                 }
             }

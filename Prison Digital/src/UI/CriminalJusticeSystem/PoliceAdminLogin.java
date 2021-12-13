@@ -148,6 +148,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnRefreshDropdown = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -323,6 +324,14 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jLabel1.setText("Choose Police Officer");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 640, -1, 30));
+
+        btnRefreshDropdown.setText("Refresh Dropdown");
+        btnRefreshDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshDropdownActionPerformed(evt);
+            }
+        });
+        add(btnRefreshDropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, -1, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -406,7 +415,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
                 ArrayList<WorkRequest> listOfWorkRequests = selectedCase.getProcessingCourt().getJudge().getUserAccount().getWorkQueue().getWorkRequestList();
                 WorkRequest tempWorkRequest = null;
                 for (WorkRequest listOfWorkRequest : listOfWorkRequests) {
-                    if (listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())) {
+                    if (listOfWorkRequest.getReceiver()!=null && listOfWorkRequest.getReceiver().equals(account) && listOfWorkRequest.getPrisoner().getName().equals(selectedCase.getAccused().getName())) {
                         tempWorkRequest = listOfWorkRequest;
                     }
                 }
@@ -428,7 +437,12 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAssignCaseActionPerformed
 
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+    private void btnAssignCase1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnRefreshDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshDropdownActionPerformed
         // TODO add your handling code here:
         initializeStaffTable();
         initializeCaseTable();
@@ -437,12 +451,13 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
         for (Employee employee : policeDepartment.getListOfPoliceOfficers()) {
             drpdwnPoliceOfficers.addItem(employee.getUserAccount().getUsername());
         }
-    }//GEN-LAST:event_btnRefreshActionPerformed
+    }//GEN-LAST:event_btnRefreshDropdownActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAssignCase;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRefreshDropdown;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> drpdwnPoliceOfficers;
     private javax.swing.JLabel jLabel1;
@@ -497,7 +512,7 @@ public class PoliceAdminLogin extends javax.swing.JPanel {
             DefaultTableModel model = (DefaultTableModel) tblCasesAssigned.getModel();
             model.setRowCount(0);
             for (Case aCase : cases) {
-                if (aCase.getProcessingPoliceDepartment().getPoliceAdmin().getUserAccount().getUsername()
+                if (aCase.getProcessingPoliceDepartment() != null && aCase.getProcessingPoliceDepartment().getPoliceAdmin().getUserAccount().getUsername()
                         .equals(account.getUsername())) {
 
                     Object[] row = new Object[7];

@@ -22,7 +22,7 @@ public class Case extends WorkRequest {
     private String verdict;
     private Person accused;
     private Boolean isImprisoned;
-    private Date startDate;
+    private String startDate;
     private int yearsOfImprisonment;
     private int caseNumber;
     private Court processingCourt;
@@ -59,7 +59,7 @@ public class Case extends WorkRequest {
         this.cell = cell;
     }
 
-    public Case(String verdict, Person accused, Boolean isImprisoned, Date startDate, int yearsOfImprisonment, Court processingCourt) {
+    public Case(String verdict, Person accused, Boolean isImprisoned, String startDate, int yearsOfImprisonment, Court processingCourt) {
         this.verdict = verdict;
         this.accused = accused;
         this.isImprisoned = isImprisoned;
@@ -93,11 +93,11 @@ public class Case extends WorkRequest {
         this.isImprisoned = isImprisoned;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
