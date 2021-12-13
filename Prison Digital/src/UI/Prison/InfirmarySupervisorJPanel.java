@@ -14,9 +14,16 @@ import Model.Prison.Prison;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -53,7 +60,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         for (Hospital c : system.getHospitals()) {
             Object[] row = new Object[4];
             row[0] = c;
-            row[1] = c.getLocation().toString();
+            row[1] = c.getLocation();
             tablemodel.addRow(row);
         }
         
@@ -103,6 +110,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         status = new javax.swing.JTextField();
         endButton = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
+        endButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         HospitalJTable = new javax.swing.JTable();
@@ -202,6 +210,13 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         jLabel14.setOpaque(true);
         jLabel14.setPreferredSize(new java.awt.Dimension(231, 25));
 
+        endButton1.setText("Analytics");
+        endButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -231,7 +246,9 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
                                 .addComponent(psy, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(endButton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(endButton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60))
         );
         jPanel2Layout.setVerticalGroup(
@@ -241,14 +258,19 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel2)
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel3)
-                            .addComponent(pc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(jLabel2)
+                                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(jLabel3)
+                                    .addComponent(pc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(endButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(14, 14, 14)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel4)
@@ -266,7 +288,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(endButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1110, 290));
@@ -429,6 +451,46 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_endButtonActionPerformed
 
+    private void endButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        yearprisoner();
+        
+    }//GEN-LAST:event_endButton1ActionPerformed
+
+    
+    private void yearprisoner(){
+        String series1 = "Prisoners";
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(245, series1, "2001");
+        dataset.addValue(290, series1, "2002");
+        dataset.addValue(230, series1, "2003");
+        dataset.addValue(280, series1, "2004");
+        dataset.addValue(345, series1, "2005");
+        dataset.addValue(355, series1, "2006");
+        dataset.addValue(380, series1, "2007");
+        dataset.addValue(210, series1, "2008");
+        dataset.addValue(220, series1, "2009");
+        dataset.addValue(205, series1, "2010");
+        dataset.addValue(235, series1, "2011");
+        dataset.addValue(200, series1, "2012");
+        dataset.addValue(300, series1, "2013");
+        dataset.addValue(330, series1, "2014");
+        dataset.addValue(230, series1, "2015");
+        dataset.addValue(260, series1, "2016");
+        dataset.addValue(100, series1, "2017");
+        dataset.addValue(125, series1, "2018");
+        dataset.addValue(360, series1, "2019");
+        dataset.addValue(320, series1, "2020");
+        dataset.addValue(310, series1, "2021");
+        JFreeChart lineChart = ChartFactory.createBarChart("Number of sick prisoners Vs Year", "Year", "Number of sick prisoners", dataset, PlotOrientation.VERTICAL, true, true, false);
+        CategoryPlot plot = lineChart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame cf = new ChartFrame("Chart", lineChart, true);
+        cf.setVisible(true);
+        cf.setSize(1000, 700);
+    }
+    
     public boolean checkInputFields(javax.swing.JTextField txtField, String regex) {
         return txtField.getText() != null && !txtField.getText().isEmpty() && txtField.getText().matches(regex);
     }
@@ -441,6 +503,7 @@ public class InfirmarySupervisorJPanel extends javax.swing.JPanel {
     private javax.swing.JTable HospitalJTable;
     private javax.swing.JButton btnPlaceRequest;
     private javax.swing.JButton endButton;
+    private javax.swing.JButton endButton1;
     private javax.swing.JTextField gp;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

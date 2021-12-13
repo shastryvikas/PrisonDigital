@@ -343,6 +343,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
     private void btnGeneralPhyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralPhyActionPerformed
         // TODO add your handling code here:
         currDesignation = "General Physician";
+        txtDesignation.setText(currDesignation);
 
         if (hospital.getPatientCare().getGeneralStaff() == null || hospital.getPatientCare().getGeneralStaff().getName().isEmpty() || hospital.getPatientCare().getGeneralStaff().getName() == null) {
             JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
@@ -359,6 +360,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
     private void btnPatientCarTecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientCarTecActionPerformed
         // TODO add your handling code here:
         currDesignation = "Patient Care Technician";
+        txtDesignation.setText(currDesignation);
 
         if (hospital.getPatientCare().getPhysiotherapyStaff() == null || hospital.getPatientCare().getPhysiotherapyStaff().getName().isEmpty() || hospital.getPatientCare().getPhysiotherapyStaff().getName() == null) {
             JOptionPane.showMessageDialog(this, "Please add " + currDesignation);
@@ -375,6 +377,7 @@ public class HospitalAdminLandingPage extends javax.swing.JPanel {
     private void btnPsychologistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPsychologistActionPerformed
         // TODO add your handling code here:
         currDesignation = "Psychologist";
+        txtDesignation.setText(currDesignation);
 
         if (hospital.getPatientCare().getPsychologyStaff() == null || hospital.getPatientCare().getPsychologyStaff().getName().isEmpty() || hospital.getPatientCare().getPsychologyStaff().getName() == null) {
             JOptionPane.showMessageDialog(this, "Please add " + currDesignation);

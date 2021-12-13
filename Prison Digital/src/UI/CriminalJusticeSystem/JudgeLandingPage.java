@@ -15,6 +15,7 @@ import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
 import Model.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
@@ -26,6 +27,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -177,6 +184,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         txtPrisonWorkrequestFeedback = new javax.swing.JTextField();
         txtPoliceWorkrequestFeedback = new javax.swing.JTextField();
         btnProvideFeedback = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -209,7 +217,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 btnRefreshActionPerformed(evt);
             }
         });
-        add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 320, -1, -1));
+        add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(838, 320, 290, 40));
 
         jLabel7.setBackground(new java.awt.Color(71, 120, 197));
         jLabel7.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
@@ -325,8 +333,8 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblPersonName)
                     .addComponent(txtPersonName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -349,7 +357,7 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 .addGap(19, 19, 19))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 510, 320));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 510, 310));
 
         jPanel3.setBackground(new java.awt.Color(242, 248, 255));
 
@@ -438,8 +446,8 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -459,10 +467,18 @@ public class JudgeLandingPage extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPoliceWorkrequestFeedback)
                     .addComponent(txtPoliceWorkrequestFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 570, 320));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 570, 310));
+
+        jButton1.setText("Analytics");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 270, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCaseActionPerformed
@@ -581,12 +597,50 @@ public class JudgeLandingPage extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnProvideFeedbackActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        String series1 = "Murder";
+        String series2 = "Theft";
+        String series3 = "Fraud";
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(245, series1, "2001");
+        dataset.addValue(290, series1, "2002");
+        dataset.addValue(230, series1, "2003");
+        dataset.addValue(280, series1, "2004");
+        dataset.addValue(345, series1, "2005");
+        dataset.addValue(355, series1, "2006");
+        dataset.addValue(380, series1, "2007");
+        dataset.addValue(210, series2, "2001");
+        dataset.addValue(220, series2, "2002");
+        dataset.addValue(205, series2, "2003");
+        dataset.addValue(235, series2, "2004");
+        dataset.addValue(200, series2, "2005");
+        dataset.addValue(300, series2, "2006");
+        dataset.addValue(330, series2, "2007");
+        dataset.addValue(230, series3, "2001");
+        dataset.addValue(260, series3, "2002");
+        dataset.addValue(100, series3, "2003");
+        dataset.addValue(125, series3, "2004");
+        dataset.addValue(360, series3, "2005");
+        dataset.addValue(320, series3, "2006");
+        dataset.addValue(310, series3, "2007");
+        JFreeChart lineChart = ChartFactory.createBarChart("Type of Crime Vs Year", "Year", "Number of crimes", dataset, PlotOrientation.VERTICAL, true, true, false);
+        CategoryPlot plot = lineChart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame cf = new ChartFrame("Chart", lineChart, true);
+        cf.setVisible(true);
+        cf.setSize(1000, 700);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateCase;
     private javax.swing.JButton btnProvideFeedback;
     private javax.swing.JButton btnProvideJudgement;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateCase;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;

@@ -25,6 +25,11 @@ public class SysAdminLandingPage extends javax.swing.JPanel {
         initComponents();
         this.container = container;
         this.system = system;
+        
+        ManagePrisons managePrisons = new ManagePrisons(container2, system);
+        container2.add("Manage Prison", managePrisons);
+        CardLayout layout = (CardLayout) container2.getLayout();
+        layout.next(container2);
     }
 
     /**

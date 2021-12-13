@@ -11,9 +11,16 @@ import Model.Prison.Prison;
 import Model.PrisonEcosystem;
 import Model.UserAccountManagement.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -79,6 +86,7 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         total = new javax.swing.JTextField();
         btnSubmitAttendance = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -198,6 +206,15 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         );
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 350, 260));
+
+        jButton1.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        jButton1.setText("Analytics");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(877, 609, 190, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitAttendanceActionPerformed
@@ -238,6 +255,23 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+        for (Attendance a : prison.getManagement().getAttendanceRecords()) {
+            String[] date = a.getDate().split("/");
+            dataset1.addValue((((float)a.getPresent() / (float)a.getTotal()) * 100), "Attendance Percentage", date[0]);
+        }
+        JFreeChart lineChart1 = ChartFactory.createBarChart("Attendance Percentage Vs Day of the month", "Date", "Attendance Percentage", dataset1, PlotOrientation.VERTICAL, true, true, false);
+        CategoryPlot plot1 = lineChart1.getCategoryPlot();
+        plot1.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame cf1 = new ChartFrame("std", lineChart1, true);
+        cf1.setVisible(true);
+        cf1.setSize(1000, 700);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void resetFields() {
         date.setText("");
         present.setText("");
@@ -254,6 +288,7 @@ public class PrisonGuardJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmitAttendance;
     private javax.swing.JTextField date;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
